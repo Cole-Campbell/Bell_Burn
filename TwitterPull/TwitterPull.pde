@@ -14,6 +14,10 @@ List<Status> tweets;
 //I dont think refresh tweets is being called.
 //Going to make a mouse click function to call the refresh tweets
 boolean clickToRefresh = false;
+
+// To store the XML file location.
+XML xmlFile;
+
 /*
 The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
 The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
@@ -23,7 +27,9 @@ The “Access Token Secret”: CWwSNlbOajW0cxG211yfCOaLS5SYurJGWeoVEUNxiBUYL
 
 void setup() {
   size(800, 600);
-
+  
+  xmlFile = loadXML("storeTweets.xml");
+  
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
   cb.setOAuthConsumerKey("LuxDk9NaQOvqqQkn9LOXmwBY1");
@@ -58,11 +64,20 @@ void draw() {
   text(status.getText(), random(width), random(height), 300, 200);
   delay(1000);
   
+  //Declaring a new XML object to add to the file  
+  XML newChild = xmlFile.addChild("tweet");
+  //Set its content to == the tweet text
+  newChild.setContent(status.getText());
+  
+  
   //If mouse clicked is true, it will refresh the tweets.
+  //Also put the save tweets to XML in here so it will only save on click.
   if(clickToRefresh == true) {
+    saveXML(xmlFile, "storeTweets.xml");
     getNewTweets();
     clickToRefresh = false;
   }
+
 }
 
 void getNewTweets() {
@@ -98,3 +113,4 @@ void mouseClicked() {
     clickToRefresh = true;
   }
 }
+
