@@ -6,10 +6,14 @@ import java.util.*;
 
 Twitter twitter;
 
-String search = "Werk";
+String search = "Dublin";
 int currentTweet;
 List<Status> tweets;
 
+//Currently looks like same tweets are popping up.
+//I dont think refresh tweets is being called.
+//Going to make a mouse click function to call the refresh tweets
+boolean clickToRefresh = false;
 /*
 The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
 The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
@@ -52,17 +56,22 @@ void draw() {
 
   fill(200);
   text(status.getText(), random(width), random(height), 300, 200);
-
-  delay(2500);
+  delay(1000);
+  
+  //If mouse clicked is true, it will refresh the tweets.
+  if(clickToRefresh == true) {
+    getNewTweets();
+    clickToRefresh = false;
+  }
 }
 
 void getNewTweets() {
   try {
     //Try to get tweets here
     Query query = new Query(search);
-
     QueryResult result = twitter.search(query);
     tweets = result.getTweets();
+    println("Tweets refreshed");
   }
   catch (TwitterException te) {
     // Deal with the case where we cant get them here 
@@ -70,7 +79,10 @@ void getNewTweets() {
     System.exit(-1);
   }
 }
-
+/* Im not sure this is needed? 
+   To refresh tweets you must click, it calls this function, which then calls getNewTweets
+   Easier just to remove this step?
+   
 void refreshTweets() {
   while (true) {
     getNewTweets();
@@ -78,5 +90,11 @@ void refreshTweets() {
     println("Updated Tweets");
 
     delay(30000);
+  }
+}*/
+
+void mouseClicked() {
+  if (clickToRefresh == false) {
+    clickToRefresh = true;
   }
 }
