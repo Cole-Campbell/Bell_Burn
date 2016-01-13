@@ -60,29 +60,56 @@ void draw() {
   if (currentTweet >= tweets.size()) {
     currentTweet = 0;
   }
-
+  
+  /*http://twitter4j.org/javadoc/twitter4j/Status.html*/
   Status status = tweets.get(currentTweet);
+  //I found this part a little confusing
+  //First we get the current tweet
+  //We store it in a status object,
+  //Then we can make a User object, the put the status.user property(its in JSON) into that object
+  //then we can get different attributes associated with it.
+  User user = status.getUser();
+  //Place place = status.getPlace();
+  
+  //Ok, so tweets come up, but seems like some are repeated.
+  //In order to eliminate these from being saved to the XML file and being false data
+  //One possible solution is we must get each ones id, then compare it to the rest of the IDs.
+  //And only add it to the XML file if the ID is unique. For loop, load XML, check then add or delete.
+  
+  //The id is in the data type LONG
+  //In order to convert to string I had to use concatenation. 
+  long idLong = status.getId();
+  String longString = "" + idLong;
   fill(200);
   
   //Space switches the number
   //Control to turn it on and off
   if(tweetsOnOffSwitch == 1) {
-  text(status.getText(), random(width), random(height), 300, 200);
-  delay(1000);
+  text(status.getText(), 100, 100, 300, 200);
+  text(user.getName(), 200, 300, 300, 200);
+  text(longString,300,300,300,200);
+    /*if(place != null) {
+      text(place.getName(),300,400,300,200);
+    } Nothing seems to come up from using the Place class */
+  delay(2000);
   }
-  /*http://twitter4j.org/javadoc/twitter4j/Status.html
+
   
-  I had been reading into the java docs.
-  There is some functions that i cant get to work, if they are belonging to the status class then it works fine, example
-  println(status.getId());
-  I believe its because they are belonging to a different class, should have a look at it together 
   
-  */
+  
+  
   
   //Declaring a new XML object to add to the file  
   XML newChild = xmlFile.addChild("tweet");
   //Set its content to == the tweet text
   newChild.setContent(status.getText());
+  //Add a child for the tweet id
+  //Probably should add it to the actual tweet XML tag.
+  XML childId = newChild.addChild("tweet-id");
+  childId.setContent(longString);
+  
+  XML childName = childId.addChild("tweet-name");
+  childName.setContent(user.getName());
   
   
   //If mouse clicked is true, it will refresh the tweets.
