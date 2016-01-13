@@ -15,6 +15,9 @@ List<Status> tweets;
 //Going to make a mouse click function to call the refresh tweets
 boolean clickToRefresh = false;
 
+//Going to put in a control to turn on and off the get tweets function
+//Spacebar turns it on/off
+int tweetsOnOffSwitch = 1;
 // To store the XML file location.
 XML xmlFile;
 
@@ -59,10 +62,22 @@ void draw() {
   }
 
   Status status = tweets.get(currentTweet);
-
   fill(200);
+  
+  //Space switches the number
+  //Control to turn it on and off
+  if(tweetsOnOffSwitch == 1) {
   text(status.getText(), random(width), random(height), 300, 200);
   delay(1000);
+  }
+  /*http://twitter4j.org/javadoc/twitter4j/Status.html
+  
+  I had been reading into the java docs.
+  There is some functions that i cant get to work, if they are belonging to the status class then it works fine, example
+  println(status.getId());
+  I believe its because they are belonging to a different class, should have a look at it together 
+  
+  */
   
   //Declaring a new XML object to add to the file  
   XML newChild = xmlFile.addChild("tweet");
@@ -114,3 +129,9 @@ void mouseClicked() {
   }
 }
 
+void keyPressed() {
+    if (keyCode == ' ') {
+     tweetsOnOffSwitch = tweetsOnOffSwitch * -1;
+     println("switched");
+    }    
+}
