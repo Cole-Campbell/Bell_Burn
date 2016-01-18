@@ -6,13 +6,16 @@ import java.util.*;
 
 Twitter twitter;
 
-String search = "Dublin";
+String search = "Clonmel";
 int currentTweet;
 List<Status> tweets;
 
 //Currently looks like same tweets are popping up.
 //I dont think refresh tweets is being called.
 //Going to make a mouse click function to call the refresh tweets
+//^^ UPDATE TO THIS
+//I added in a time stamp and it goes from the newest to the oldest
+//And then loops back around
 boolean clickToRefresh = false;
 
 //Going to put in a control to turn on and off the get tweets function
@@ -66,10 +69,18 @@ void draw() {
   //I found this part a little confusing
   //First we get the current tweet
   //We store it in a status object,
-  //Then we can make a User object, the put the status.user property(its in JSON) into that object
+  //Then we can make a User object, then put the status.user property(its in JSON) into that object
   //then we can get different attributes associated with it.
   User user = status.getUser();
-  //Place place = status.getPlace();
+  
+  //Running this piece of code returns when the tweets were created. 
+  //Will store this in XML as well. 
+  println(status.getCreatedAt());
+  String storeDate = "" + status.getCreatedAt();
+  
+  GeoLocation geo = status.getGeoLocation();
+  println(geo.getGeoLocation()); // This seems to return null, has nobody got GeoLocation on?
+  
   
   //Ok, so tweets come up, but seems like some are repeated.
   //In order to eliminate these from being saved to the XML file and being false data
@@ -88,29 +99,21 @@ void draw() {
   text(status.getText(), 100, 100, 300, 200);
   text(user.getName(), 200, 300, 300, 200);
   text(longString,300,300,300,200);
-    /*if(place != null) {
-      text(place.getName(),300,400,300,200);
-    } Nothing seems to come up from using the Place class */
   delay(2000);
   }
 
-  
-  
-  
-  
-  
   //Declaring a new XML object to add to the file  
   XML newChild = xmlFile.addChild("tweet");
   //Set its content to == the tweet text
   newChild.setContent(status.getText());
-  //Add a child for the tweet id
-  //Probably should add it to the actual tweet XML tag.
-  XML childId = newChild.addChild("tweet-id");
-  childId.setContent(longString);
-  
-  XML childName = childId.addChild("tweet-name");
-  childName.setContent(user.getName());
-  
+  //give the tweet an ID attribute
+  newChild.setString("tweet-id", longString);
+  //give the tweet a userName attribute
+  newChild.setString("tweet-name", user.getName());
+  //give the tweet a date attribute
+  newChild.setString("tweet-date", storeDate);
+  //Have cleaned this up and removed the old method i was using.
+  //Not sure if theres other pieces we should add.
   
   //If mouse clicked is true, it will refresh the tweets.
   //Also put the save tweets to XML in here so it will only save on click.
@@ -136,26 +139,15 @@ void getNewTweets() {
     System.exit(-1);
   }
 }
-/* Im not sure this is needed? 
-   To refresh tweets you must click, it calls this function, which then calls getNewTweets
-   Easier just to remove this step?
-   
-void refreshTweets() {
-  while (true) {
-    getNewTweets();
 
-    println("Updated Tweets");
-
-    delay(30000);
-  }
-}*/
-
+//Deleted the refresh tweets method, using mouseCLick to refresh instead
 void mouseClicked() {
   if (clickToRefresh == false) {
     clickToRefresh = true;
   }
 }
 
+//If you press space, it will stop the tweet stream
 void keyPressed() {
     if (keyCode == ' ') {
      tweetsOnOffSwitch = tweetsOnOffSwitch * -1;
