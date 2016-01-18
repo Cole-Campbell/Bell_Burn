@@ -77,9 +77,7 @@ void draw() {
   //Will store this in XML as well. 
   println(status.getCreatedAt());
   String storeDate = "" + status.getCreatedAt();
-  
-  GeoLocation geo = status.getGeoLocation();
-  println(geo.getGeoLocation()); // This seems to return null, has nobody got GeoLocation on?
+
   
   
   //Ok, so tweets come up, but seems like some are repeated.
@@ -101,10 +99,12 @@ void draw() {
   text(longString,300,300,300,200);
   delay(2000);
   }
-
+  
+  //XML[] tweetsInFile = xmlFile.getChildren("tweet");
   //Declaring a new XML object to add to the file  
-  XML newChild = xmlFile.addChild("tweet");
+  //XML oldChild = xmlFile.getChild("tweets");
   //Set its content to == the tweet text
+  XML newChild = xmlFile.addChild("tweet");  
   newChild.setContent(status.getText());
   //give the tweet an ID attribute
   newChild.setString("tweet-id", longString);
@@ -118,7 +118,7 @@ void draw() {
   //If mouse clicked is true, it will refresh the tweets.
   //Also put the save tweets to XML in here so it will only save on click.
   if(clickToRefresh == true) {
-    saveXML(xmlFile, "storeTweets.xml");
+    saveXML(xmlFile, "data/storeTweets.xml");
     getNewTweets();
     clickToRefresh = false;
   }
