@@ -6,6 +6,8 @@ import java.util.*;
 
 Twitter twitter;
 
+//String is not needed anymore, can leave it here for now as a note
+//Incase we want to put it back in, pass it through the Query object.
 String search = "Dublin";
 int currentTweet;
 List<Status> tweets;
@@ -129,13 +131,14 @@ void getNewTweets() {
     //Try to get tweets here
     GeoLocation dubLoc = new GeoLocation(53.344104,-6.2674937); //set location for dublin
     
-    Query query = new Query(search);
+    Query query = new Query();
     query.count(100); //Returns 100 searches per page
     
     query.setGeoCode(dubLoc, 20, Query.Unit.valueOf("mi"));  //Search for tweets by people who have set dublin as their location. 20mi radius
-    
+        
     QueryResult result = twitter.search(query);
     tweets = result.getTweets();
+        
     println("Tweets refreshed");
   }
   catch (TwitterException te) {
