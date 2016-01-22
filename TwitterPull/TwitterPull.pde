@@ -127,7 +127,13 @@ void draw() {
 void getNewTweets() {
   try {
     //Try to get tweets here
+    GeoLocation dubLoc = new GeoLocation(53.344104,-6.2674937); //set location for dublin
+    
     Query query = new Query(search);
+    query.count(100); //Returns 100 searches per page
+    
+    query.setGeoCode(dubLoc, 20, Query.Unit.valueOf("mi"));  //Search for tweets by people who have set dublin as their location. 20mi radius
+    
     QueryResult result = twitter.search(query);
     tweets = result.getTweets();
     println("Tweets refreshed");
