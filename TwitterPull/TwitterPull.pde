@@ -6,7 +6,7 @@ import java.util.*;
 
 Twitter twitter;
 
-String search = "Clonmel";
+String search = "Dublin";
 int currentTweet;
 List<Status> tweets;
 
@@ -17,7 +17,6 @@ List<Status> tweets;
 //I added in a time stamp and it goes from the newest to the oldest
 //And then loops back around
 boolean clickToRefresh = false;
-
 //Going to put in a control to turn on and off the get tweets function
 //Spacebar turns it on/off
 int tweetsOnOffSwitch = 1;
@@ -153,4 +152,15 @@ void keyPressed() {
      tweetsOnOffSwitch = tweetsOnOffSwitch * -1;
      println("switched");
     }    
+    if (keyCode == DELETE) {
+     
+      XML[] getForDeletion = xmlFile.getChildren("tweet");
+       
+       for(int i = 0; i < getForDeletion.length; i++) {
+         println("Deleting " + i);
+         xmlFile.removeChild(getForDeletion[i]);   
+         saveXML(xmlFile, "data/storeTweets.xml");
+       }
+       
+    }  
 }
