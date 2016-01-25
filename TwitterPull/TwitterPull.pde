@@ -25,6 +25,7 @@ int tweetsOnOffSwitch = 1;
 // To store the XML file location.
 XML xmlFile;
 
+Interface myInterface;
 /*
 The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
 The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
@@ -36,6 +37,8 @@ void setup() {
   size(800, 600);
   
   xmlFile = loadXML("storeTweets.xml");
+  
+  myInterface = new Interface(800,50,0,550);
   
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
@@ -60,7 +63,8 @@ void draw() {
   currentTweet = currentTweet +1;
   background(0);
 
-
+  myInterface.paint();
+  
   if (currentTweet >= tweets.size()) {
     currentTweet = 0;
   }
@@ -149,12 +153,12 @@ void getNewTweets() {
 }
 
 //Deleted the refresh tweets method, using mouseCLick to refresh instead
-void mouseClicked() {
+/*void mouseClicked() {
   if (clickToRefresh == false) {
     clickToRefresh = true;
   }
-}
-
+}*/
+/*
 //If you press space, it will stop the tweet stream
 void keyPressed() {
     if (keyCode == ' ') {
@@ -172,4 +176,4 @@ void keyPressed() {
        }
        
     }  
-}
+}*/
