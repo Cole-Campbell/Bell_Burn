@@ -82,8 +82,6 @@ void draw() {
   //Will store this in XML as well. 
   println(status.getCreatedAt());
   String storeDate = "" + status.getCreatedAt();
-
-  
   
   //Ok, so tweets come up, but seems like some are repeated.
   //In order to eliminate these from being saved to the XML file and being false data
@@ -99,16 +97,15 @@ void draw() {
   //Space switches the number
   //Control to turn it on and off
   if(tweetsOnOffSwitch == 1) {
-  text(status.getText(), 100, 100, 300, 200);
-  text(user.getName(), 200, 300, 300, 200);
-  text(longString,300,300,300,200);
-  delay(2000);
+     text(status.getText(), 100, 100, 300, 200);
+     text(user.getName(), 200, 300, 300, 200);
+     text(longString,300,300,300,200);
+     delay(3000);
   }
   
-  //XML[] tweetsInFile = xmlFile.getChildren("tweet");
   //Declaring a new XML object to add to the file  
-  //XML oldChild = xmlFile.getChild("tweets");
   //Set its content to == the tweet text
+  
   XML newChild = xmlFile.addChild("tweet");  
   newChild.setContent(status.getText());
   //give the tweet an ID attribute
@@ -120,60 +117,4 @@ void draw() {
   //Have cleaned this up and removed the old method i was using.
   //Not sure if theres other pieces we should add.
   
-  //If mouse clicked is true, it will refresh the tweets.
-  //Also put the save tweets to XML in here so it will only save on click.
-  if(clickToRefresh == true) {
-    saveXML(xmlFile, "data/storeTweets.xml");
-    getNewTweets();
-    clickToRefresh = false;
-  }
-
 }
-
-void getNewTweets() {
-  try {
-    //Try to get tweets here
-    GeoLocation dubLoc = new GeoLocation(53.344104,-6.2674937); //set location for dublin
-    
-    Query query = new Query();
-    query.count(100); //Returns 100 searches per page
-    
-    query.setGeoCode(dubLoc, 20, Query.Unit.valueOf("mi"));  //Search for tweets by people who have set dublin as their location. 20mi radius
-        
-    QueryResult result = twitter.search(query);
-    tweets = result.getTweets();
-        
-    println("Tweets refreshed");
-  }
-  catch (TwitterException te) {
-    // Deal with the case where we cant get them here 
-    System.out.println("Failed to search tweets: " + te.getMessage());
-    System.exit(-1);
-  }
-}
-
-//Deleted the refresh tweets method, using mouseCLick to refresh instead
-/*void mouseClicked() {
-  if (clickToRefresh == false) {
-    clickToRefresh = true;
-  }
-}*/
-/*
-//If you press space, it will stop the tweet stream
-void keyPressed() {
-    if (keyCode == ' ') {
-     tweetsOnOffSwitch = tweetsOnOffSwitch * -1;
-     println("switched");
-    }    
-    if (keyCode == DELETE) {
-     
-      XML[] getForDeletion = xmlFile.getChildren("tweet");
-       
-       for(int i = 0; i < getForDeletion.length; i++) {
-         println("Deleting " + i);
-         xmlFile.removeChild(getForDeletion[i]);   
-         saveXML(xmlFile, "data/storeTweets.xml");
-       }
-       
-    }  
-}*/
