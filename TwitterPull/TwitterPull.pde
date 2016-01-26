@@ -9,19 +9,17 @@ Twitter twitter;
 //String is not needed anymore, can leave it here for now as a note
 //Incase we want to put it back in, pass it through the Query object.
 String search = "Dublin";
+
+
 int currentTweet;
+boolean nextPage = false;
+QueryResult result;
+//Arraylist to store the status (the tweet);
 List<Status> tweets;
 
-//Currently looks like same tweets are popping up.
-//I dont think refresh tweets is being called.
-//Going to make a mouse click function to call the refresh tweets
-//^^ UPDATE TO THIS
-//I added in a time stamp and it goes from the newest to the oldest
-//And then loops back around
-boolean clickToRefresh = false;
-//Going to put in a control to turn on and off the get tweets function
-//Spacebar turns it on/off
+//Going to put in a switch to turn on and off the get tweets function
 int tweetsOnOffSwitch = 1;
+
 // To store the XML file location.
 XML xmlFile;
 
@@ -38,7 +36,7 @@ void setup() {
   
   xmlFile = loadXML("storeTweets.xml");
   
-  myInterface = new Interface(800,50,0,550);
+  myInterface = new Interface(800,50,0,550); //Initiate the interface
   
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
@@ -65,9 +63,20 @@ void draw() {
 
   myInterface.paint();
   
+  //Im wondering about this piece here, the tweets.size is 100 (can be max 100)
+  //We add 1 to currentTweet and when it is == 100, we reset it to 0.
+  //Maybe here when the current tweet is == 100, we fire off a function that calls the next 100 tweets?
+  //Will do some research and try test it out.
+  
+  //Tested it and it works!!
+  //When currentTweet is 100, it must be time to go onto the next page
+  //Set nextPage to true and then call the getNewTweets() function.
   if (currentTweet >= tweets.size()) {
     currentTweet = 0;
+    nextPage = true;
+    getNewTweets();
   }
+  println(tweets.size());
   
   /*http://twitter4j.org/javadoc/twitter4j/Status.html*/
   Status status = tweets.get(currentTweet);
@@ -100,7 +109,7 @@ void draw() {
      text(status.getText(), 100, 100, 300, 200);
      text(user.getName(), 200, 300, 300, 200);
      text(longString,300,300,300,200);
-     delay(3000);
+     delay(100);
   }
   
   //Declaring a new XML object to add to the file  
@@ -117,4 +126,10 @@ void draw() {
   //Have cleaned this up and removed the old method i was using.
   //Not sure if theres other pieces we should add.
   
+}
+
+void mouseClicked() {
+  deleteTweets(); // Call the delete function from the Handler
+  saveTweets();// Call the saveTweets function from the Handler
+  pauseTweets();// Call the pauseTweets function from the Handler
 }
