@@ -89,7 +89,6 @@ void draw() {
   
   //Running this piece of code returns when the tweets were created. 
   //Will store this in XML as well. 
-  println(status.getCreatedAt());
   String storeDate = "" + status.getCreatedAt();
   
   //Ok, so tweets come up, but seems like some are repeated.
@@ -109,6 +108,7 @@ void draw() {
      text(status.getText(), 100, 100, 300, 200);
      text(user.getName(), 200, 300, 300, 200);
      text(longString,300,300,300,200);
+     println(status.getCreatedAt());
      delay(100);
   }
   
