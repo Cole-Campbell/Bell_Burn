@@ -12,4 +12,8 @@ public class City {
     
   }
 
+  void makeCity() {
+    fill(255,255,255);
+    ellipse(50,50,50,50);
+  }
 }

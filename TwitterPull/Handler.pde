@@ -11,7 +11,7 @@ void getNewTweets() {
     //In the draw function have maybe dublin.paint() and it draws the circle
     //Also make a drag function so we can place the cities where they belong
     
-    City dublin = new City("Dublin",53.344104,-6.2674937);
+    dublin = new City("Dublin",53.344104,-6.2674937);
     GeoLocation dubLoc = new GeoLocation(dublin.longitude,dublin.latitude); //set location for dublin
     
     

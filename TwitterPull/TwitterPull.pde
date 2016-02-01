@@ -26,6 +26,8 @@ XML xmlFile;
 Interface myInterface;
 
 int pageNum = 1;
+
+City dublin;
 /*
 The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
 The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
@@ -64,6 +66,7 @@ void draw() {
   background(0);
 
   myInterface.paint();
+  dublin.makeCity();
   
   //Im wondering about this piece here, the tweets.size is 100 (can be max 100)
   //We add 1 to currentTweet and when it is == 100, we reset it to 0.
