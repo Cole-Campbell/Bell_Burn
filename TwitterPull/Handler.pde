@@ -25,16 +25,16 @@ void getNewTweets() {
       println("Tweets refreshed");
     }
 
+
     
     //This will be called after the first call, this will then be called indefinitely
     //Use the query created above and pass it the nextQuery call.
     if(nextPage == true) {
-        int i = 0;
-        i++;
+        pageNum = pageNum + 1;
         query = result.nextQuery();
         result = twitter.search(query);
         tweets = result.getTweets();
-        println("Page " + i);
+        println("Page " + pageNum);
         nextPage = false;
     }
 

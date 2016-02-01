@@ -8,7 +8,7 @@ Twitter twitter;
 
 //String is not needed anymore, can leave it here for now as a note
 //Incase we want to put it back in, pass it through the Query object.
-String search = "Dublin";
+String search = "";
 
 
 int currentTweet;
@@ -24,6 +24,8 @@ int tweetsOnOffSwitch = 1;
 XML xmlFile;
 
 Interface myInterface;
+
+int pageNum = 1;
 /*
 The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
 The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
@@ -86,6 +88,12 @@ void draw() {
   //Then we can make a User object, then put the status.user property(its in JSON) into that object
   //then we can get different attributes associated with it.
   User user = status.getUser();
+  
+  /*
+  GeoLocation tweetLoc = status.getGeoLocation();
+  double longitude = tweetLoc.getLongitude();
+  println(longitude);
+  */
   
   //Running this piece of code returns when the tweets were created. 
   //Will store this in XML as well. 
