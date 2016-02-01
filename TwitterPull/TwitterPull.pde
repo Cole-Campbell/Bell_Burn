@@ -137,10 +137,24 @@ void draw() {
   //Have cleaned this up and removed the old method i was using.
   //Not sure if theres other pieces we should add.
   
+  //For the drag
+  dublin.move();
 }
 
 void mouseClicked() {
   deleteTweets(); // Call the delete function from the Handler
   saveTweets();// Call the saveTweets function from the Handler
   pauseTweets();// Call the pauseTweets function from the Handler
+}
+
+//Have set a drag function for arranging the cities on the map
+//https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
+void mousePressed() {
+    if (dublin.mouseOver(mouseX, mouseY)) {
+        dublin.mousePressed();
+    }
+}
+
+void mouseReleased() {
+    dublin.mouseReleased();
 }
