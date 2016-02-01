@@ -2,7 +2,18 @@
 void getNewTweets() {
   try {
     //Try to get tweets here
-    GeoLocation dubLoc = new GeoLocation(53.344104,-6.2674937); //set location for dublin
+
+    // UPDATE 2/1/2016
+    //Added in an extra step here for future editing. Basically we set the citys Name, Longitude, Latitude
+    //Then add the long and lat to the geoLocation.
+    //This is first steps towards generating the graphics.
+    //Use the City class to generate where the lights originate from?
+    //In the draw function have maybe dublin.paint() and it draws the circle
+    //Also make a drag function so we can place the cities where they belong
+    
+    City dublin = new City("Dublin",53.344104,-6.2674937);
+    GeoLocation dubLoc = new GeoLocation(dublin.longitude,dublin.latitude); //set location for dublin
+    
     
     //The Query is how we want our results to come back
     //Basically calling it the type of search we want
