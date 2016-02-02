@@ -4,26 +4,32 @@ import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
 
+PImage world;
+
 Twitter twitter;
 
-String search = "Clonmel";
+//String is not needed anymore, can leave it here for now as a note
+//Incase we want to put it back in, pass it through the Query object.
+String search = "";
+
+
 int currentTweet;
+boolean nextPage = false;
+QueryResult result;
+//Arraylist to store the status (the tweet);
 List<Status> tweets;
 
-//Currently looks like same tweets are popping up.
-//I dont think refresh tweets is being called.
-//Going to make a mouse click function to call the refresh tweets
-//^^ UPDATE TO THIS
-//I added in a time stamp and it goes from the newest to the oldest
-//And then loops back around
-boolean clickToRefresh = false;
-
-//Going to put in a control to turn on and off the get tweets function
-//Spacebar turns it on/off
+//Going to put in a switch to turn on and off the get tweets function
 int tweetsOnOffSwitch = 1;
+
 // To store the XML file location.
 XML xmlFile;
 
+Interface myInterface;
+
+int pageNum = 1;
+
+City dublin;
 /*
 The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
 The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
@@ -32,9 +38,13 @@ The “Access Token Secret”: CWwSNlbOajW0cxG211yfCOaLS5SYurJGWeoVEUNxiBUYL
  */
 
 void setup() {
-  size(800, 600);
+  dublin = new City("Dublin",53.344104,-6.2674937,200,100,50);
+  size(1920, 1080);
+  world = loadImage("world.png");
   
   xmlFile = loadXML("storeTweets.xml");
+  
+  myInterface = new Interface(800,50,0,550); //Initiate the interface
   
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
@@ -58,11 +68,26 @@ void draw() {
 
   currentTweet = currentTweet +1;
   background(0);
+  
+  image(world,0,0);
 
-
+  myInterface.paint();
+  dublin.makeCity();
+  
+  //Im wondering about this piece here, the tweets.size is 100 (can be max 100)
+  //We add 1 to currentTweet and when it is == 100, we reset it to 0.
+  //Maybe here when the current tweet is == 100, we fire off a function that calls the next 100 tweets?
+  //Will do some research and try test it out.
+  
+  //Tested it and it works!!
+  //When currentTweet is 100, it must be time to go onto the next page
+  //Set nextPage to true and then call the getNewTweets() function.
   if (currentTweet >= tweets.size()) {
     currentTweet = 0;
+    nextPage = true;
+    getNewTweets();
   }
+  println(tweets.size());
   
   /*http://twitter4j.org/javadoc/twitter4j/Status.html*/
   Status status = tweets.get(currentTweet);
@@ -73,12 +98,15 @@ void draw() {
   //then we can get different attributes associated with it.
   User user = status.getUser();
   
+  /*
+  GeoLocation tweetLoc = status.getGeoLocation();
+  double longitude = tweetLoc.getLongitude();
+  println(longitude);
+  */
+  
   //Running this piece of code returns when the tweets were created. 
   //Will store this in XML as well. 
-  println(status.getCreatedAt());
   String storeDate = "" + status.getCreatedAt();
-
-  
   
   //Ok, so tweets come up, but seems like some are repeated.
   //In order to eliminate these from being saved to the XML file and being false data
@@ -94,16 +122,16 @@ void draw() {
   //Space switches the number
   //Control to turn it on and off
   if(tweetsOnOffSwitch == 1) {
-  text(status.getText(), 100, 100, 300, 200);
-  text(user.getName(), 200, 300, 300, 200);
-  text(longString,300,300,300,200);
-  delay(2000);
+     text(status.getText(), 100, 100, 300, 200);
+     text(user.getName(), 200, 300, 300, 200);
+     text(longString,300,300,300,200);
+     println(status.getCreatedAt());
+     delay(100);
   }
   
-  //XML[] tweetsInFile = xmlFile.getChildren("tweet");
   //Declaring a new XML object to add to the file  
-  //XML oldChild = xmlFile.getChild("tweets");
   //Set its content to == the tweet text
+  
   XML newChild = xmlFile.addChild("tweet");  
   newChild.setContent(status.getText());
   //give the tweet an ID attribute
@@ -115,42 +143,24 @@ void draw() {
   //Have cleaned this up and removed the old method i was using.
   //Not sure if theres other pieces we should add.
   
-  //If mouse clicked is true, it will refresh the tweets.
-  //Also put the save tweets to XML in here so it will only save on click.
-  if(clickToRefresh == true) {
-    saveXML(xmlFile, "data/storeTweets.xml");
-    getNewTweets();
-    clickToRefresh = false;
-  }
-
+  //For the drag
+  dublin.move();
 }
 
-void getNewTweets() {
-  try {
-    //Try to get tweets here
-    Query query = new Query(search);
-    QueryResult result = twitter.search(query);
-    tweets = result.getTweets();
-    println("Tweets refreshed");
-  }
-  catch (TwitterException te) {
-    // Deal with the case where we cant get them here 
-    System.out.println("Failed to search tweets: " + te.getMessage());
-    System.exit(-1);
-  }
-}
-
-//Deleted the refresh tweets method, using mouseCLick to refresh instead
 void mouseClicked() {
-  if (clickToRefresh == false) {
-    clickToRefresh = true;
-  }
+  deleteTweets(); // Call the delete function from the Handler
+  saveTweets();// Call the saveTweets function from the Handler
+  pauseTweets();// Call the pauseTweets function from the Handler
 }
 
-//If you press space, it will stop the tweet stream
-void keyPressed() {
-    if (keyCode == ' ') {
-     tweetsOnOffSwitch = tweetsOnOffSwitch * -1;
-     println("switched");
-    }    
+//Have set a drag function for arranging the cities on the map
+//https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
+void mousePressed() {
+    if (dublin.mouseOver(mouseX, mouseY)) {
+        dublin.mousePressed();
+    }
+}
+
+void mouseReleased() {
+    dublin.mouseReleased();
 }
