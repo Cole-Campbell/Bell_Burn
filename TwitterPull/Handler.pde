@@ -10,7 +10,7 @@ void getNewTweets() {
     //Use the City class to generate where the lights originate from?
     //In the draw function have maybe dublin.paint() and it draws the circle
     //Also make a drag function so we can place the cities where they belong
-    
+
     GeoLocation dubLoc = new GeoLocation(dublin.longitude,dublin.latitude); //set location for dublin
     
     
