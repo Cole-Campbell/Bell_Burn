@@ -77,7 +77,8 @@ void draw() {
     rect(0,0,width,50);
     fill(0,0,0);
     text("TweetSet Demo", 0, 0, 300, 200);
-    
+    liveStream();
+    delay(10000);
   }
   
   if(tweetSetDemo == true) {
