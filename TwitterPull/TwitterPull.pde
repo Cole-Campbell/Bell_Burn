@@ -37,12 +37,13 @@ boolean tweetSetLive = false;
 
 void setup() {
   dublin = new City("Dublin",53.344104,-6.2674937,200,100,50);
-  size(1920, 1080);
+  size(1024, 768);
   world = loadImage("world.png");
   
   xmlFile = loadXML("storeTweets.xml");
   
-  myInterface = new Interface(800,50,0,550); //Initiate the interface
+                            //width,height,x,y
+  myInterface = new Interface(width,50,0,height - 100); //Initiate the interface
   
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
@@ -65,18 +66,27 @@ void draw() {
 
   background(0);
   
-  if(tweetSetDemo == false) {
+  //Turns on the button upon start up
+  if(tweetSetDemo == false && tweetSetLive == false) {    
     
     fill(255,255,255);
     rect(0,0,width,50);
     fill(0,0,0);
     text("TweetSet Demo", 0, 0, 300, 200);
+    
+    fill(255,255,255);
+    rect(0,100,width,50);
+    fill(0,0,0);
+    text("TweetSet Live", 0, 100, 300, 200);
+    
+  }
+  //Turns on the live tweets version
+  if(tweetSetLive == true){
     liveStream();
-    delay(10000);
   }
   
+  //Turns on the demo version
   if(tweetSetDemo == true) {
-    
     currentTweet = currentTweet +1;
     myInterface.paint();
     dublin.makeCity();
@@ -161,9 +171,18 @@ void mouseClicked() {
   saveTweets();// Call the saveTweets function from the Handler
   pauseTweets();// Call the pauseTweets function from the Handler
   
+  //Activate the Demo version.
   if(mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50){
       if(tweetSetDemo == false) {
           tweetSetDemo = true;
+          println("This works!!");
+      }
+  }
+  
+  //Activate the Live version
+  if(mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150){
+      if(tweetSetLive == false) {
+          tweetSetLive = true;
           println("This works!!");
       }
   }
