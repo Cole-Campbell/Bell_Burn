@@ -34,12 +34,6 @@ City dublin;
 
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
-/*
-The “Consumer Key”: LuxDk9NaQOvqqQkn9LOXmwBY1
-The “Consumer Secret”: 0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2
-The “Access Token”: 537618780-TnQbYM3IS88usjTURUFyX2QJTL2kwBZemAqOCQKu
-The “Access Token Secret”: CWwSNlbOajW0cxG211yfCOaLS5SYurJGWeoVEUNxiBUYL
- */
 
 void setup() {
   dublin = new City("Dublin",53.344104,-6.2674937,200,100,50);
@@ -52,10 +46,10 @@ void setup() {
   
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
-  cb.setOAuthConsumerKey("LuxDk9NaQOvqqQkn9LOXmwBY1");
-  cb.setOAuthConsumerSecret("0IANaFy2X3qNx6rKc3drLit6kG7ETPOGBZD1GYL5YSopZiw5j2");
-  cb.setOAuthAccessToken("537618780-TnQbYM3IS88usjTURUFyX2QJTL2kwBZemAqOCQKu");
-  cb.setOAuthAccessTokenSecret("CWwSNlbOajW0cxG211yfCOaLS5SYurJGWeoVEUNxiBUYL");
+  cb.setOAuthConsumerKey(con);
+  cb.setOAuthConsumerSecret(conS);
+  cb.setOAuthAccessToken(access);
+  cb.setOAuthAccessTokenSecret(accessS);
 
   TwitterFactory tf = new TwitterFactory(cb.build());
 
