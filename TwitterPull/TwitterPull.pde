@@ -43,7 +43,7 @@ void setup() {
   xmlFile = loadXML("storeTweets.xml");
   
                             //width,height,x,y
-  myInterface = new Interface(width,50,0,height - 100); //Initiate the interface
+  myInterface = new Interface(width,50,0,height - 50); //Initiate the interface
   
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
@@ -56,7 +56,7 @@ void setup() {
 
   twitter = tf.getInstance();
 
-  getNewTweets();
+  dublin.getNewTweets();
 
   currentTweet = 0;
 }
@@ -103,7 +103,7 @@ void draw() {
     if (currentTweet >= tweets.size()) {
       currentTweet = 0;
       nextPage = true;
-      getNewTweets();
+      dublin.getNewTweets();
     }
     println(tweets.size());
     
