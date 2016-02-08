@@ -134,13 +134,13 @@ void draw() {
       println(currentTweet);
       
     /*http://twitter4j.org/javadoc/twitter4j/Status.html*/
-         if(currentTweet==100) {            
-           currentTweet = 0;
-           nextPage = true;
-         }  
-         else {
-           nextPage = false;
-         }
+       if(currentTweet==100) {            
+         currentTweet = 0;
+         nextPage = true;
+       }  
+       else {
+         nextPage = false;
+       }
 
 
       if(nextPage == true) {
@@ -150,7 +150,7 @@ void draw() {
               myCity.makeCity();
               myCity.getNewTweets();
               //myCity.callGet();
-              delay(200);
+              delay(500);
               println("calling this");
 
           }
@@ -159,7 +159,10 @@ void draw() {
          
 
         City myCity = cities.get(j);
-        Status status = myCity.tweets.get(currentTweet);
+        for(int k = 0; k < myCity.tweets.size(); k++) {
+                 
+        Status status = myCity.tweets.get(k);
+        println(myCity.cityName + myCity.tweets.size());
         //I found this part a little confusing
         //First we get the current tweet
         //We store it in a status object,
@@ -212,7 +215,7 @@ void draw() {
         newChild.setString("city-name",myCity.cityName);
         //Have cleaned this up and removed the old method i was using.
         //Not sure if theres other pieces we should add.
-        
+        }
       }
     /*    ArrayList<Status> tweets = new ArrayList<Status>();       
         Status status = tweets.get(currentTweet);
