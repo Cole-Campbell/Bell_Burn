@@ -119,11 +119,4 @@ public class City {
     System.exit(-1);
   }
 }
-void callGet() {
-    if (currentTweet >= tweets.size()) {
-      currentTweet = 0;
-      nextPage = true;
-      getNewTweets();
-    }
-}
 }

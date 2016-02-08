@@ -1,6 +1,5 @@
 //This is the get tweet function
 
-
 void saveTweets() {
     if(mouseX >= 250 && mouseX <= 350 && mouseY >= 550 && mouseY <= 600) {
         println("saving...");
