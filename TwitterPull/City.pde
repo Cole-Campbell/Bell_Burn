@@ -108,62 +108,10 @@ public class City {
         result = twitter.search(query);
         tweets = result.getTweets();
         println(cityName + "Page " + pageNum);
-        nextPage = false;
     }
     
-    Status status = tweets.get(currentTweet);
-        //I found this part a little confusing
-        //First we get the current tweet
-        //We store it in a status object,
-        //Then we can make a User object, then put the status.user property(its in JSON) into that object
-        //then we can get different attributes associated with it.
-        User user = status.getUser();
-        println(tweets.size());
-        /*
-        GeoLocation tweetLoc = status.getGeoLocation();
-        double longitude = tweetLoc.getLongitude();
-        println(longitude);
-        */
+    
         
-        //Running this piece of code returns when the tweets were created. 
-        //Will store this in XML as well. 
-        String storeDate = "" + status.getCreatedAt();
-        
-        //Ok, so tweets come up, but seems like some are repeated.
-        //In order to eliminate these from being saved to the XML file and being false data
-        //One possible solution is we must get each ones id, then compare it to the rest of the IDs.
-        //And only add it to the XML file if the ID is unique. For loop, load XML, check then add or delete.
-        
-        //The id is in the data type LONG
-        //In order to convert to string I had to use concatenation. 
-        long idLong = status.getId();
-        String longString = "" + idLong;
-        fill(200);
-        
-        //Space switches the number
-        //Control to turn it on and off
-        if(tweetsOnOffSwitch == 1) {
-           text(status.getText(), 100, 100, 300, 200);
-           text(user.getName(), 200, 300, 300, 200);
-           text(longString,300,300,300,200);
-           println(status.getCreatedAt());
-           delay(2);
-        }
-        
-        //Declaring a new XML object to add to the file  
-        //Set its content to == the tweet text
-        
-        XML newChild = xmlFile.addChild("tweet");  
-        newChild.setContent(status.getText());
-        //give the tweet an ID attribute
-        newChild.setString("tweet-id", longString);
-        //give the tweet a userName attribute
-        newChild.setString("tweet-name", user.getName());
-        //give the tweet a date attribute
-        newChild.setString("tweet-date", storeDate);
-        //Have cleaned this up and removed the old method i was using.
-        //Not sure if theres other pieces we should add.
-
   }
   catch (TwitterException te) {
     // Deal with the case where we cant get them here 
