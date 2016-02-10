@@ -46,7 +46,7 @@ void setup() {
   cities.add(dublin);
   cities.add(toronto);
   
-  size(1024, 768);
+  size(800, 600);
   world = loadImage("world.png");
   
   xmlFile = loadXML("storeTweets.xml");
@@ -108,29 +108,14 @@ void draw() {
   
   //Turns on the demo version
   if(tweetSetDemo == true) {
-    
+      
+    myInterface.paint();
+     
+    image(world,0,0);
+      
+    if(tweetsOnOffSwitch == 1) {
+      
       currentTweet = currentTweet +1;
-      myInterface.paint();
-    
-
-    
-      image(world,0,0);
-    
-    //Im wondering about this piece here, the tweets.size is 100 (can be max 100)
-    //We add 1 to currentTweet and when it is == 100, we reset it to 0.
-    //Maybe here when the current tweet is == 100, we fire off a function that calls the next 100 tweets?
-    //Will do some research and try test it out.
-    
-    //Tested it and it works!!
-    //When currentTweet is 100, it must be time to go onto the next page
-    //Set nextPage to true and then call the getNewTweets() function.
-    /*if (currentTweet >= tweets.size() + 100) {
-      currentTweet = 0;
-      nextPage = true;
-      //dublin.getNewTweets();
-      toronto.getNewTweets();
-    }*/
-
       println(currentTweet);
       //when currentTweet is 100, we want to go onto the next page
       if(currentTweet==100){
@@ -142,66 +127,65 @@ void draw() {
       //Need to specify a number so the for loop only calls once
       if(currentTweet == 10){
         //Loop through the cities array and get each object
-        for(int j = 0; j < cities.size(); j++){ 
+          for(int j = 0; j < cities.size(); j++){ 
           
-          City myCity = cities.get(j);
+              City myCity = cities.get(j);
+          
           //The first time we loop through, it will skip this
           //The next time, nextPage will be true, so call the next set of tweets
           //We want to call this for each city          
-          if(nextPage == true) {
-            
-                myCity.makeCity();
-                myCity.getNewTweets();
-                delay(500);
-                println("calling this");
-                
-          }
-         
-             for(int k = 0; k < myCity.tweets.size(); k++) {
-                         
-                  Status status = myCity.tweets.get(k);
-                  User user = status.getUser();
-    
-                  println(myCity.cityName + " " + myCity.tweets.size());
-                  /*
-                  GeoLocation tweetLoc = status.getGeoLocation();
-                  double longitude = tweetLoc.getLongitude();
-                  println(longitude);
-                  */
-                
-                  //Running this piece of code returns when the tweets were created. 
-                  String storeDate = "" + status.getCreatedAt();           
-                  //The id is in the data type LONG and needs to be converted to a string
-                  long idLong = status.getId();
-                  String longString = "" + idLong;
-                
-                              
-                   //This piece is nearly obsolete, its for displaying a tweet on screen
-                   if(tweetsOnOffSwitch == 1) {
-                         
-                         fill(200);
-                         text(status.getText(), 100, 100, 300, 200);
-                         text(user.getName(), 200, 300, 300, 200);
-                         text(longString,300,300,300,200);
-                         println(status.getCreatedAt());
-                         delay(2);              
+                  if(nextPage == true) {
                     
-                    }
-                
-                  //For saving to XML
-                  //Load up with the data we want from the status object
-                  //ID, Author, Date and the CityObjects name.
-                  
-                  XML newChild = xmlFile.addChild("tweet");  
-                  newChild.setContent(status.getText());
-                  newChild.setString("tweet-id", longString);
-                  newChild.setString("tweet-name", user.getName());
-                  newChild.setString("tweet-date", storeDate);
-                  newChild.setString("city-name",myCity.cityName);
+                        myCity.makeCity();
+                        myCity.getNewTweets();
+                        delay(500);
+                        println("calling this");
+                        
+                  }
+         
+                  for(int k = 0; k < myCity.tweets.size(); k++) {
+                         
+                        Status status = myCity.tweets.get(k);
+                        User user = status.getUser();
+          
+                        println(myCity.cityName + " " + myCity.tweets.size());
+                        /*
+                        GeoLocation tweetLoc = status.getGeoLocation();
+                        double longitude = tweetLoc.getLongitude();
+                        println(longitude);
+                        */
+                      
+                        //Running this piece of code returns when the tweets were created. 
+                        String storeDate = "" + status.getCreatedAt();           
+                        //The id is in the data type LONG and needs to be converted to a string
+                        long idLong = status.getId();
+                        String longString = "" + idLong;
+                      
+                                    
+                         //This piece is nearly obsolete, its for displaying a tweet on screen
+                   
+                         
+                        fill(200);
+                        text(status.getText(), 100, 100, 300, 200);
+                        text(user.getName(), 200, 300, 300, 200);
+                        text(longString,300,300,300,200);
+                        println(status.getCreatedAt());
+                   
+                        //For saving to XML
+                        //Load up with the data we want from the status object
+                        //ID, Author, Date and the CityObjects name.
+                        
+                        XML newChild = xmlFile.addChild("tweet");  
+                        newChild.setContent(status.getText());
+                        newChild.setString("tweet-id", longString);
+                        newChild.setString("tweet-name", user.getName());
+                        newChild.setString("tweet-date", storeDate);
+                        newChild.setString("city-name",myCity.cityName);
     
                   }
-            }
-      }
+            }  
+        }
+    }
 
     //For the drag
     dublin.move();

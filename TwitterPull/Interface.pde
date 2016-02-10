@@ -23,21 +23,25 @@ public class Interface {
   void paint() {
     fill(200,200,200);    
     rect(interXpos, interYpos, interWidth, interHeight);
-    
-    
+        
     fill(150,50,50);
-    rect(50, 550, 100, 50);
+    rect(0, height - 50, 100, 50);
     fill(0,0,0);
-    text(delString, 50, 550, 100, 50);
+    text(delString, 20, height - 40, 100, 50);
     
     fill(50,50,90);
-    rect(250, 550, 100, 50);
+    rect(150, height - 50, 100, 50);
     fill(0,0,0);
-    text(pauseString, 250, 550, 100, 50);
+    text(pauseString, 170, height - 40, 100, 50);
     
     fill(50,70,50);    
-    rect(450, 550, 100, 50);
+    rect(300, height - 50, 100, 50);
     fill(0,0,0);
-    text(clickString, 450, 550, 100, 50);
+    text(clickString, 320, height - 40, 100, 50);
+    
+    fill(30,90,50);    
+    rect(300, height - 50, 100, 50);
+    fill(0,0,0);
+    text("coming soon...", width - 100, height - 40, 100, 50);
   }
 }
