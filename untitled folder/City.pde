@@ -111,6 +111,7 @@ public class City {
       System.exit(-1);
     }
   }
+<<<<<<< HEAD
   void callGet() {
     if (currentTweet >= tweets.size()) {
       currentTweet = 0;
@@ -118,4 +119,7 @@ public class City {
       getNewTweets();
     }
   }
+=======
+}
+>>>>>>> fd62b2452e96a0d0283f4750ef4734c9fe38537b
 }
