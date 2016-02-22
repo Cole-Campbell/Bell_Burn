@@ -1,16 +1,17 @@
+//Twitter4J library imports which are used to communicate with Twitter
 import twitter4j.conf.*;
 import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
 
-PImage world;
-
 Twitter twitter;
 
 //String is not needed anymore, can leave it here for now as a note
 //Incase we want to put it back in, pass it through the Query object.
 String search = "";
+
+public String xml = "storeTweets.xml";
 
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
@@ -37,23 +38,25 @@ City toronto;
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 
+//Map visual variable declared
+PImage world;
+
 void setup() {
-  
-  
+  //Array list of cities are declared initially. Add a city by copy/paste of one of the cities below
   cities = new ArrayList<City>();
-  dublin = new City("Dublin",53.344104,-6.2674937,200,100,50);
-  toronto = new City("Toronto",43.6525,-79.381667,400,200,50);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 200, 100, 50);
+  toronto = new City("Toronto", 43.6525, -79.381667, 400, 200, 50);
   cities.add(dublin);
   cities.add(toronto);
-  
-  size(1024, 768);
+
+  size(1920, 1200);
   world = loadImage("world.png");
-  
-  xmlFile = loadXML("storeTweets.xml");
-  
-                            //width,height,x,y
-  myInterface = new Interface(width,50,0,height - 50); //Initiate the interface
-  
+
+  xmlFile = loadXML(xml);
+
+  //width,height,x,y
+  myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
+
   ConfigurationBuilder cb = new ConfigurationBuilder();
 
   cb.setOAuthConsumerKey(con);
@@ -65,102 +68,88 @@ void setup() {
 
   twitter = tf.getInstance();
 
+  //Finds Tweets in city location WITH location set
   dublin.getNewTweets();
   toronto.getNewTweets();
-  
+
   currentTweet = 0;
-  
 }
 
-
-
-
-
-
 void draw() {
-  
-  background(0);
-  
-  //Turns on the button upon start up
-  if(tweetSetDemo == false && tweetSetLive == false) {    
-    
-      fill(255,255,255);
-      rect(0,0,width,50);
-      fill(0,0,0);
-      text("TweetSet Demo", 0, 0, 300, 200);
-      
-      fill(255,255,255);
-      rect(0,100,width,50);
-      fill(0,0,0);
-      text("TweetSet Live", 0, 100, 300, 200);
-    
-  }
-  
-  
-  //Turns on the live tweets version
-  if(tweetSetLive == true){
-    
-      liveStream();
-      
-  }
-  
-  
-  
-  //Turns on the demo version
-  if(tweetSetDemo == true) {
-    
-      currentTweet = currentTweet +1;
-      myInterface.paint();
-    
 
-    
-      image(world,0,0);
-    
+  background(0);
+
+  //Turns on the button upon start up
+  if (tweetSetDemo == false && tweetSetLive == false) {    
+
+    fill(255, 255, 255);
+    rect(0, 0, width, 50);
+    fill(0, 0, 0);
+    text("TweetSet Demo", 0, 0, 300, 200);
+
+    fill(255, 255, 255);
+    rect(0, 100, width, 50);
+    fill(0, 0, 0);
+    text("TweetSet Live", 0, 100, 300, 200);
+  }
+
+  //Turns on the live tweets version
+  if (tweetSetLive == true) {
+
+    liveStream();
+  }
+
+  //Turns on the demo version
+  if (tweetSetDemo == true) {
+
+    currentTweet = currentTweet +1;
+    myInterface.paint();
+
+    image(world, 0, 0);
+
     //Im wondering about this piece here, the tweets.size is 100 (can be max 100)
     //We add 1 to currentTweet and when it is == 100, we reset it to 0.
     //Maybe here when the current tweet is == 100, we fire off a function that calls the next 100 tweets?
     //Will do some research and try test it out.
-    
+
     //Tested it and it works!!
     //When currentTweet is 100, it must be time to go onto the next page
     //Set nextPage to true and then call the getNewTweets() function.
     /*if (currentTweet >= tweets.size() + 100) {
+     currentTweet = 0;
+     nextPage = true;
+     //dublin.getNewTweets();
+     toronto.getNewTweets();
+     }*/
+
+    println(currentTweet);
+
+    /*http://twitter4j.org/javadoc/twitter4j/Status.html*/
+    if (currentTweet==100) {            
       currentTweet = 0;
       nextPage = true;
-      //dublin.getNewTweets();
-      toronto.getNewTweets();
-    }*/
-
-      println(currentTweet);
-      
-    /*http://twitter4j.org/javadoc/twitter4j/Status.html*/
-       if(currentTweet==100) {            
-         currentTweet = 0;
-         nextPage = true;
-       }  
-       else {
-         nextPage = false;
-       }
+    } else {
+      nextPage = false;
+    }
 
 
-      if(nextPage == true) {
-          for(int i = 0; i < cities.size(); i++){
-            
-              City myCity = cities.get(i);
-              myCity.makeCity();
-              myCity.getNewTweets();
-              //myCity.callGet();
-              delay(500);
-              println("calling this");
+    if (nextPage == true) {
+      for (int i = 0; i < cities.size(); i++) {
 
-          }
+        City myCity = cities.get(i);
+        myCity.makeCity();
+        myCity.getNewTweets();
+        //myCity.callGet();
+        delay(500);
+        println("calling this");
       }
-      for(int j = 0; j < cities.size(); j++){ 
-         
+    }
+    for (int j = 0; j < cities.size(); j++) { 
 
-        City myCity = cities.get(j);
-        for(int k = 0; k < myCity.tweets.size(); k++) {
-                 
+
+      City myCity = cities.get(j);
+      for (int k = 0; k < myCity.tweets.size(); k++) {
+
         Status status = myCity.tweets.get(k);
         println(myCity.cityName + myCity.tweets.size());
         //I found this part a little confusing
@@ -172,38 +161,38 @@ void draw() {
         println(myCity.tweets.size());
         /*
         GeoLocation tweetLoc = status.getGeoLocation();
-        double longitude = tweetLoc.getLongitude();
-        println(longitude);
-        */
-        
+         double longitude = tweetLoc.getLongitude();
+         println(longitude);
+         */
+
         //Running this piece of code returns when the tweets were created. 
         //Will store this in XML as well. 
         String storeDate = "" + status.getCreatedAt();
-        
+
         //Ok, so tweets come up, but seems like some are repeated.
         //In order to eliminate these from being saved to the XML file and being false data
         //One possible solution is we must get each ones id, then compare it to the rest of the IDs.
         //And only add it to the XML file if the ID is unique. For loop, load XML, check then add or delete.
-        
+
         //The id is in the data type LONG
         //In order to convert to string I had to use concatenation. 
         long idLong = status.getId();
         String longString = "" + idLong;
         fill(200);
-        
+
         //Space switches the number
         //Control to turn it on and off
-        if(tweetsOnOffSwitch == 1) {
-           text(status.getText(), 100, 100, 300, 200);
-           text(user.getName(), 200, 300, 300, 200);
-           text(longString,300,300,300,200);
-           println(status.getCreatedAt());
-           delay(2);
+        if (tweetsOnOffSwitch == 1) {
+          text(status.getText(), 100, 100, 300, 200);
+          text(user.getName(), 200, 300, 300, 200);
+          text(longString, 300, 300, 300, 200);
+          println(status.getCreatedAt());
+          delay(2);
         }
-        
+
         //Declaring a new XML object to add to the file  
         //Set its content to == the tweet text
-        
+
         XML newChild = xmlFile.addChild("tweet");  
         newChild.setContent(status.getText());
         //give the tweet an ID attribute
@@ -212,65 +201,65 @@ void draw() {
         newChild.setString("tweet-name", user.getName());
         //give the tweet a date attribute
         newChild.setString("tweet-date", storeDate);
-        newChild.setString("city-name",myCity.cityName);
+        newChild.setString("city-name", myCity.cityName);
         //Have cleaned this up and removed the old method i was using.
         //Not sure if theres other pieces we should add.
-        }
       }
+    }
     /*    ArrayList<Status> tweets = new ArrayList<Status>();       
-        Status status = tweets.get(currentTweet);
-        //I found this part a little confusing
-        //First we get the current tweet
-        //We store it in a status object,
-        //Then we can make a User object, then put the status.user property(its in JSON) into that object
-        //then we can get different attributes associated with it.
-        User user = status.getUser();
-        println(tweets.size());
-        /*
-        GeoLocation tweetLoc = status.getGeoLocation();
-        double longitude = tweetLoc.getLongitude();
-        println(longitude);
-        */
-     /*   
-        //Running this piece of code returns when the tweets were created. 
-        //Will store this in XML as well. 
-        String storeDate = "" + status.getCreatedAt();
-        
-        //Ok, so tweets come up, but seems like some are repeated.
-        //In order to eliminate these from being saved to the XML file and being false data
-        //One possible solution is we must get each ones id, then compare it to the rest of the IDs.
-        //And only add it to the XML file if the ID is unique. For loop, load XML, check then add or delete.
-        
-        //The id is in the data type LONG
-        //In order to convert to string I had to use concatenation. 
-        long idLong = status.getId();
-        String longString = "" + idLong;
-        fill(200);
-        
-        //Space switches the number
-        //Control to turn it on and off
-        if(tweetsOnOffSwitch == 1) {
-           text(status.getText(), 100, 100, 300, 200);
-           text(user.getName(), 200, 300, 300, 200);
-           text(longString,300,300,300,200);
-           println(status.getCreatedAt());
-           delay(2);
-        }
-        
-        //Declaring a new XML object to add to the file  
-        //Set its content to == the tweet text
-        
-        XML newChild = xmlFile.addChild("tweet");  
-        newChild.setContent(status.getText());
-        //give the tweet an ID attribute
-        newChild.setString("tweet-id", longString);
-        //give the tweet a userName attribute
-        newChild.setString("tweet-name", user.getName());
-        //give the tweet a date attribute
-        newChild.setString("tweet-date", storeDate);
-        //Have cleaned this up and removed the old method i was using.
-        //Not sure if theres other pieces we should add.
-    */
+     Status status = tweets.get(currentTweet);
+     //I found this part a little confusing
+     //First we get the current tweet
+     //We store it in a status object,
+     //Then we can make a User object, then put the status.user property(its in JSON) into that object
+     //then we can get different attributes associated with it.
+     User user = status.getUser();
+     println(tweets.size());
+    /*
+     GeoLocation tweetLoc = status.getGeoLocation();
+     double longitude = tweetLoc.getLongitude();
+     println(longitude);
+     */
+    /*   
+     //Running this piece of code returns when the tweets were created. 
+     //Will store this in XML as well. 
+     String storeDate = "" + status.getCreatedAt();
+     
+     //Ok, so tweets come up, but seems like some are repeated.
+     //In order to eliminate these from being saved to the XML file and being false data
+     //One possible solution is we must get each ones id, then compare it to the rest of the IDs.
+     //And only add it to the XML file if the ID is unique. For loop, load XML, check then add or delete.
+     
+     //The id is in the data type LONG
+     //In order to convert to string I had to use concatenation. 
+     long idLong = status.getId();
+     String longString = "" + idLong;
+     fill(200);
+     
+     //Space switches the number
+     //Control to turn it on and off
+     if(tweetsOnOffSwitch == 1) {
+     text(status.getText(), 100, 100, 300, 200);
+     text(user.getName(), 200, 300, 300, 200);
+     text(longString,300,300,300,200);
+     println(status.getCreatedAt());
+     delay(2);
+     }
+     
+     //Declaring a new XML object to add to the file  
+     //Set its content to == the tweet text
+     
+     XML newChild = xmlFile.addChild("tweet");  
+     newChild.setContent(status.getText());
+     //give the tweet an ID attribute
+     newChild.setString("tweet-id", longString);
+     //give the tweet a userName attribute
+     newChild.setString("tweet-name", user.getName());
+     //give the tweet a date attribute
+     newChild.setString("tweet-date", storeDate);
+     //Have cleaned this up and removed the old method i was using.
+     //Not sure if theres other pieces we should add.
+     */
     //For the drag
     dublin.move();
     toronto.move();
@@ -281,32 +270,32 @@ void mouseClicked() {
   deleteTweets(); // Call the delete function from the Handler
   saveTweets();// Call the saveTweets function from the Handler
   pauseTweets();// Call the pauseTweets function from the Handler
-  
+
   //Activate the Demo version.
-  if(mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50){
-      if(tweetSetDemo == false) {
-          tweetSetDemo = true;
-          println("This works!!");
-      }
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50) {
+    if (tweetSetDemo == false) {
+      tweetSetDemo = true;
+      println("This works!!");
+    }
   }
-  
+
   //Activate the Live version
-  if(mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150){
-      if(tweetSetLive == false) {
-          tweetSetLive = true;
-          println("This works!!");
-      }
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150) {
+    if (tweetSetLive == false) {
+      tweetSetLive = true;
+      println("This works!!");
+    }
   }
 }
 
 //Have set a drag function for arranging the cities on the map
 //https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
 void mousePressed() {
-    if (dublin.mouseOver(mouseX, mouseY)) {
-        dublin.mousePressed();
-    }
+  if (dublin.mouseOver(mouseX, mouseY)) {
+    dublin.mousePressed();
+  }
 }
 
 void mouseReleased() {
-    dublin.mouseReleased();
+  dublin.mouseReleased();
 }

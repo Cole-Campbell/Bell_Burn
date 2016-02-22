@@ -1,10 +1,9 @@
 //This is the get tweet function
 
-
 void saveTweets() {
     if(mouseX >= 250 && mouseX <= 350 && mouseY >= 550 && mouseY <= 600) {
         println("saving...");
-        saveXML(xmlFile, "data/storeTweets.xml");
+        saveXML(xmlFile, xml);
         println("...saved");
   }
 }
@@ -27,7 +26,7 @@ void deleteTweets() {
     for(int i = 0; i < getForDeletion.length; i++) {
          println("Deleting " + i);
          xmlFile.removeChild(getForDeletion[i]);   
-         saveXML(xmlFile, "data/storeTweets.xml");
+         saveXML(xmlFile, xml);
     }
   }
 }

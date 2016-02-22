@@ -26,18 +26,18 @@ public class Interface {
     
     
     fill(150,50,50);
-    rect(50, 550, 100, 50);
+    rect(50, height-50, 100, 50);
     fill(0,0,0);
-    text(delString, 50, 550, 100, 50);
+    text(delString, 50, height-50, 100, 50);
     
     fill(50,50,90);
-    rect(250, 550, 100, 50);
+    rect(250, height-50, 100, 50);
     fill(0,0,0);
-    text(pauseString, 250, 550, 100, 50);
+    text(pauseString, 250, height-50, 100, 50);
     
     fill(50,70,50);    
-    rect(450, 550, 100, 50);
+    rect(450, height-50, 100, 50);
     fill(0,0,0);
-    text(clickString, 450, 550, 100, 50);
+    text(clickString, 450, height-50, 100, 50);
   }
 }
