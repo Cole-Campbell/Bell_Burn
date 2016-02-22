@@ -3,7 +3,7 @@
 void saveTweets() {
     if(mouseX >= 170 && mouseX <= 270 && mouseY >= height - 50 && mouseY <= height) {
         println("saving...");
-        saveXML(xmlFile, xml);
+        saveXML(xmlFile, saveXml);
         println("...saved");
   }
 }
@@ -26,7 +26,7 @@ void deleteTweets() {
     for(int i = 0; i < getForDeletion.length; i++) {
          println("Deleting " + i);
          xmlFile.removeChild(getForDeletion[i]);   
-         saveXML(xmlFile, xml);
+         saveXML(xmlFile, saveXml);
     }
   }
 }

@@ -8,8 +8,8 @@ public class Interface {
   PGraphics graphic;
   
   String delString = "DELETE";
-  String pauseString = "SAVE";
-  String clickString = "PAUSE";
+  String pauseString = "PAUSE";
+  String clickString = "SAVE";
   
   boolean mouseDown = false;
   
@@ -25,21 +25,6 @@ public class Interface {
     rect(interXpos, interYpos, interWidth, interHeight);
         
     fill(150,50,50);
-<<<<<<< HEAD
-    rect(50, height-50, 100, 50);
-    fill(0,0,0);
-    text(delString, 50, height-50, 100, 50);
-    
-    fill(50,50,90);
-    rect(250, height-50, 100, 50);
-    fill(0,0,0);
-    text(pauseString, 250, height-50, 100, 50);
-    
-    fill(50,70,50);    
-    rect(450, height-50, 100, 50);
-    fill(0,0,0);
-    text(clickString, 450, height-50, 100, 50);
-=======
     rect(0, height - 50, 100, 50);
     fill(0,0,0);
     text(delString, 20, height - 40, 100, 50);
@@ -47,17 +32,16 @@ public class Interface {
     fill(50,50,90);
     rect(150, height - 50, 100, 50);
     fill(0,0,0);
-    text(pauseString, 170, height - 40, 100, 50);
+    text(clickString, 170, height - 40, 100, 50);
     
     fill(50,70,50);    
     rect(300, height - 50, 100, 50);
     fill(0,0,0);
-    text(clickString, 320, height - 40, 100, 50);
+    text(pauseString, 320, height - 40, 100, 50);
     
     fill(30,90,50);    
     rect(300, height - 50, 100, 50);
     fill(0,0,0);
     text("coming soon...", width - 100, height - 40, 100, 50);
->>>>>>> fd62b2452e96a0d0283f4750ef4734c9fe38537b
   }
 }
