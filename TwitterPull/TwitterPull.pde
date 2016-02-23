@@ -43,6 +43,8 @@ boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 boolean tweetSetPlay = true;
 
+int timerCount = 6;
+
 void setup() {
 
   //fullScreen();
@@ -222,16 +224,7 @@ void draw() {
     }
   }
     
-    //Timer Code to increment time by 30 minutes for each second
-    Timer timer = new Timer();
-    timer.schedule(new TimerTask(){
-      @Override
-      void increaseTime(){
-        
-      }
-    }, 60000);
-    
-    
+       
     
     //Was display code, currently not working or reading the cities
     /*for (int w=0; w<tweetList.length; w++){
@@ -251,6 +244,7 @@ void draw() {
           }
         }
       }*/
+  timer();
 }
     
   
@@ -295,4 +289,14 @@ void mousePressed() {
 
 void mouseReleased() {
   dublin.mouseReleased();
+}
+
+void timer() {
+  if(frameCount % 30 == 1) {
+     println("Counting down from ..." + timerCount);
+     timerCount--; 
+     if(timerCount == 0) {
+       timerCount = 6;
+     }
+  }  
 }
