@@ -41,9 +41,10 @@ City toronto;
 
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
-boolean tweetSetPlay = true;
+boolean tweetSetPlay = false;
 
 int timerCount = 6;
+Calendar incrementMe;
 
 void setup() {
 
@@ -78,6 +79,9 @@ void setup() {
   toronto.getNewTweets();
 
   currentTweet = 0;
+  
+  incrementMe = Calendar.getInstance();
+  println(incrementMe.getTime());
 }
 
 void draw() {
@@ -296,6 +300,9 @@ void timer() {
      println("Counting down from ..." + timerCount);
      timerCount--; 
      if(timerCount == 0) {
+       incrementMe.add(Calendar.MINUTE, 30);
+       String whatTime = incrementMe.getTime() + " ";
+       println(whatTime.substring(11, 19) + " ");
        timerCount = 6;
      }
   }  
