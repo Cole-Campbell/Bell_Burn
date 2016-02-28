@@ -15,8 +15,6 @@ String search = "";
 String xml = "storeTweets.xml";
 String saveXml = "data/storeTweets.xml";
 
-String tweetCity;
-
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
 boolean nextPage = false;
@@ -43,6 +41,7 @@ boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 boolean tweetSetPlay = false;
 
+//This is for the timer
 int timerCount = 6;
 Calendar incrementMe;
 
@@ -110,109 +109,20 @@ void draw() {
 
   //Turns on the live tweets version
   if (tweetSetLive == true) {
-
     liveStream();
   }
 
-
-
   //Turns on the demo version
   if (tweetSetDemo == true) {
-
-    myInterface.paint();
-
-    image(world, 0, 0);
-
-    if (tweetsOnOffSwitch == 1) {
-
-      currentTweet = currentTweet +1;
-      println(currentTweet);
-      //when currentTweet is 100, we want to go onto the next page
-      if (currentTweet==100) {
-
-        nextPage=true;
-        currentTweet=0;
-      }
-      //Need to specify a number so the for loop only calls once
-      if (currentTweet == 10) {
-        //Loop through the cities array and get each object
-        for (int j = 0; j < cities.size(); j++) { 
-
-          City myCity = cities.get(j);
-
-          //The first time we loop through, it will skip this
-          //The next time, nextPage will be true, so call the next set of tweets
-          //We want to call this for each city          
-          if (nextPage == true) {
-
-            myCity.makeCity();
-            myCity.getNewTweets();
-            delay(500);
-            println("calling this");
-          }
-
-          for (int k = 0; k < myCity.tweets.size(); k++) {
-
-            Status status = myCity.tweets.get(k);
-            User user = status.getUser();
-
-            println(myCity.cityName + " " + myCity.tweets.size());
-
-            //Running this piece of code returns when the tweets were created. 
-            String storeDate = "" + status.getCreatedAt();           
-            //The id is in the data type LONG and needs to be converted to a string
-            long idLong = status.getId();
-            String longString = "" + idLong;
-
-
-            //This piece is nearly obsolete, its for displaying a tweet on screen
-
-
-            fill(200);
-            text(status.getText(), 100, 100, 300, 200);
-            text(user.getName(), 200, 300, 300, 200);
-            text(longString, 300, 300, 300, 200);
-            println(status.getCreatedAt());
-
-            //For saving to XML
-            //Load up with the data we want from the status object
-            //ID, Author, Date and the CityObjects name.
-
-            XML newChild = xmlFile.addChild("tweet");  
-            newChild.setContent(status.getText());
-            newChild.setString("tweet-id", longString);
-            newChild.setString("tweet-name", user.getName());
-            newChild.setString("tweet-date", storeDate);
-            newChild.setString("city-name", myCity.cityName);
-
-
-            if (status.getGeoLocation() != null) {
-              GeoLocation tweetLoc = status.getGeoLocation();
-              double longitude = tweetLoc.getLongitude();
-              double latitude = tweetLoc.getLatitude();
-              println(longitude); 
-              println(latitude);
-              newChild.setDouble("longitude", longitude);
-              newChild.setDouble("latitude", latitude);
-            }
-          }
-        }
-      }
-    }
-
-    //For the drag
-    dublin.move();
-    toronto.move();
+    demoVersion();
   }
-
+  //println(xmlCity);
   //TweetSet Play
   if (tweetSetPlay == true) {
-    int dubLatPix = 400;
-    int dubLonPix = 223;
-    //println("This is Working!!!");
+
     image(world, 0, 0);
     world.resize(800,600);
-    //rect(dubLatPix,dubLonPix,5,5);
+
     fill (0,255,0);
 
     XML[] tweetList = xmlFile.getChildren("tweet");
@@ -223,7 +133,12 @@ void draw() {
         Double tweetLat = tweetList[t].getDouble("latitude");
         Double tweetLong = tweetList[t].getDouble("longitude");
         String tweetDateString = tweetDate.substring(11, 19) + " ";
-        println(tweetDateString);
+               
+        //println(t + " : " + tweetCity);
+        
+        if(tweetCity == dublin.cityName || tweetCity == "Toronto"){
+          println(tweetCity + " is working");
+        }    
       }
     }
   }
@@ -252,58 +167,3 @@ void draw() {
 }
     
   
-
-void mouseClicked() {
-  deleteTweets(); // Call the delete function from the Handler
-  saveTweets();// Call the saveTweets function from the Handler
-  pauseTweets();// Call the pauseTweets function from the Handler
-
-  //Activate the Demo version.
-  if (mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50) {
-    if (tweetSetDemo == false) {
-      tweetSetDemo = true;
-      println("This works!!");
-    }
-  }
-
-  //Activate the Live version
-  if (mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150) {
-    if (tweetSetPlay == false) {
-      tweetSetPlay = true;
-      println("This works!!");
-    }
-  }
-
-  //Activate the Play version
-  if (mouseX >= 0 && mouseX <= width && mouseY >= 200 && mouseY <= 250) {
-    if (tweetSetPlay == false) {
-      tweetSetPlay = true;
-      println("This works!!");
-    }
-  }
-}
-
-//Have set a drag function for arranging the cities on the map
-//https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
-void mousePressed() {
-  if (dublin.mouseOver(mouseX, mouseY)) {
-    dublin.mousePressed();
-  }
-}
-
-void mouseReleased() {
-  dublin.mouseReleased();
-}
-
-void timer() {
-  if(frameCount % 30 == 1) {
-     println("Counting down from ..." + timerCount);
-     timerCount--; 
-     if(timerCount == 0) {
-       incrementMe.add(Calendar.MINUTE, 30);
-       String whatTime = incrementMe.getTime() + " ";
-       println(whatTime.substring(11, 19) + " ");
-       timerCount = 6;
-     }
-  }  
-}

@@ -1,4 +1,4 @@
-//This is the get tweet function
+
 
 void saveTweets() {
     if(mouseX >= 170 && mouseX <= 270 && mouseY >= height - 50 && mouseY <= height) {
@@ -29,4 +29,59 @@ void deleteTweets() {
          saveXML(xmlFile, saveXml);
     }
   }
+}
+
+void mouseClicked() {
+  deleteTweets(); // Call the delete function from the Handler
+  saveTweets();// Call the saveTweets function from the Handler
+  pauseTweets();// Call the pauseTweets function from the Handler
+
+  //Activate the Demo version.
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50) {
+    if (tweetSetDemo == false) {
+      tweetSetDemo = true;
+      println("This works!!");
+    }
+  }
+
+  //Activate the Live version
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150) {
+    if (tweetSetPlay == false) {
+      tweetSetPlay = true;
+      println("This works!!");
+    }
+  }
+
+  //Activate the Play version
+  if (mouseX >= 0 && mouseX <= width && mouseY >= 200 && mouseY <= 250) {
+    if (tweetSetPlay == false) {
+      tweetSetPlay = true;
+      println("This works!!");
+    }
+  }
+}
+
+//Have set a drag function for arranging the cities on the map
+//https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
+void mousePressed() {
+  if (dublin.mouseOver(mouseX, mouseY)) {
+    dublin.mousePressed();
+  }
+}
+
+void mouseReleased() {
+  dublin.mouseReleased();
+}
+
+void timer() {
+  if(frameCount % 30 == 1) {
+     //println("Counting down from ..." + timerCount);
+     timerCount--; 
+     if(timerCount == 0) {
+       incrementMe.add(Calendar.MINUTE, 30);
+       String whatTime = incrementMe.getTime() + " ";
+       //println(whatTime.substring(11, 19) + " ");
+       timerCount = 6;
+     }
+  }  
 }
