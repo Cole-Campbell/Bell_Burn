@@ -123,7 +123,7 @@ void draw() {
     image(world, 0, 0);
     for (int a = 0; a < cities.size(); a++) { 
       City myCity = cities.get(a);
-      myCity.makeCity();
+     // myCity.makeCity();
      
     }
     dublin.move();
@@ -159,13 +159,26 @@ void draw() {
             println("Tweet Latitude is: " + tweetLat);
             println("Tweet Longitude is: " + tweetLong);
             println(" ");
-            double difference = whichCity.longitude - tweetLat;
-            println("The difference is: " + difference);
+            
+            double differenceLat = whichCity.longitude - tweetLat;
+            differenceLat = differenceLat;
+            //float a = (float)whichCity.xPos + differenceLat;
+            //(float)differenceLat;
+            
+            double differenceLong = whichCity.latitude - tweetLong;
+            differenceLong = differenceLong;
+            //float b = (float)differenceLong;
+            
+            println("The difference between latitudes is: " + differenceLat);
+            println("The difference between longitudes is: " + differenceLong);
+            
             println(" ");
             println("////// ");
             println(" ");
-             //so now that we know the city
-             //we can compare the tweets lat and longitude
+            fill(255,255,255);
+            //rect(whichCity.xPos + differenceLat, whichCity.yPos + differenceLong, 5, 5);
+            //so now that we know the city
+            //we can compare the tweets lat and longitude
           }   
         }
       }
