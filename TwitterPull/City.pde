@@ -108,6 +108,7 @@ public class City {
         result = twitter.search(query);
         tweets = result.getTweets();
         println(cityName + "Page " + pageNum);
+        nextPage = false;
     }
     
     

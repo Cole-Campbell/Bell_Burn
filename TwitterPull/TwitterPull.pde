@@ -53,8 +53,9 @@ void setup() {
   cities = new ArrayList<City>();
   dublin = new City("Dublin", 53.344104, -6.2674937, 200, 100, 50);
   toronto = new City("Toronto", 43.6525, -79.381667, 400, 200, 50);
-  cities.add(dublin);
   cities.add(toronto);
+  cities.add(dublin);
+
 
   xmlFile = loadXML(xml);
   world = loadImage("world.png");
@@ -124,21 +125,36 @@ void draw() {
     world.resize(800,600);
 
     fill (0,255,0);
-
+    //Load up all the tweets from the XML file.
     XML[] tweetList = xmlFile.getChildren("tweet");
+    //We only need to do this once a second, 
     if (frameCount%30==1) {
+      //We need to extract all the tweets we have saved
       for (int t=0; t<tweetList.length; t++) {
+        //Store the tweets attributes
         String tweetDate = tweetList[t].getString("tweet-date");
         String tweetCity = tweetList[t].getString("city-name");
         Double tweetLat = tweetList[t].getDouble("latitude");
         Double tweetLong = tweetList[t].getDouble("longitude");
         String tweetDateString = tweetDate.substring(11, 19) + " ";
                
-        //println(t + " : " + tweetCity);
-        
-        if(tweetCity == dublin.cityName || tweetCity == "Toronto"){
-          println(tweetCity + " is working");
-        }    
+        //We then need to compare them.
+        //So go through each city
+        for (int j = 0; j < cities.size(); j++) { 
+        City whichCity = cities.get(j);
+          //check which city we are currently on
+          if(tweetCity.equals(whichCity.cityName)){
+            tweetLat = tweetLat + 10;
+            double difference = whichCity.latitude + tweetLat;
+            println("Tweet Latitude is: " + tweetLat);
+            println(" ");
+            println("Tweet Longitude is: " + tweetLong);
+            println(difference);
+             //so now that we know the city
+             //we can compare the tweets lat and longitude
+              println(tweetCity + " is working" + t);
+          }   
+        }
       }
     }
   }

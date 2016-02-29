@@ -20,7 +20,7 @@ void demoVersion() {
       if (currentTweet == 10) {
         //Loop through the cities array and get each object
         for (int j = 0; j < cities.size(); j++) { 
-
+          
           City myCity = cities.get(j);
 
           //The first time we loop through, it will skip this
@@ -35,7 +35,7 @@ void demoVersion() {
           }
 
           for (int k = 0; k < myCity.tweets.size(); k++) {
-
+            
             Status status = myCity.tweets.get(k);
             User user = status.getUser();
 
