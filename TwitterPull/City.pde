@@ -29,9 +29,7 @@ public class City {
     
       fill(255,255,255);
       ellipse(xPos,yPos,radius,radius);
-      
-                   
-        
+            
   }
   
   

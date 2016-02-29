@@ -120,8 +120,14 @@ void draw() {
   //println(xmlCity);
   //TweetSet Play
   if (tweetSetPlay == true) {
-
     image(world, 0, 0);
+    for (int a = 0; a < cities.size(); a++) { 
+      City myCity = cities.get(a);
+      myCity.makeCity();
+     
+    }
+    dublin.move();
+    toronto.move();
     world.resize(800,600);
 
     fill (0,255,0);
@@ -144,15 +150,22 @@ void draw() {
         City whichCity = cities.get(j);
           //check which city we are currently on
           if(tweetCity.equals(whichCity.cityName)){
-            tweetLat = tweetLat + 10;
-            double difference = whichCity.latitude + tweetLat;
-            println("Tweet Latitude is: " + tweetLat);
+            //THESE NEED TO BE THE WRONG WAY AROUND FOR SOME REASON
+            println("City latitude is: " + whichCity.longitude);
+            println("City Longitude is: " + whichCity.latitude);
+            println("City Name is: " + whichCity.cityName);
             println(" ");
+            println("Tweet City is: " + tweetCity);
+            println("Tweet Latitude is: " + tweetLat);
             println("Tweet Longitude is: " + tweetLong);
-            println(difference);
+            println(" ");
+            double difference = whichCity.longitude - tweetLat;
+            println("The difference is: " + difference);
+            println(" ");
+            println("////// ");
+            println(" ");
              //so now that we know the city
              //we can compare the tweets lat and longitude
-              println(tweetCity + " is working" + t);
           }   
         }
       }
