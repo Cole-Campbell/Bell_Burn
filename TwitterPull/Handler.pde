@@ -80,8 +80,8 @@ void timer() {
      if(timerCount == 0) {
        incrementMe.add(Calendar.MINUTE, 30);
        String whatTime = incrementMe.getTime() + " ";
+       
        //println(whatTime.substring(11, 19) + " ");
-       timerCount = 6;
-     }
+       timerCount = 6;  }
   }  
 }

@@ -24,6 +24,9 @@ QueryResult result;
 List<City> cities;
 //List<Status> tweets;
 
+//Array List for Particles
+ArrayList<Particle> myParticle;
+
 //Going to put in a switch to turn on and off the get tweets function
 int tweetsOnOffSwitch = 1;
 
@@ -47,9 +50,10 @@ Calendar incrementMe;
 
 void setup() {
 
-  //fullScreen();
-  size(800, 600);
+  fullScreen();
+  //size(800, 600);
 
+  myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   dublin = new City("Dublin", 53.344104, -6.2674937, 200, 100, 50);
   toronto = new City("Toronto", 43.6525, -79.381667, 400, 200, 50);
@@ -120,7 +124,7 @@ void draw() {
   //println(xmlCity);
   //TweetSet Play
   if (tweetSetPlay == true) {
-    //image(world, 0, 0);
+    image(world, 0, 0);
     for (int a = 0; a < cities.size(); a++) { 
       City myCity = cities.get(a);
      // myCity.makeCity();
@@ -128,7 +132,7 @@ void draw() {
     }
     dublin.move();
     toronto.move();
-    //world.resize(800,600);
+    world.resize(width, height);
 
     fill (0,255,0);
     //Load up all the tweets from the XML file.
@@ -160,42 +164,50 @@ void draw() {
             println("Tweet Longitude is: " + tweetLong);
             println(" ");
             
-            double differenceLat = whichCity.longitude - tweetLat;
-            differenceLat = differenceLat;
-            //float a = (float)whichCity.xPos + differenceLat;
-            //(float)differenceLat;
-            
+            double differenceLat = whichCity.longitude - tweetLat;           
             double differenceLong = whichCity.latitude - tweetLong;
-            differenceLong = differenceLong;
             
-            float a = (float)whichCity.longitude;
+            //float a = (float)whichCity.longitude;
             float b = (float)differenceLong;
             
-            float c = (float)whichCity.latitude;
+            //float c = (float)whichCity.latitude;
             float d = (float)differenceLat;
             
             //a = a * 100;
-            b = b * 1000;
+            b = b * 100;
+            d = d * 100;
+            println("Longitude difference is equal to " + Math.floor(b));
+            println("Latitude difference is equal to " + Math.floor(d));
             println("The difference between latitudes is: " + differenceLat);
             println("The difference between longitudes is: " + differenceLong);
             
             println(" ");
             println("////// ");
             println(" ");
-            fill(255,255,255);
+            
             
             
             //B = difference of longitude * 1000
             println("The difference between the longitude " + b+whichCity.xPos);
-            rect(b+whichCity.xPos, b,10,10);
+            fill(255,255,255);
+            myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
+            
+            rect(b+whichCity.xPos, d+whichCity.yPos,10,10);
             
             //rect(whichCity.xPos + differenceLat, whichCity.yPos + differenceLong, 5, 5);
             //so now that we know the city
             //we can compare the tweets lat and longitude
-          }   
+          }  
         }
       }
     }
+    for(int q = 0; q<=myParticle.size()-1; q++){
+              Particle aParticle = myParticle.get(q);
+              aParticle.paint();
+              if (aParticle.timeUp() == true) {
+                myParticle.remove(aParticle);              
+              }
+            }
   }
     
        
