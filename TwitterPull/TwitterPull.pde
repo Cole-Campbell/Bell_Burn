@@ -120,7 +120,7 @@ void draw() {
   //println(xmlCity);
   //TweetSet Play
   if (tweetSetPlay == true) {
-    image(world, 0, 0);
+    //image(world, 0, 0);
     for (int a = 0; a < cities.size(); a++) { 
       City myCity = cities.get(a);
      // myCity.makeCity();
@@ -128,7 +128,7 @@ void draw() {
     }
     dublin.move();
     toronto.move();
-    world.resize(800,600);
+    //world.resize(800,600);
 
     fill (0,255,0);
     //Load up all the tweets from the XML file.
@@ -167,8 +167,15 @@ void draw() {
             
             double differenceLong = whichCity.latitude - tweetLong;
             differenceLong = differenceLong;
-            //float b = (float)differenceLong;
             
+            float a = (float)whichCity.longitude;
+            float b = (float)differenceLong;
+            
+            float c = (float)whichCity.latitude;
+            float d = (float)differenceLat;
+            
+            //a = a * 100;
+            b = b * 1000;
             println("The difference between latitudes is: " + differenceLat);
             println("The difference between longitudes is: " + differenceLong);
             
@@ -176,6 +183,12 @@ void draw() {
             println("////// ");
             println(" ");
             fill(255,255,255);
+            
+            
+            //B = difference of longitude * 1000
+            println("The difference between the longitude " + b+whichCity.xPos);
+            rect(b+whichCity.xPos, b,10,10);
+            
             //rect(whichCity.xPos + differenceLat, whichCity.yPos + differenceLong, 5, 5);
             //so now that we know the city
             //we can compare the tweets lat and longitude
