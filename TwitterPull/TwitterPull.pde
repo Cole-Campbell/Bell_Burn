@@ -55,8 +55,8 @@ void setup() {
 
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
-  dublin = new City("Dublin", 53.344104, -6.2674937, 200, 100, 50);
-  toronto = new City("Toronto", 43.6525, -79.381667, 400, 200, 50);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 885, 252, 1);
+  toronto = new City("Toronto", 43.6525, -79.381667, 558, 318, 1);
   cities.add(toronto);
   cities.add(dublin);
 
@@ -117,6 +117,7 @@ void draw() {
     liveStream();
   }
 
+/*------------DEMO VERSION-------------*/
   //Turns on the demo version
   if (tweetSetDemo == true) {
     demoVersion();
@@ -184,7 +185,7 @@ void draw() {
             println(" ");
             println("////// ");
             println(" ");
-            
+            println("Here is the mouseX " + mouseX + " and the mouseY " + mouseY);
             
             
             //B = difference of longitude * 1000
