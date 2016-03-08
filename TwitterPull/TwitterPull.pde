@@ -152,7 +152,13 @@ void draw() {
         Double tweetLat = tweetList[t].getDouble("latitude");
         Double tweetLong = tweetList[t].getDouble("longitude");
         String tweetDateString = tweetDate.substring(11, 19) + " ";
+                
+        //Grab the hour and minutes, convert them to integers
         String tweetStrHH = tweetDate.substring(11,13);
+        String tweetStrMM = tweetDate.substring(14,16);
+        int tweetHH = Integer.parseInt(tweetStrHH);
+        int tweetMM = Integer.parseInt(tweetStrMM);
+     
                
         //We then need to compare them.
         //So go through each city
@@ -197,7 +203,14 @@ void draw() {
             //B = difference of longitude * 1000
             //println("The difference between the longitude " + b+whichCity.xPos);
             fill(255,255,255);
-            myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
+            if(tweetHH - curHH == 0){
+              if(curMM - tweetMM <= 30){
+                println("The minutes are working");
+                println("The tweets time is = " + tweetDateString);
+                myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
+              }
+            }
+
             
             rect(b+whichCity.xPos, d+whichCity.yPos,10,10);
             
@@ -209,12 +222,15 @@ void draw() {
       }
     }
     for(int q = 0; q<=myParticle.size()-1; q++){
+      
               Particle aParticle = myParticle.get(q);
               aParticle.paint();
+              
               if (aParticle.timeUp() == true) {
                 myParticle.remove(aParticle);              
               }
-            }
+              
+    }
   }
        
   timer();
