@@ -19,7 +19,7 @@ String saveXml = "data/storeTweets.xml";
 int currentTweet;
 boolean nextPage = false;
 
-QueryResult result;
+
 //Arraylist to store the status (the tweet);
 List<City> cities;
 //List<Status> tweets;
@@ -39,10 +39,12 @@ int pageNum = 1;
 
 City dublin;
 City toronto;
+City nyc;
 
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 boolean tweetSetPlay = false;
+
 
 //This is for the timer
 int timerCount = 6;
@@ -59,10 +61,15 @@ void setup() {
 
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
-  dublin = new City("Dublin", 53.344104, -6.2674937, 885, 252, 1);
-  toronto = new City("Toronto", 43.6525, -79.381667, 558, 318, 1);
-  cities.add(toronto);
+  
+  dublin = new City("Dublin", 53.344104, -6.2674937, 685, 252, 1);
   cities.add(dublin);
+  
+  toronto = new City("Toronto", 43.6525, -79.381667, 458, 318, 1);
+  cities.add(toronto);
+  //println(cities.size() + toronto.longitude + toronto.latitude);
+  nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
+  cities.add(nyc);
 
 
   xmlFile = loadXML(xml);
@@ -85,11 +92,13 @@ void setup() {
 
   dublin.getNewTweets();
   toronto.getNewTweets();
+  nyc.getNewTweets();
 
   currentTweet = 0;
   
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
+  incrementMe.add(Calendar.HOUR, -4);
 }
 
 void draw() {
@@ -116,7 +125,7 @@ void draw() {
   }
 
 
-  //Turns on the live tweets version
+/*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
     liveStream();
   }
@@ -126,114 +135,22 @@ void draw() {
   if (tweetSetDemo == true) {
     demoVersion();
   }
-  //println(xmlCity);
-  //TweetSet Play
+
+/*------------DISPLAY VERSION-------------*/
   if (tweetSetPlay == true) {
-    image(world, 0, 0);
-    for (int a = 0; a < cities.size(); a++) { 
-      City myCity = cities.get(a);
-     // myCity.makeCity();
-     
-    }
-    dublin.move();
-    toronto.move();
-    world.resize(width, height);
-
-    fill (0,255,0);
-    //Load up all the tweets from the XML file.
-    XML[] tweetList = xmlFile.getChildren("tweet");
-    //We only need to do this once a second, 
-    if (frameCount%30==1) {
-      //We need to extract all the tweets we have saved
-      for (int t=0; t<tweetList.length; t++) {
-        //Store the tweets attributes
-        String tweetDate = tweetList[t].getString("tweet-date");
-        String tweetCity = tweetList[t].getString("city-name");
-        Double tweetLat = tweetList[t].getDouble("latitude");
-        Double tweetLong = tweetList[t].getDouble("longitude");
-        String tweetDateString = tweetDate.substring(11, 19) + " ";
-                
-        //Grab the hour and minutes, convert them to integers
-        String tweetStrHH = tweetDate.substring(11,13);
-        String tweetStrMM = tweetDate.substring(14,16);
-        int tweetHH = Integer.parseInt(tweetStrHH);
-        int tweetMM = Integer.parseInt(tweetStrMM);
-     
-               
-        //We then need to compare them.
-        //So go through each city
-        for (int j = 0; j < cities.size(); j++) { 
-        City whichCity = cities.get(j);
-          //check which city we are currently on
-          if(tweetCity.equals(whichCity.cityName)){
-            //THESE NEED TO BE THE WRONG WAY AROUND FOR SOME REASON
-            /*
-            println("City latitude is: " + whichCity.longitude);
-            println("City Longitude is: " + whichCity.latitude);
-            println("City Name is: " + whichCity.cityName);
-            println(" ");
-            println("Tweet City is: " + tweetCity);
-            println("Tweet Latitude is: " + tweetLat);
-            println("Tweet Longitude is: " + tweetLong);
-            println(" ");
-            */
-            double differenceLat = whichCity.longitude - tweetLat;           
-            double differenceLong = whichCity.latitude - tweetLong;
-            
-            //float a = (float)whichCity.longitude;
-            float b = (float)differenceLong;
-            
-            //float c = (float)whichCity.latitude;
-            float d = (float)differenceLat;
-            
-            //a = a * 100;
-            b = b * 100;
-            d = d * 100;
-            /*println("Longitude difference is equal to " + Math.floor(b));
-            println("Latitude difference is equal to " + Math.floor(d));
-            println("The difference between latitudes is: " + differenceLat);
-            println("The difference between longitudes is: " + differenceLong);
-            
-            println(" ");
-            println("////// ");
-            println(" ");
-            println("Here is the mouseX " + mouseX + " and the mouseY " + mouseY);
-            
-            */
-            //B = difference of longitude * 1000
-            //println("The difference between the longitude " + b+whichCity.xPos);
-            fill(255,255,255);
-            if(tweetHH - curHH == 0){
-              if(curMM - tweetMM <= 30){
-                println("The minutes are working");
-                println("The tweets time is = " + tweetDateString);
-                myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
-              }
-            }
-
-            
-            rect(b+whichCity.xPos, d+whichCity.yPos,10,10);
-            
-            //rect(whichCity.xPos + differenceLat, whichCity.yPos + differenceLong, 5, 5);
-            //so now that we know the city
-            //we can compare the tweets lat and longitude
-          }  
-        }
-      }
-    }
-    for(int q = 0; q<=myParticle.size()-1; q++){
-      
-              Particle aParticle = myParticle.get(q);
-              aParticle.paint();
-              
-              if (aParticle.timeUp() == true) {
-                myParticle.remove(aParticle);              
-              }
-              
-    }
+    displayTweets();
+    timer();
   }
-       
-  timer();
+    for(int q = 0; q<=myParticle.size()-1; q++){    
+        //println(q);
+        Particle aParticle = myParticle.get(q);
+        aParticle.paint();
+        
+        if (aParticle.timeUp() == true) {
+          myParticle.remove(aParticle);              
+        }              
+    }
+
 }
     
   

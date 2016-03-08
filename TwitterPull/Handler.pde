@@ -63,6 +63,7 @@ void mouseClicked() {
 
 //Have set a drag function for arranging the cities on the map
 //https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
+/*
 void mousePressed() {
   if (dublin.mouseOver(mouseX, mouseY)) {
     dublin.mousePressed();
@@ -71,14 +72,14 @@ void mousePressed() {
 
 void mouseReleased() {
   dublin.mouseReleased();
-}
+}*/
 
 void timer() {
   if(frameCount % 30 == 1) {
      //println("Counting down from ..." + timerCount);
      timerCount--; 
      if(timerCount == 0) {
-       incrementMe.add(Calendar.MINUTE, 30);
+       incrementMe.add(Calendar.MINUTE, 15);
        String whatTime = incrementMe.getTime() + " ";
        println("Current time = " + whatTime);
        String strHH = whatTime.substring(11,13);
