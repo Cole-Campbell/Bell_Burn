@@ -80,8 +80,15 @@ void timer() {
      if(timerCount == 0) {
        incrementMe.add(Calendar.MINUTE, 30);
        String whatTime = incrementMe.getTime() + " ";
+       println("Current time = " + whatTime);
+       String strHH = whatTime.substring(11,13);
+       String strMM = whatTime.substring(14,16);
        
-       //println(whatTime.substring(11, 19) + " ");
+       curHH = Integer.parseInt(strHH);
+       curMM = Integer.parseInt(strMM);
+       
+       println("Current Hour = " + curHH);
+       println("Current Min = " + curMM);
        timerCount = 6;  }
   }  
 }

@@ -48,10 +48,14 @@ boolean tweetSetPlay = false;
 int timerCount = 6;
 Calendar incrementMe;
 
+//For comparing the incremented time to the tweetTime
+int curHH = 0;
+int curMM = 0;
+
 void setup() {
 
-  fullScreen();
-  //size(800, 600);
+  //fullScreen();
+  size(1200, 800);
 
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
@@ -148,6 +152,7 @@ void draw() {
         Double tweetLat = tweetList[t].getDouble("latitude");
         Double tweetLong = tweetList[t].getDouble("longitude");
         String tweetDateString = tweetDate.substring(11, 19) + " ";
+        String tweetStrHH = tweetDate.substring(11,13);
                
         //We then need to compare them.
         //So go through each city
@@ -156,6 +161,7 @@ void draw() {
           //check which city we are currently on
           if(tweetCity.equals(whichCity.cityName)){
             //THESE NEED TO BE THE WRONG WAY AROUND FOR SOME REASON
+            /*
             println("City latitude is: " + whichCity.longitude);
             println("City Longitude is: " + whichCity.latitude);
             println("City Name is: " + whichCity.cityName);
@@ -164,7 +170,7 @@ void draw() {
             println("Tweet Latitude is: " + tweetLat);
             println("Tweet Longitude is: " + tweetLong);
             println(" ");
-            
+            */
             double differenceLat = whichCity.longitude - tweetLat;           
             double differenceLong = whichCity.latitude - tweetLong;
             
@@ -177,7 +183,7 @@ void draw() {
             //a = a * 100;
             b = b * 100;
             d = d * 100;
-            println("Longitude difference is equal to " + Math.floor(b));
+            /*println("Longitude difference is equal to " + Math.floor(b));
             println("Latitude difference is equal to " + Math.floor(d));
             println("The difference between latitudes is: " + differenceLat);
             println("The difference between longitudes is: " + differenceLong);
@@ -187,9 +193,9 @@ void draw() {
             println(" ");
             println("Here is the mouseX " + mouseX + " and the mouseY " + mouseY);
             
-            
+            */
             //B = difference of longitude * 1000
-            println("The difference between the longitude " + b+whichCity.xPos);
+            //println("The difference between the longitude " + b+whichCity.xPos);
             fill(255,255,255);
             myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
             
@@ -210,27 +216,7 @@ void draw() {
               }
             }
   }
-    
        
-    
-    //Was display code, currently not working or reading the cities
-    /*for (int w=0; w<tweetList.length; w++){
-          if (tweetCity=="Dublin") {
-           
-        //String tweetCity = tweetList[t].getString("city-name");    
-            
-          } else if (tweetCity == "Toronto") {
-            
-            double localTorLat = 43.7000;
-            double localTorLon = 79.4000;
-            println("This is Toronto");
-            fill (150,200,120);
-            rect (10, 100, 20, 20);
-            fill (150,200,120);
-            
-          }
-        }
-      }*/
   timer();
 }
     
