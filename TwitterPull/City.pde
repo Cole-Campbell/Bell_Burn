@@ -63,7 +63,7 @@ public class City {
   void getNewTweets() {
   try {
     //Try to get tweets here
-
+    println("Initial state of boolean " + nextPage);
     // UPDATE 2/1/2016
     //Added in an extra step here for future editing. Basically we set the citys Name, Longitude, Latitude
     //Then add the long and lat to the geoLocation.
@@ -83,7 +83,7 @@ public class City {
     
     //Here we define what type of search we want
     //We pass it our geoLocation, the distance, and we must set if its "km" or "mi"
-    query.setGeoCode(coors, 20, Query.Unit.valueOf("mi"));
+    query.setGeoCode(coors, 50, Query.Unit.valueOf("mi"));
     
     //This will only run once at the start of the program
     //We get the first set of results from our query
@@ -95,18 +95,22 @@ public class City {
       tweets = result.getTweets();
       println("Tweets refreshed");
     }
-
-
     
     //This will be called after the first call, this will then be called indefinitely
     //Use the query created above and pass it the nextQuery call.
     if(nextPage == true) {
         pageNum = pageNum + 1;
-        query = result.nextQuery();
-        result = twitter.search(query);
-        tweets = result.getTweets();
-        println(cityName + "Page " + pageNum);
-        nextPage = false;
+        if(result.hasNext()){
+          query = result.nextQuery();
+          result = twitter.search(query);
+          tweets = result.getTweets();
+          println(cityName + "Page " + pageNum);
+        }
+        else{
+          println("NOPE");
+          println("NOPE");
+          println("NOPE");
+        }
     }
     
     

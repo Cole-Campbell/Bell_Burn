@@ -9,13 +9,12 @@ void demoVersion() {
     if (tweetsOnOffSwitch == 1) {
 
       currentTweet = currentTweet +1;
-      println(currentTweet);
       //when currentTweet is 100, we want to go onto the next page
       if (currentTweet==100) {
-
         nextPage=true;
         currentTweet=0;
       }
+
       //Need to specify a number so the for loop only calls once
       if (currentTweet == 10) {
         //Loop through the cities array and get each object
@@ -27,7 +26,6 @@ void demoVersion() {
           //The next time, nextPage will be true, so call the next set of tweets
           //We want to call this for each city          
           if (nextPage == true) {
-
             myCity.makeCity();
             myCity.getNewTweets();
             delay(500);
@@ -84,6 +82,6 @@ void demoVersion() {
     }
 
     //For the drag
-    dublin.move();
-    toronto.move();
+    //dublin.move();
+    //toronto.move();
 }

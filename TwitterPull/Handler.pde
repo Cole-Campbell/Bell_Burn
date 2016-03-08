@@ -63,6 +63,7 @@ void mouseClicked() {
 
 //Have set a drag function for arranging the cities on the map
 //https://gist.github.com/shinaisan/2390346 referenced this piece doing it.
+/*
 void mousePressed() {
   if (dublin.mouseOver(mouseX, mouseY)) {
     dublin.mousePressed();
@@ -71,7 +72,7 @@ void mousePressed() {
 
 void mouseReleased() {
   dublin.mouseReleased();
-}
+}*/
 
 void timer() {
   if(frameCount % 30 == 1) {
