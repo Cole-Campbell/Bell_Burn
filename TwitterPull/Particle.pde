@@ -1,7 +1,7 @@
 public class Particle {
  float xPos;
  float yPos;
- float Life = 20;
+ float Life = 170;
  
  Particle(float xPos, float yPos){
    this.yPos = yPos;

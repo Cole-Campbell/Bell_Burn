@@ -19,7 +19,7 @@ String saveXml = "data/storeTweets.xml";
 int currentTweet;
 boolean nextPage = false;
 
-QueryResult result;
+
 //Arraylist to store the status (the tweet);
 List<City> cities;
 //List<Status> tweets;
@@ -62,13 +62,13 @@ void setup() {
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   
-  dublin = new City("Dublin", 53.344104, -6.2674937, 885, 252, 1);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 685, 252, 1);
   cities.add(dublin);
   
-  //toronto = new City("Toronto", 43.6525, -79.381667, 558, 318, 1);
-  //cities.add(toronto);
+  toronto = new City("Toronto", 43.6525, -79.381667, 458, 318, 1);
+  cities.add(toronto);
   //println(cities.size() + toronto.longitude + toronto.latitude);
-  nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 318, 1);
+  nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   cities.add(nyc);
 
 
@@ -91,13 +91,14 @@ void setup() {
   twitter = tf.getInstance();
 
   dublin.getNewTweets();
-  //toronto.getNewTweets();
+  toronto.getNewTweets();
   nyc.getNewTweets();
 
   currentTweet = 0;
   
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
+  incrementMe.add(Calendar.HOUR, -4);
 }
 
 void draw() {
@@ -134,13 +135,22 @@ void draw() {
   if (tweetSetDemo == true) {
     demoVersion();
   }
-  
+
 /*------------DISPLAY VERSION-------------*/
   if (tweetSetPlay == true) {
     displayTweets();
+    timer();
   }
-       
-  timer();
+    for(int q = 0; q<=myParticle.size()-1; q++){    
+        //println(q);
+        Particle aParticle = myParticle.get(q);
+        aParticle.paint();
+        
+        if (aParticle.timeUp() == true) {
+          myParticle.remove(aParticle);              
+        }              
+    }
+
 }
     
   

@@ -79,7 +79,7 @@ void timer() {
      //println("Counting down from ..." + timerCount);
      timerCount--; 
      if(timerCount == 0) {
-       incrementMe.add(Calendar.MINUTE, 30);
+       incrementMe.add(Calendar.MINUTE, 15);
        String whatTime = incrementMe.getTime() + " ";
        println("Current time = " + whatTime);
        String strHH = whatTime.substring(11,13);

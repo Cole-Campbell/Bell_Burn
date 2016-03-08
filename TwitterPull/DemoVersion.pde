@@ -13,24 +13,18 @@ void demoVersion() {
       if (currentTweet==100) {
         nextPage=true;
         currentTweet=0;
-      }
+     
 
-      //Need to specify a number so the for loop only calls once
-      if (currentTweet == 10) {
+        //Need to specify a number so the for loop only calls once
         //Loop through the cities array and get each object
         for (int j = 0; j < cities.size(); j++) { 
           
-          City myCity = cities.get(j);
-
-          //The first time we loop through, it will skip this
-          //The next time, nextPage will be true, so call the next set of tweets
-          //We want to call this for each city          
-          if (nextPage == true) {
-            myCity.makeCity();
-            myCity.getNewTweets();
-            delay(500);
-            println("calling this");
-          }
+          City myCity = cities.get(j);            
+          myCity.makeCity();
+          myCity.getNewTweets();
+          delay(500);
+          println("calling this");
+          
 
           for (int k = 0; k < myCity.tweets.size(); k++) {
             
@@ -79,8 +73,10 @@ void demoVersion() {
           }
         }
       }
-    }
-
+      else{
+        nextPage=false;
+      }
+     }
     //For the drag
     //dublin.move();
     //toronto.move();

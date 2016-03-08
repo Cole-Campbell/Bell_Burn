@@ -1,12 +1,14 @@
 void displayTweets() {
- image(world, 0, 0);
+ 
     for (int a = 0; a < cities.size(); a++) { 
       City myCity = cities.get(a);
-     // myCity.makeCity();
-     
+      myCity.makeCity();
+    
     }
     dublin.move();
     toronto.move();
+
+    image(world, 0, 0);
     world.resize(width, height);
 
     fill (0,255,0);
@@ -74,7 +76,7 @@ void displayTweets() {
             //println("The difference between the longitude " + b+whichCity.xPos);
             fill(255,255,255);
             if(tweetHH - curHH == 0){
-              if(curMM - tweetMM <= 30){
+              if(curMM - tweetMM <= 15){
                 println("The minutes are working");
                 println("The tweets time is = " + tweetDateString);
                 myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
@@ -86,14 +88,5 @@ void displayTweets() {
         }
       }
     }
-    for(int q = 0; q<=myParticle.size()-1; q++){
-      
-              Particle aParticle = myParticle.get(q);
-              aParticle.paint();
-              
-              if (aParticle.timeUp() == true) {
-                myParticle.remove(aParticle);              
-              }
-              
-    } 
+ 
 }

@@ -7,7 +7,7 @@ public class City {
   float yPos;
   float radius;
   List<Status> tweets;
-   
+  QueryResult result;
   //Need to pass these arguments when making a city
   //City Name
   //Longitude
@@ -105,6 +105,7 @@ public class City {
           result = twitter.search(query);
           tweets = result.getTweets();
           println(cityName + "Page " + pageNum);
+          //nextPage = false;
         }
         else{
           println("NOPE");
