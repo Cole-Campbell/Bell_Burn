@@ -7,9 +7,8 @@ void displayTweets() {
     }
     dublin.move();
     toronto.move();
-
-    image(world, 0, 0);
-    world.resize(width, height);
+    image(world,0,0);
+    world.resize(1350, 720);
 
     fill (0,255,0);
     //Load up all the tweets from the XML file.
@@ -59,8 +58,8 @@ void displayTweets() {
             float d = (float)differenceLat;
             
             //a = a * 100;
-            b = b * 100;
-            d = d * 100;
+            b = b * 15;
+            d = d * 8;
             /*println("Longitude difference is equal to " + Math.floor(b));
             println("Latitude difference is equal to " + Math.floor(d));
             println("The difference between latitudes is: " + differenceLat);

@@ -40,6 +40,7 @@ int pageNum = 1;
 City dublin;
 City toronto;
 City nyc;
+City tokyo;
 
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
@@ -57,19 +58,21 @@ int curMM = 0;
 void setup() {
 
   //fullScreen();
-  size(1200, 800);
+  size(1350, 720);
 
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   
-  dublin = new City("Dublin", 53.344104, -6.2674937, 685, 252, 1);
+  dublin = new City("Dublin", 53.344104, -6.2674937, -6.26*9 , 53.34*-4.2, 10);
   cities.add(dublin);
-  
-  toronto = new City("Toronto", 43.6525, -79.381667, 458, 318, 1);
+  toronto = new City("Toronto", 43.7, -79.381667, -79.38*4.7, 43.65*-4, 1);
   cities.add(toronto);
   //println(cities.size() + toronto.longitude + toronto.latitude);
   nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   cities.add(nyc);
+  
+  tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
+  cities.add(tokyo);
 
 
   xmlFile = loadXML(xml);
@@ -93,6 +96,7 @@ void setup() {
   dublin.getNewTweets();
   toronto.getNewTweets();
   nyc.getNewTweets();
+  tokyo.getNewTweets();
 
   currentTweet = 0;
   
