@@ -10,7 +10,7 @@ public class Particle {
  
  void paint(){
    fill(255,255,255);
-   rect(width/2+xPos, height/2+yPos, 5, 5);
+   rect(width/2+xPos, 570+yPos, 5, 5);
 }
 boolean timeUp(){
  Life--;

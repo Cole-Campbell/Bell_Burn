@@ -5,10 +5,10 @@ void displayTweets() {
       myCity.makeCity();
     
     }
-    dublin.move();
+    //dublin.move();
     toronto.move();
     image(world,0,0);
-    world.resize(1440, 769);
+    world.resize(1440, 842);
 
     fill (0,255,0);
     //Load up all the tweets from the XML file.
@@ -58,7 +58,7 @@ void displayTweets() {
             float d = (float)differenceLat;
             
             //a = a * 100;
-            b = b * 15;
+            b = b * 8;
             d = d * 8;
             /*println("Longitude difference is equal to " + Math.floor(b));
             println("Latitude difference is equal to " + Math.floor(d));
@@ -76,8 +76,9 @@ void displayTweets() {
             fill(255,255,255);
             if(tweetHH - curHH == 0){
               if(curMM - tweetMM <= 15){
-                println("The minutes are working");
-                println("The tweets time is = " + tweetDateString);
+                //println("The minutes are working");
+                //println("The tweets time is = " + tweetDateString);
+                println("This is the latitude of Toronto Tweets " + whichCity.yPos);
                 myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
               }
             }

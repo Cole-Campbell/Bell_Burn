@@ -44,10 +44,10 @@ City tokyo;
 
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
-boolean tweetSetPlay = true;
+boolean tweetSetPlay = false;
 
 //Every 5.55 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
-float latPix = 5.55;
+float latPix = 4.7;
 float longPix = 4;
 
 //This is for the timer
@@ -61,18 +61,18 @@ int curMM = 0;
 void setup() {
 
   //fullScreen();
-  size(1440, 769);
+  size(1440, 1440);
 
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   
-  dublin = new City("Dublin", 53.344104, -6.2674937, -6.2674937*4 , 53.344104*-5.5, 10);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 1);
   cities.add(dublin);
-  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*4, 43.6525*-latPix, 1);
+  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
   cities.add(toronto);
   //println(cities.size() + toronto.longitude + toronto.latitude);
-  nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
-  cities.add(nyc);
+  //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
+  //cities.add(nyc);
   
   tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
   cities.add(tokyo);
@@ -98,7 +98,7 @@ void setup() {
 
   dublin.getNewTweets();
   toronto.getNewTweets();
-  nyc.getNewTweets();
+  //nyc.getNewTweets();
   tokyo.getNewTweets();
 
   currentTweet = 0;
@@ -109,7 +109,7 @@ void setup() {
 }
 
 void draw() {
-
+  fill(255);
   background(0);
 
   //Turns on the button upon start up
@@ -147,6 +147,7 @@ void draw() {
   if (tweetSetPlay == true) {
     displayTweets();
     timer();
+    rect(720,570,10,10);
   }
     for(int q = 0; q<=myParticle.size()-1; q++){    
         //println(q);
