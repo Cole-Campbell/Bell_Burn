@@ -8,7 +8,7 @@ void displayTweets() {
     dublin.move();
     toronto.move();
     image(world,0,0);
-    world.resize(1350, 720);
+    world.resize(1440, 769);
 
     fill (0,255,0);
     //Load up all the tweets from the XML file.
