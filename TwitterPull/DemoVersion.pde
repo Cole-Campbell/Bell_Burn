@@ -78,6 +78,6 @@ void demoVersion() {
       }
      }
     //For the drag
-    //dublin.move();
-    //toronto.move();
+    dublin.move();
+    toronto.move();
 }

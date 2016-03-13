@@ -7,6 +7,8 @@ import java.util.*;
 Twitter twitter;
 
 PImage world;
+PImage dublinMap;
+PImage torontoMap;
 
 //String is not needed anymore, can leave it here for now as a note
 //Incase we want to put it back in, pass it through the Query object.
@@ -64,7 +66,7 @@ int curMM = 0;
 void setup() {
 
   fullScreen();
-  //size(1440, 1440);
+  //size(1080, 760);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
@@ -72,10 +74,12 @@ void setup() {
   
   //Make cities and then add them to the arrayList.
                     //cityName, Latitude, Longitude,      xPos,         yPos,      radius
-  dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 1);
+  //dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 1000 , 300, 10);
   cities.add(dublin);
   
-  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
+  //toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 100);
+  toronto = new City("Toronto", 43.6525, -79.381667, width/2 - width/4, height/2, 1);
   cities.add(toronto);
   
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
@@ -87,6 +91,8 @@ void setup() {
 
   xmlFile = loadXML(xml);
   world = loadImage("world.png");
+  dublinMap = loadImage("dub.jpg");
+  torontoMap = loadImage("tor.jpg");
   world.resize(800,600);
 
                              //width,height,x,y
@@ -139,7 +145,16 @@ void draw() {
     timer();
     rect(720,570,10,10);
   }
-  
+  //Keeps check on how many particles there are, removes them when its time.
+  for(int q = 0; q<=myParticle.size()-1; q++){    
+      //println(q);
+      Particle aParticle = myParticle.get(q);
+      aParticle.paint();
+      
+      if (aParticle.timeUp() == true) {
+        myParticle.remove(aParticle);              
+      }              
+  }
 /*------------MAIN MENU-----------------*/
   if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
     fill(255, 255, 255);
@@ -166,16 +181,7 @@ void draw() {
 
 
 
-  //Keeps check on how many particles there are, removes them when its time.
-    for(int q = 0; q<=myParticle.size()-1; q++){    
-        //println(q);
-        Particle aParticle = myParticle.get(q);
-        aParticle.paint();
-        
-        if (aParticle.timeUp() == true) {
-          myParticle.remove(aParticle);              
-        }              
-    }
+
 
 }
     
