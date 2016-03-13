@@ -39,9 +39,5 @@ public class Interface {
     fill(0,0,0);
     text(pauseString, 320, height - 40, 100, 50);
     
-    fill(30,90,50);    
-    rect(300, height - 50, 100, 50);
-    fill(0,0,0);
-    text("coming soon...", width - 100, height - 40, 100, 50);
   }
 }

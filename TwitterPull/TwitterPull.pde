@@ -121,27 +121,7 @@ void setup() {
 void draw() {
   fill(255);
   background(0);
-
-  //Turns on the button upon start up
-  if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
-
-    fill(255, 255, 255);
-    rect(0, 0, width, 50);
-    fill(0, 0, 0);
-    text("TweetSet Demo", 0, 0, 300, 200);
-
-    fill(255, 255, 255);
-    rect(0, 100, width, 50);
-    fill(0, 0, 0);
-    text("TweetSet Live", 0, 100, 300, 200);
-
-    fill(255, 255, 255);
-    rect(0, 200, width, 50);
-    fill(0, 0, 0);
-    text("TweetSet Play", 0, 200, 300, 200);
-  }
-
-
+  
 /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
     liveStream();
@@ -159,7 +139,34 @@ void draw() {
     timer();
     rect(720,570,10,10);
   }
-  //Keeps check on how many particles there are, removes them when its needed.
+  
+/*------------MAIN MENU-----------------*/
+  if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
+    fill(255, 255, 255);
+    rect(0, 0, width, 50);
+    fill(0, 0, 0);
+    text("TweetSet Demo", 0, 0, 300, 200);
+
+    fill(255, 255, 255);
+    rect(0, 100, width, 50);
+    fill(0, 0, 0);
+    text("TweetSet Live", 0, 100, 300, 200);
+
+    fill(255, 255, 255);
+    rect(0, 200, width, 50);
+    fill(0, 0, 0);
+    text("TweetSet Play", 0, 200, 300, 200);
+  }
+  else{
+    fill(30,90,50);    
+    rect(width - 100, height - 50, 100, 50);
+    fill(0,0,0);
+    text("Back", width - 100, height - 40, 100, 50);
+  }
+
+
+
+  //Keeps check on how many particles there are, removes them when its time.
     for(int q = 0; q<=myParticle.size()-1; q++){    
         //println(q);
         Particle aParticle = myParticle.get(q);

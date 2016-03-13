@@ -3,7 +3,7 @@
 void demoVersion() {
     
     myInterface.paint();
-
+    
     image(world, 0, 0);
 
     if (tweetsOnOffSwitch == 1) {

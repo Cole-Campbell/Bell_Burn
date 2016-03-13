@@ -31,34 +31,39 @@ void deleteTweets() {
   }
 }
 
+
 void mouseClicked() {
-  deleteTweets(); // Call the delete function from the Handler
-  saveTweets();// Call the saveTweets function from the Handler
-  pauseTweets();// Call the pauseTweets function from the Handler
+  //Demo interface click handlers
+  if(tweetSetDemo == true) {
+      deleteTweets(); // Call the delete function from the Handler
+      saveTweets();// Call the saveTweets function from the Handler
+      pauseTweets();// Call the pauseTweets function from the Handler
+  }
 
   //Activate the Demo version.
   if (mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50) {
     if (tweetSetDemo == false) {
       tweetSetDemo = true;
-      println("This works!!");
     }
   }
-
   //Activate the Live version
   if (mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150) {
     if (tweetSetPlay == false) {
       tweetSetPlay = true;
-      println("This works!!");
     }
   }
-
   //Activate the Play version
   if (mouseX >= 0 && mouseX <= width && mouseY >= 200 && mouseY <= 250) {
     if (tweetSetPlay == false) {
       tweetSetPlay = true;
-      println("This works!!");
     }
   }
+  //Go back to main menu
+  if (mouseX >= width - 100 && mouseY >= height - 50) {
+      tweetSetPlay = false;
+      tweetSetDemo = false;
+      tweetSetLive = false;
+  } 
 }
 
 //Have set a drag function for arranging the cities on the map
@@ -73,23 +78,3 @@ void mousePressed() {
 void mouseReleased() {
   dublin.mouseReleased();
 }*/
-
-void timer() {
-  if(frameCount % 30 == 1) {
-     //println("Counting down from ..." + timerCount);
-     timerCount--; 
-     if(timerCount == 0) {
-       incrementMe.add(Calendar.MINUTE, 15);
-       String whatTime = incrementMe.getTime() + " ";
-       println("Current time = " + whatTime);
-       String strHH = whatTime.substring(11,13);
-       String strMM = whatTime.substring(14,16);
-       
-       curHH = Integer.parseInt(strHH);
-       curMM = Integer.parseInt(strMM);
-       
-       println("Current Hour = " + curHH);
-       println("Current Min = " + curMM);
-       timerCount = 6;  }
-  }  
-}
