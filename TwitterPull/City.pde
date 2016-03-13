@@ -25,11 +25,9 @@ public class City {
     this.radius = radius;
   }
 
-  void makeCity() {
-    
+  void makeCity() {   
       fill(255,255,255);
-      ellipse(xPos,yPos,radius,radius);
-            
+      ellipse(xPos,yPos,radius,radius);         
   }
   
   

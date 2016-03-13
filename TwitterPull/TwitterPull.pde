@@ -12,45 +12,48 @@ PImage world;
 //Incase we want to put it back in, pass it through the Query object.
 String search = "";
 
+//For loading up and saving the XML files.
 String xml = "storeTweets.xml";
 String saveXml = "data/storeTweets.xml";
 
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
 boolean nextPage = false;
+//Keeps track of the page number. Should probably but in the city class.
+int pageNum = 1;
 
-
-//Arraylist to store the status (the tweet);
+//Array list to store the cities.
 List<City> cities;
-//List<Status> tweets;
 
-//Array List for Particles
+//Array List to store Particles
 ArrayList<Particle> myParticle;
 
-//Going to put in a switch to turn on and off the get tweets function
+//For the pause button
 int tweetsOnOffSwitch = 1;
 
 // To store the XML file location.
 XML xmlFile;
 
+//Create a new Interface
 Interface myInterface;
 
-int pageNum = 1;
-
+//Cities
 City dublin;
 City toronto;
 City nyc;
 City tokyo;
 
+//Controls for the menu
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 boolean tweetSetPlay = false;
 
 //Every 5.55 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
+//Is this dependant on the screen size?... Just checked, yes it is.
 float latPix = 4.7;
 float longPix = 4;
 
-//This is for the timer
+//This is for the timer. Counts down from the number specified here.
 int timerCount = 6;
 Calendar incrementMe;
 
@@ -60,49 +63,56 @@ int curMM = 0;
 
 void setup() {
 
-  //fullScreen();
-  size(1440, 1440);
+  fullScreen();
+  //size(1440, 1440);
 
+  //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   
+  //Make cities and then add them to the arrayList.
+                    //cityName, Latitude, Longitude,      xPos,         yPos,      radius
   dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 1);
   cities.add(dublin);
+  
   toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
   cities.add(toronto);
-  //println(cities.size() + toronto.longitude + toronto.latitude);
+  
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   //cities.add(nyc);
   
-  tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
-  cities.add(tokyo);
+  //tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
+  //cities.add(tokyo);
 
 
   xmlFile = loadXML(xml);
   world = loadImage("world.png");
   world.resize(800,600);
 
-  //width,height,x,y
+                             //width,height,x,y
   myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
 
+  //This is for the twitter codes.
   ConfigurationBuilder cb = new ConfigurationBuilder();
-
   cb.setOAuthConsumerKey(con);
   cb.setOAuthConsumerSecret(conS);
   cb.setOAuthAccessToken(access);
   cb.setOAuthAccessTokenSecret(accessS);
 
+  //Initialize Twitter4J
   TwitterFactory tf = new TwitterFactory(cb.build());
-
   twitter = tf.getInstance();
-
+  
+  
+  //Need to call this once. If not called, then the tweetList array is empty and throws an error.
   dublin.getNewTweets();
   toronto.getNewTweets();
   //nyc.getNewTweets();
-  tokyo.getNewTweets();
+  //tokyo.getNewTweets();
 
   currentTweet = 0;
   
+  //Set up a new date.time. Go back by X hours.
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
   incrementMe.add(Calendar.HOUR, -4);
@@ -149,6 +159,7 @@ void draw() {
     timer();
     rect(720,570,10,10);
   }
+  //Keeps check on how many particles there are, removes them when its needed.
     for(int q = 0; q<=myParticle.size()-1; q++){    
         //println(q);
         Particle aParticle = myParticle.get(q);
