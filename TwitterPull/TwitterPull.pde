@@ -65,8 +65,8 @@ int curMM = 0;
 
 void setup() {
 
-  fullScreen();
-  //size(1080, 760);
+  //fullScreen();
+  size(1080, 760);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
@@ -88,14 +88,14 @@ void setup() {
   //tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
   //cities.add(tokyo);
 
-
+  //Add in the maps
   xmlFile = loadXML(xml);
   world = loadImage("world.png");
   dublinMap = loadImage("dub.jpg");
   torontoMap = loadImage("tor.jpg");
   world.resize(800,600);
 
-                             //width,height,x,y
+                             //width,height,xPos,yPos
   myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
 
   //This is for the twitter codes.
@@ -172,6 +172,7 @@ void draw() {
     fill(0, 0, 0);
     text("TweetSet Play", 0, 200, 300, 200);
   }
+  //If we are on not on the main menu then make this button
   else{
     fill(30,90,50);    
     rect(width - 100, height - 50, 100, 50);

@@ -5,27 +5,27 @@ void demoVersion() {
     myInterface.paint();
     
     image(world, 0, 0);
-
+    
+    //The pause button will change tweetsOnOffSwitch to 0.
     if (tweetsOnOffSwitch == 1) {
-
+      
+      //We need to cycle through the tweets in the tweetList arrayList
       currentTweet = currentTweet +1;
       //when currentTweet is 100, we want to go onto the next page
       if (currentTweet==100) {
+        //We need to change nextPage to true, so when we call getNewTweets, it calls the nextQuery.
         nextPage=true;
         currentTweet=0;
      
-
-        //Need to specify a number so the for loop only calls once
-        //Loop through the cities array and get each object
+        //Loop through the cities array and get each city
         for (int j = 0; j < cities.size(); j++) { 
           
           City myCity = cities.get(j);            
           myCity.makeCity();
           myCity.getNewTweets();
-          delay(500);
           println("calling this");
           
-
+          //We then loop through each cities tweets.
           for (int k = 0; k < myCity.tweets.size(); k++) {
             
             Status status = myCity.tweets.get(k);
@@ -41,8 +41,6 @@ void demoVersion() {
 
 
             //This piece is nearly obsolete, its for displaying a tweet on screen
-
-
             fill(200);
             text(status.getText(), 100, 100, 300, 200);
             text(user.getName(), 200, 300, 300, 200);
@@ -52,7 +50,6 @@ void demoVersion() {
             //For saving to XML
             //Load up with the data we want from the status object
             //ID, Author, Date and the CityObjects name.
-
             XML newChild = xmlFile.addChild("tweet");  
             newChild.setContent(status.getText());
             newChild.setString("tweet-id", longString);
@@ -60,7 +57,7 @@ void demoVersion() {
             newChild.setString("tweet-date", storeDate);
             newChild.setString("city-name", myCity.cityName);
 
-
+            //We want to check if there is a GeoLocation attached to a tweet.
             if (status.getGeoLocation() != null) {
               GeoLocation tweetLoc = status.getGeoLocation();
               double longitude = tweetLoc.getLongitude();
@@ -76,8 +73,5 @@ void demoVersion() {
       else{
         nextPage=false;
       }
-     }
-    //For the drag
-    dublin.move();
-    toronto.move();
+   }
 }

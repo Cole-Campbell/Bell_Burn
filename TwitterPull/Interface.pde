@@ -5,12 +5,10 @@ public class Interface {
   int interXpos;
   int interYpos;
   color bgColor;
-  PGraphics graphic;
-  
+  PGraphics graphic;  
   String delString = "DELETE";
   String pauseString = "PAUSE";
-  String clickString = "SAVE";
-  
+  String clickString = "SAVE"; 
   boolean mouseDown = false;
   
   public Interface(int w, int h, int x, int y){
@@ -37,7 +35,6 @@ public class Interface {
     fill(50,70,50);    
     rect(300, height - 50, 100, 50);
     fill(0,0,0);
-    text(pauseString, 320, height - 40, 100, 50);
-    
+    text(pauseString, 320, height - 40, 100, 50);    
   }
 }

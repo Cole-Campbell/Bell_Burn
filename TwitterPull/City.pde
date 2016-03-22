@@ -30,27 +30,6 @@ public class City {
       ellipse(xPos,yPos,radius,radius);         
   }
   
-  
-  boolean moving = false;
-
-  void mousePressed() {
-      moving = true;
-  }
-  
-  void mouseReleased() {
-      moving = false;
-  }
-
-  boolean mouseOver(int mx, int my) {
-      return ((xPos - mx)*(xPos - mx) + (yPos - my)*(yPos - my)) <= radius*radius;
-  }
-
-  void move() {
-      if (moving) {
-          this.xPos = mouseX;
-          this.yPos = mouseY;
-      }
-  }
   //http://stackoverflow.com/questions/16730364/add-arraylist-to-another-arraylist-in-java
   
   //UPDATE 2/7/2016
@@ -85,9 +64,9 @@ public class City {
     
     //This will only run once at the start of the program
     //We get the first set of results from our query
-    //We create a QueryResult and name it result in the main file
+    //We create a QueryResult and name it result
     //We then search for our QueryResult using the parameters set above.
-    //We put the tweets it retrieved into the tweets ArrayList created in the main
+    //We put the tweets it retrieved into the tweets ArrayList created by the city class
     if(nextPage == false) {    
       result = twitter.search(query);
       tweets = result.getTweets();
