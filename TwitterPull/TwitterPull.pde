@@ -30,6 +30,7 @@ List<City> cities;
 
 //Array List to store Particles
 ArrayList<Particle> myParticle;
+ArrayList<ScreenDisplay> mainDisplay;
 
 //For the pause button
 int tweetsOnOffSwitch = 1;
