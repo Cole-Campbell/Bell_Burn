@@ -1,12 +1,11 @@
 void displayTweets() {
-     
   //image(world,0,0);
   //world.resize(1440, 842);
-  image(dublinMap,width/2,0);
-  dublinMap.resize(width/2,height - height/5);
+  //image(dublinMap,width/2,0);
+  //dublinMap.resize(width/2,height - height/5);
   
-  image(torontoMap,0,0);
-  torontoMap.resize(width/2,height - height/5);
+  //image(torontoMap,0,0);
+  //torontoMap.resize(width/2,height - height/5);
 
   for (int a = 0; a < cities.size(); a++) { 
     City myCity = cities.get(a);

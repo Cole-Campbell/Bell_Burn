@@ -18,7 +18,6 @@ String search = "";
 String xml = "storeTweets.xml";
 String saveXml = "data/storeTweets.xml";
 
-
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
 boolean nextPage = false;
@@ -29,15 +28,14 @@ int pageNum = 1;
 List<City> cities;
 
 //Array List to store Particles
-ArrayList<Particle> myParticle;
-ArrayList<ScreenDisplay> mainDisplay;
+ArrayList<Particle> myParticle;  
+ArrayList<Display> mainDisplay;
 
 //For the pause button
 int tweetsOnOffSwitch = 1;
 
 // To store the XML file location.
 XML xmlFile;
-
 
 //Create a new Interface
 Interface myInterface;
@@ -53,8 +51,8 @@ boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 boolean tweetSetPlay = false;
 
-//Every 5.55 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
-//Is this dependant on the screen size?... Just checked, yes it is.
+//Every 4.7 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
+//Dependant on the screen size
 float latPix = 4.7;
 float longPix = 4;
 
@@ -69,10 +67,12 @@ int curMM = 0;
 void setup() {
 
   //fullScreen();
-  size(1080, 760);
+  size(1000, 500);
+  background(0);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
+  mainDisplay = new ArrayList <Display>();
   cities = new ArrayList<City>();
   
   //Make cities and then add them to the arrayList.
@@ -95,8 +95,8 @@ void setup() {
   xmlFile = loadXML(xml);
   xmlLive = loadXML(liveXml);
   world = loadImage("world.png");
-  dublinMap = loadImage("dub.jpg");
-  torontoMap = loadImage("tor.jpg");
+  //dublinMap = loadImage("dub.jpg");
+  //torontoMap = loadImage("tor.jpg");
   world.resize(800,600);
 
                              //width,height,xPos,yPos
@@ -112,7 +112,6 @@ void setup() {
   //Initialize Twitter4J
   TwitterFactory tf = new TwitterFactory(cb.build());
   twitter = tf.getInstance();
-  
   
   //Need to call this once. If not called, then the tweetList array is empty and throws an error.
   dublin.getNewTweets();
@@ -130,7 +129,6 @@ void setup() {
 
 void draw() {
   fill(255);
-  background(0);
   
 /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
@@ -149,6 +147,11 @@ void draw() {
     timer();
     rect(720,570,10,10);
   }
+  for(int x = 0; x<=width; x++){
+    Display aDisplay = mainDisplay.get(x);
+    aDisplay.paint();
+  }
+  
   //Keeps check on how many particles there are, removes them when its time.
   for(int q = 0; q<=myParticle.size()-1; q++){    
       //println(q);
@@ -183,11 +186,12 @@ void draw() {
     fill(0,0,0);
     text("Back", width - 100, height - 40, 100, 50);
   }
-
-
-
-
-
 }
+
+
+
+
+
+
     
   
