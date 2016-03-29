@@ -18,6 +18,7 @@ String search = "";
 String xml = "storeTweets.xml";
 String saveXml = "data/storeTweets.xml";
 
+
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
 boolean nextPage = false;
@@ -35,6 +36,7 @@ int tweetsOnOffSwitch = 1;
 
 // To store the XML file location.
 XML xmlFile;
+
 
 //Create a new Interface
 Interface myInterface;
@@ -90,6 +92,7 @@ void setup() {
 
   //Add in the maps
   xmlFile = loadXML(xml);
+  xmlLive = loadXML(liveXml);
   world = loadImage("world.png");
   dublinMap = loadImage("dub.jpg");
   torontoMap = loadImage("tor.jpg");

@@ -1,11 +1,20 @@
 
 
 void saveTweets() {
-    if(mouseX >= 170 && mouseX <= 270 && mouseY >= height - 50 && mouseY <= height) {
+    if(tweetSetDemo == true) {
+      if(mouseX >= 170 && mouseX <= 270 && mouseY >= height - 50 && mouseY <= height) {
         println("saving...");
         saveXML(xmlFile, saveXml);
         println("...saved");
-  }
+      }
+    }
+    if(tweetSetLive == true) {
+      if(mouseX >= 170 && mouseX <= 270 && mouseY >= height - 50 && mouseY <= height) {
+        println("saving...");
+        saveXML(xmlLive, liveXml);
+        println("...saved");
+      }
+    }
 }
 
 void pauseTweets(){
@@ -20,21 +29,34 @@ void deleteTweets() {
   // Could maybe change to delete last 50 etc
   // Adds all files to an XML array, loop around and delete them all.
   // Must save at the end or else the XML file wont update.
-  if(mouseX >= 0 && mouseX <= 150 && mouseY >= height - 50 && mouseY <= height) {   
-    XML[] getForDeletion = xmlFile.getChildren("tweet");
-       
-    for(int i = 0; i < getForDeletion.length; i++) {
-         println("Deleting " + i);
-         xmlFile.removeChild(getForDeletion[i]);   
-         saveXML(xmlFile, saveXml);
-    }
-  }
+      
+      if(mouseX >= 0 && mouseX <= 150 && mouseY >= height - 50 && mouseY <= height) {   
+        if(tweetSetDemo == true){
+          XML[] getForDeletion = xmlFile.getChildren("tweet");
+           
+          for(int i = 0; i < getForDeletion.length; i++) {
+               println("Deleting " + i);
+               xmlFile.removeChild(getForDeletion[i]);   
+               saveXML(xmlFile, saveXml);
+          }
+        }
+        if(tweetSetLive == true){
+          XML[] getForDeletion = xmlLive.getChildren("tweet");
+           
+          for(int i = 0; i < getForDeletion.length; i++) {
+               println("Deleting " + i);
+               xmlLive.removeChild(getForDeletion[i]);   
+               saveXML(xmlLive, liveXml);
+          }
+        }
+      }
+      
 }
 
 
 void mouseClicked() {
   //Demo interface click handlers
-  if(tweetSetDemo == true) {
+  if(tweetSetDemo == true || tweetSetLive == true) {
       deleteTweets(); // Call the delete function from the Handler
       saveTweets();// Call the saveTweets function from the Handler
       pauseTweets();// Call the pauseTweets function from the Handler
@@ -48,8 +70,8 @@ void mouseClicked() {
   }
   //Activate the Live version
   if (mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150) {
-    if (tweetSetPlay == false) {
-      tweetSetPlay = true;
+    if (tweetSetLive == false) {
+      tweetSetLive = true;
     }
   }
   //Activate the Play version
