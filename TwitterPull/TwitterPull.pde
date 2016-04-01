@@ -5,6 +5,7 @@ import twitter4j.api.*;
 import java.util.*;
 
 Twitter twitter;
+Display mainDisplay;
 
 PImage world;
 PImage dublinMap;
@@ -29,7 +30,6 @@ List<City> cities;
 
 //Array List to store Particles
 ArrayList<Particle> myParticle;  
-ArrayList<Display> mainDisplay;
 
 //For the pause button
 int tweetsOnOffSwitch = 1;
@@ -49,7 +49,7 @@ City tokyo;
 //Controls for the menu
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
-boolean tweetSetPlay = false;
+boolean tweetSetPlay = true;
 
 //Every 4.7 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
 //Dependant on the screen size
@@ -67,14 +67,14 @@ int curMM = 0;
 void setup() {
 
   //fullScreen();
-  size(1000, 500);
+  size(1440, 774);
   background(0);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
-  mainDisplay = new ArrayList <Display>();
   cities = new ArrayList<City>();
   
+  mainDisplay = new Display();
   //Make cities and then add them to the arrayList.
                     //cityName, Latitude, Longitude,      xPos,         yPos,      radius
   //dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
@@ -128,6 +128,7 @@ void setup() {
 }
 
 void draw() {
+  background(0);
   fill(255);
   
 /*------------LIVE VERSION-------------*/
@@ -143,13 +144,9 @@ void draw() {
 
 /*------------DISPLAY VERSION-------------*/
   if (tweetSetPlay == true) {
+    mainDisplay.paint();
     displayTweets();
     timer();
-    rect(720,570,10,10);
-  }
-  for(int x = 0; x<=width; x++){
-    Display aDisplay = mainDisplay.get(x);
-    aDisplay.paint();
   }
   
   //Keeps check on how many particles there are, removes them when its time.

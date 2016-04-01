@@ -3,7 +3,6 @@
 void demoVersion() {
     
     myInterface.paint();
-    
     image(world, 0, 0);
     
     //The pause button will change tweetsOnOffSwitch to 0.

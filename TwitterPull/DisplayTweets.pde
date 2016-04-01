@@ -1,6 +1,6 @@
 void displayTweets() {
-  //image(world,0,0);
-  //world.resize(1440, 842);
+  image(world,0,0);
+  world.resize(1440, 774);
   //image(dublinMap,width/2,0);
   //dublinMap.resize(width/2,height - height/5);
   
@@ -12,7 +12,7 @@ void displayTweets() {
     myCity.makeCity();  
   }
   
-  fill (0,255,0);
+  fill (255);
   //Load up all the tweets from the XML file.
   XML[] tweetList = xmlFile.getChildren("tweet");
   //We only need to do this once a second, 
