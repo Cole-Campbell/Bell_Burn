@@ -7,9 +7,9 @@ public class Display {
  
   void paint(){
     fill(255);
-    for(int y=0; y<=height; y=y+50){
-      for(int x=0; x<=width; x=x+50){
-        rect(xPos+x, yPos+y, 50, 50);       
+    for(int y=0; y<=height; y=y+10){
+      for(int x=0; x<=width; x=x+10){
+        rect(xPos+x, yPos+y, 10, 10);       
       }
     }
   }
