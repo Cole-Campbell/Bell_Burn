@@ -3,8 +3,11 @@ import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
+import guru.ttslib.*;
 
 Twitter twitter;
+
+TTS tts;
 
 PImage world;
 PImage dublinMap;
@@ -46,6 +49,7 @@ City dublin;
 City toronto;
 City nyc;
 City tokyo;
+City clonmel;
 
 //Controls for the menu
 boolean tweetSetDemo = false;
@@ -68,22 +72,25 @@ int curMM = 0;
 void setup() {
 
   //fullScreen();
-  size(1080, 760);
+  size(1080, 560);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   
+  tts = new TTS();
   //Make cities and then add them to the arrayList.
                     //cityName, Latitude, Longitude,      xPos,         yPos,      radius
   //dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
   dublin = new City("Dublin", 53.344104, -6.2674937, 1000 , 300, 10);
-  cities.add(dublin);
+  //cities.add(dublin);
   
   //toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 100);
   toronto = new City("Toronto", 43.6525, -79.381667, width/2 - width/4, height/2, 1);
-  cities.add(toronto);
+  //cities.add(toronto);
   
+  clonmel = new City("Clonmel",52.35345, -7.68982, 200, 200, 1);
+  cities.add(clonmel);
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   //cities.add(nyc);
   
@@ -189,4 +196,4 @@ void draw() {
 
 }
     
-  
+

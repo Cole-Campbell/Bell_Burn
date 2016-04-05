@@ -46,6 +46,16 @@ void liveStream() {
             text(user.getName(), 200, 300, 300, 200);
             text(longString, 300, 300, 300, 200);
             println(status.getCreatedAt());
+            String searchWord = status.getText();
+            /*println(searchWord);
+            int intIndex = searchWord.indexOf("Tweetset");
+            if(intIndex == - 1){
+               System.out.println("Hello not found");
+            }else{
+               System.out.println("Found Hello at index "
+               + intIndex);
+            }*/
+
             
             //We need to load up the XML file and check if the tweets already exist
             XML[] liveList = xmlLive.getChildren("tweet");
@@ -58,6 +68,9 @@ void liveStream() {
               }
             }
             if(tweetExists == false) {
+              if(searchWord.contains("Tweetset")){            
+                tts.speak(searchWord);
+              }
               //For saving to XML
               //Load up with the data we want from the status object
               //ID, Author, Date and the CityObjects name.
