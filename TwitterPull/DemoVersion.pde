@@ -20,7 +20,7 @@ void demoVersion() {
         for (int j = 0; j < cities.size(); j++) { 
           
           City myCity = cities.get(j);            
-          myCity.makeCity();
+          //myCity.makeCity();
           myCity.getNewTweets();
           println("calling this");
           

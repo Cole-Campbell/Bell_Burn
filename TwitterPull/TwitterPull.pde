@@ -5,7 +5,6 @@ import twitter4j.api.*;
 import java.util.*;
 
 Twitter twitter;
-Display mainDisplay;
 
 PImage world;
 PImage dublinMap;
@@ -29,7 +28,9 @@ int pageNum = 1;
 List<City> cities;
 
 //Array List to store Particles
-ArrayList<Particle> myParticle;  
+ArrayList<Particle> myParticle; 
+
+Display display; 
 
 //For the pause button
 int tweetsOnOffSwitch = 1;
@@ -68,13 +69,11 @@ void setup() {
 
   //fullScreen();
   size(1440, 774);
-  background(0);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
-  
-  mainDisplay = new Display();
+  display = new Display();
   //Make cities and then add them to the arrayList.
                     //cityName, Latitude, Longitude,      xPos,         yPos,      radius
   //dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
@@ -128,9 +127,8 @@ void setup() {
 }
 
 void draw() {
-  background(0);
   fill(255);
-  
+  background(0);
 /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
     liveStream();
@@ -144,7 +142,10 @@ void draw() {
 
 /*------------DISPLAY VERSION-------------*/
   if (tweetSetPlay == true) {
-    mainDisplay.paint();
+    //Paint's background from the ScreenDisplay class. These squares
+    //Will be used to display the tweets when we pull them in. Square's
+    //individual latitude and longitude will be stored within the class. 
+    display.paint();
     displayTweets();
     timer();
   }

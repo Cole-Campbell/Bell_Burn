@@ -9,7 +9,7 @@ void displayTweets() {
 
   for (int a = 0; a < cities.size(); a++) { 
     City myCity = cities.get(a);
-    myCity.makeCity();  
+    //myCity.makeCity();  
   }
   
   fill (255);
@@ -31,8 +31,7 @@ void displayTweets() {
       String tweetStrMM = tweetDate.substring(14,16);
       int tweetHH = Integer.parseInt(tweetStrHH);
       int tweetMM = Integer.parseInt(tweetStrMM);
-   
-             
+      
       //We then need to compare them.
       //So go through each city
       for (int j = 0; j < cities.size(); j++) { 
@@ -81,7 +80,7 @@ void displayTweets() {
 
               //println("The minutes are working");
               //println("The tweets time is = " + tweetDateString);
-              //println("This is the latitude of Toronto Tweets " + whichCity.yPos);
+              //println("This is the latitude of Toronto Tweets " + whichCity.yPos);              
               myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
               println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
               

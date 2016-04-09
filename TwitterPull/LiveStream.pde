@@ -21,7 +21,7 @@ void liveStream() {
         //Loop through the cities array and get each city
         for (int j = 0; j < cities.size(); j++) {           
           City myCity = cities.get(j);            
-          myCity.makeCity();
+          //myCity.makeCity();
           myCity.getNewTweets();
           println("calling this");
           

@@ -25,10 +25,11 @@ public class City {
     this.radius = radius;
   }
 
+  /*Make City marker disabled while working on the display of the project.
   void makeCity() {   
       fill(255,255,255);
       ellipse(xPos,yPos,radius,radius);         
-  }
+  }*/
   
   //http://stackoverflow.com/questions/16730364/add-arraylist-to-another-arraylist-in-java
   
