@@ -66,7 +66,7 @@ int curHH = 0;
 int curMM = 0;
 
 void setup() {
-
+   frameRate(1);
   //fullScreen();
   size(1440, 774);
 
@@ -75,18 +75,18 @@ void setup() {
   cities = new ArrayList<City>();
   display = new Display();
   //Make cities and then add them to the arrayList.
-                    //cityName, Latitude, Longitude,      xPos,         yPos,      radius
+  //cityName, Latitude, Longitude,      xPos,         yPos,      radius
   //dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
-  dublin = new City("Dublin", 53.344104, -6.2674937, 1000 , 300, 10);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 1000, 300, 10);
   cities.add(dublin);
-  
+
   //toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 100);
   toronto = new City("Toronto", 43.6525, -79.381667, width/2 - width/4, height/2, 1);
   cities.add(toronto);
-  
+
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   //cities.add(nyc);
-  
+
   //tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
   //cities.add(tokyo);
 
@@ -96,9 +96,9 @@ void setup() {
   world = loadImage("world.png");
   //dublinMap = loadImage("dub.jpg");
   //torontoMap = loadImage("tor.jpg");
-  world.resize(800,600);
+  world.resize(800, 600);
 
-                             //width,height,xPos,yPos
+  //width,height,xPos,yPos
   myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
 
   //This is for the twitter codes.
@@ -111,7 +111,7 @@ void setup() {
   //Initialize Twitter4J
   TwitterFactory tf = new TwitterFactory(cb.build());
   twitter = tf.getInstance();
-  
+
   //Need to call this once. If not called, then the tweetList array is empty and throws an error.
   dublin.getNewTweets();
   toronto.getNewTweets();
@@ -119,7 +119,7 @@ void setup() {
   //tokyo.getNewTweets();
 
   currentTweet = 0;
-  
+
   //Set up a new date.time. Go back by X hours.
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
@@ -129,38 +129,36 @@ void setup() {
 void draw() {
   fill(255);
   background(0);
-/*------------LIVE VERSION-------------*/
+  /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
     liveStream();
   }
 
-/*------------DEMO VERSION-------------*/
+  /*------------DEMO VERSION-------------*/
   //Turns on the demo version
   if (tweetSetDemo == true) {
     demoVersion();
   }
 
-/*------------DISPLAY VERSION-------------*/
+  /*------------DISPLAY VERSION-------------*/
   if (tweetSetPlay == true) {
-    //Paint's background from the ScreenDisplay class. These squares
-    //Will be used to display the tweets when we pull them in. Square's
-    //individual latitude and longitude will be stored within the class. 
-    display.paint();
     displayTweets();
     timer();
+    display.paint();
   }
-  
+
   //Keeps check on how many particles there are, removes them when its time.
-  for(int q = 0; q<=myParticle.size()-1; q++){    
-      //println(q);
-      Particle aParticle = myParticle.get(q);
-      aParticle.paint();
-      
-      if (aParticle.timeUp() == true) {
-        myParticle.remove(aParticle);              
-      }              
+  for (int q = 0; q<=myParticle.size()-1; q++) {    
+    //println(q);
+    Particle aParticle = myParticle.get(q);
+    aParticle.paint();
+
+    if (aParticle.timeUp() == true) {
+      myParticle.remove(aParticle);
+    }
   }
-/*------------MAIN MENU-----------------*/
+
+  /*------------MAIN MENU-----------------*/
   if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
     fill(255, 255, 255);
     rect(0, 0, width, 50);
@@ -178,18 +176,10 @@ void draw() {
     text("TweetSet Play", 0, 200, 300, 200);
   }
   //If we are on not on the main menu then make this button
-  else{
-    fill(30,90,50);    
+  else {
+    fill(30, 90, 50);    
     rect(width - 100, height - 50, 100, 50);
-    fill(0,0,0);
+    fill(0, 0, 0);
     text("Back", width - 100, height - 40, 100, 50);
   }
 }
-
-
-
-
-
-
-    
-  
