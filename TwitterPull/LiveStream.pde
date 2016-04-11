@@ -1,7 +1,7 @@
 
 String liveXml = "data/liveTweets.xml";
 XML xmlLive;
-
+ArrayList<Particle> shootingParticles;
 
 void liveStream() {
     
@@ -9,6 +9,10 @@ void liveStream() {
     
     image(world, 0, 0);
     
+    for (int j = 0; j < shootingParticles.size(); j++) { 
+        Particle aParticle = shootingParticles.get(j);
+        aParticle.paint();
+    }
     //The pause button will change tweetsOnOffSwitch to 0.
     if (tweetsOnOffSwitch == 1) {
       
@@ -71,6 +75,7 @@ void liveStream() {
               if(searchWord.contains("Tweetset")){            
                 tts.speak(searchWord);
               }
+
               //For saving to XML
               //Load up with the data we want from the status object
               //ID, Author, Date and the CityObjects name.
@@ -81,16 +86,39 @@ void liveStream() {
               newChild.setString("tweet-date", storeDate);
               newChild.setString("city-name", myCity.cityName);
   
+              double tweetLat = 0.0;
+              double tweetLong = 0.0;
+              
               //We want to check if there is a GeoLocation attached to a tweet.
               if (status.getGeoLocation() != null) {
                 GeoLocation tweetLoc = status.getGeoLocation();
                 double longitude = tweetLoc.getLongitude();
+                tweetLong = tweetLoc.getLongitude();
                 double latitude = tweetLoc.getLatitude();
+                tweetLat = tweetLoc.getLatitude();
                 println(longitude); 
                 println(latitude);
                 newChild.setDouble("longitude", longitude);
                 newChild.setDouble("latitude", latitude);
               }
+              
+              
+              double differenceLat = myCity.longitude - tweetLat;           
+              double differenceLong = myCity.latitude - tweetLong;
+              
+              float b = (float)differenceLong;             
+              float d = (float)differenceLat;
+              
+              b = b * 500;
+              d = d * 500;
+              println("Longitude difference is equal to " + Math.floor(b));
+              println("Latitude difference is equal to " + Math.floor(d));
+              println("The difference between latitudes is: " + differenceLat);
+              println("The difference between longitudes is: " + differenceLong);
+
+              fill(255,255,255);
+
+              shootingParticles.add(new Particle(b+myCity.xPos, d+myCity.yPos));
             }
             else{
               println("Sorry, this tweet already exists!");
@@ -100,3 +128,4 @@ void liveStream() {
       }
     }
   }
+
