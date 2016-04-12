@@ -10,8 +10,8 @@ public class Particle {
 
   void paint() {
     fill(255, 255, 255);
-    //rect(xPos, yPos, 5, 5);
-    rect((width/2)+xPos, 568+yPos, 5, 5);
+    rect(xPos+=1, yPos-=5, 5, 5);
+    rect((width/2)+xPos, 568 + yPos, 5, 5);
     //rect(width/2+xPos, 570+yPos, 5, 5);
   }
 

@@ -3,13 +3,12 @@ import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
+import guru.ttslib.*;
 
 Twitter twitter;
 
 //Backgrounds for the canvas
 PImage world;
-//PImage dublinMap;
-//PImage torontoMap;
 
 //String is not needed anymore, can leave it here for now as a note
 //Incase we want to put it back in, pass it through the Query object.
@@ -55,7 +54,7 @@ boolean tweetSetPlay = false;
 
 //Every 4.7 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
 //Dependant on the screen size
-float latPix = 4.7;
+float latPix = 4.677777778;
 float longPix = 4;
 
 //This is for the timer. Counts down from the number specified here.
@@ -66,22 +65,24 @@ Calendar incrementMe;
 int curHH = 0;
 int curMM = 0;
 
+TTS tts;
+
 void setup() {
   //fullScreen();
-  size(1440, 774);
+  size(1440, 700);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
   display = new ArrayList <Display>();
+  shootingParticles = new ArrayList<Particle>();
+  tts = new TTS();
   //Make cities and then add them to the arrayList.
   //cityName, Latitude, Longitude,      xPos,         yPos,      radius
-  dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
-  //dublin = new City("Dublin", 53.344104, -6.2674937, 1000, 300, 10);
+  dublin = new City("Dublin", 53.344104, -6.2675, -6.26*longPix, 53.344104*-latPix, 1);
   cities.add(dublin);
 
-  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 100);
-  //toronto = new City("Toronto", 43.6525, -79.381667, width/2 - width/4, height/2, 1);
+  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
   cities.add(toronto);
 
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
@@ -152,9 +153,9 @@ void draw() {
     Particle aParticle = myParticle.get(q);
     aParticle.paint();
 
-    if (aParticle.timeUp() == true) {
-      myParticle.remove(aParticle);
-    }
+    //if (aParticle.timeUp() == true) {
+      //myParticle.remove(aParticle);
+    //}
   }
 
   /*------------MAIN MENU-----------------*/

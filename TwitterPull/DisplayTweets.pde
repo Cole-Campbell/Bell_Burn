@@ -48,50 +48,17 @@ void displayTweets() {
         if (tweetCity.equals(whichCity.cityName)) {
           if (tweetHH - curHH == 0) {
             if (curMM - tweetMM <= 15) {
-              //THESE NEED TO BE THE WRONG WAY AROUND FOR SOME REASON
-              /*
-              println("City latitude is: " + whichCity.longitude);
-               println("City Longitude is: " + whichCity.latitude);
-               println("City Name is: " + whichCity.cityName);
-               println(" ");
-               println("Tweet City is: " + tweetCity);
-               println("Tweet Latitude is: " + tweetLat);
-               println("Tweet Longitude is: " + tweetLong);
-               println(" ");
-               */
+
               double differenceLat = whichCity.longitude - tweetLat;           
               double differenceLong = whichCity.latitude - tweetLong;
 
-              //float a = (float)whichCity.longitude;
               float b = (float)differenceLong;
-
-              //float c = (float)whichCity.latitude;
               float d = (float)differenceLat;
 
-              //a = a * 100;
               b = b* longPix;
               d = d*latPix;
-              /*
-              println("Longitude difference is equal to " + Math.floor(b));
-              println("Latitude difference is equal to " + Math.floor(d));
-              println("The difference between latitudes is: " + differenceLat);
-              println("The difference between longitudes is: " + differenceLong);
-              */
 
-              /*
-              println(" ");
-               println("////// ");
-               println(" ");
-               println("Here is the mouseX " + mouseX + " and the mouseY " + mouseY);
-               
-               */
-              //B = difference of longitude * 1000
-              //println("The difference between the longitude " + b+whichCity.xPos);
-              fill(255, 255, 255);
-
-              //println("The minutes are working");
-              //println("The tweets time is = " + tweetDateString);
-              //println("This is the latitude of Toronto Tweets " + whichCity.yPos);              
+              fill(255, 255, 255);          
 
               myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
               //println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
