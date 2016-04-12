@@ -9,9 +9,9 @@ class Display {
   float latS = 75;
   float latE = latS-latMult;
   int test = 145;
-  int r = 0;
-  int g = 0;
-  int b = 0;
+  int r = 255;
+  int g = 255;
+  int b = 255;
 
   //Declare an array to contain the information of each square, being the x,y,latS&E,
   //longS&E as well as colour, has to be discussed in class.
@@ -32,9 +32,9 @@ class Display {
         xP[y][4] = latS;
         xP[y][5] = latS-latMult;
 
-        xP[y][6] = r+x/14;
-        xP[y][7] = g+y;
-        xP[y][8] = b+x+y/3;
+        xP[y][6] = r;
+        xP[y][7] = g;
+        xP[y][8] = b;
       }
     }
   }
@@ -51,20 +51,19 @@ class Display {
 
         longS = xP[y][2];
         longE = xP[y][3];
-        
+
         latS = xP[y][4];
         latE = xP[y][5];
-        
+
         fill(xP[x][6], xP[x][7], xP[x][8]);
-        //xP[x][6] = xP[x][6];
+        //xP[x][6] = xP[x][6];x][8]);
         rect(xPos, yPos, 10, 10);
 
         longS = longS+longMult;
         longE+=longMult;
-        
+
         latS = latS+latMult;
         latE-=latMult;
-
         xP[y][3]=longE;
         xP[y][5]=latE;
 
@@ -74,10 +73,13 @@ class Display {
           longE = -180+longMult;
           xP[y][3] = longE;
           //println("Second run is " +longE);
-        } else if (latE< -74) {
-          println("First run is " +latE);
-          
-          println("Second run is " +latE);
+          if (latE<=-66) {
+            //println("First run is " +latE);
+            latS = 75;
+            latE = latS-latMult;
+            xP[y][5] = latE;
+            //println("Second run is " +latE);
+          }
         }
       }
     }

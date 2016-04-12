@@ -6,9 +6,10 @@ import java.util.*;
 
 Twitter twitter;
 
+//Backgrounds for the canvas
 PImage world;
-PImage dublinMap;
-PImage torontoMap;
+//PImage dublinMap;
+//PImage torontoMap;
 
 //String is not needed anymore, can leave it here for now as a note
 //Incase we want to put it back in, pass it through the Query object.
@@ -30,7 +31,7 @@ List<City> cities;
 //Array List to store Particles
 ArrayList<Particle> myParticle; 
 
-Display display; 
+ArrayList <Display> display;
 
 //For the pause button
 int tweetsOnOffSwitch = 1;
@@ -50,7 +51,7 @@ City tokyo;
 //Controls for the menu
 boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
-boolean tweetSetPlay = true;
+boolean tweetSetPlay = false;
 
 //Every 4.7 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
 //Dependant on the screen size
@@ -66,22 +67,21 @@ int curHH = 0;
 int curMM = 0;
 
 void setup() {
-   frameRate(1);
   //fullScreen();
   size(1440, 774);
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
-  display = new Display();
+  display = new ArrayList <Display>();
   //Make cities and then add them to the arrayList.
   //cityName, Latitude, Longitude,      xPos,         yPos,      radius
-  //dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
-  dublin = new City("Dublin", 53.344104, -6.2674937, 1000, 300, 10);
+  dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 100);
+  //dublin = new City("Dublin", 53.344104, -6.2674937, 1000, 300, 10);
   cities.add(dublin);
 
-  //toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 100);
-  toronto = new City("Toronto", 43.6525, -79.381667, width/2 - width/4, height/2, 1);
+  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 100);
+  //toronto = new City("Toronto", 43.6525, -79.381667, width/2 - width/4, height/2, 1);
   cities.add(toronto);
 
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
@@ -96,7 +96,7 @@ void setup() {
   world = loadImage("world.png");
   //dublinMap = loadImage("dub.jpg");
   //torontoMap = loadImage("tor.jpg");
-  world.resize(800, 600);
+  world.resize(width, height);
 
   //width,height,xPos,yPos
   myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
@@ -144,7 +144,6 @@ void draw() {
   if (tweetSetPlay == true) {
     displayTweets();
     timer();
-    display.paint();
   }
 
   //Keeps check on how many particles there are, removes them when its time.

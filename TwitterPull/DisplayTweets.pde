@@ -1,16 +1,12 @@
 void displayTweets() {
   //image(world,0,0);
   //world.resize(1440, 774);
-  //image(dublinMap,width/2,0);
-  //dublinMap.resize(width/2,height - height/5);
 
-  //image(torontoMap,0,0);
-  //torontoMap.resize(width/2,height - height/5);
-  for (int a = 0; a < cities.size(); a++) { 
+  //display.paint();
+  for (int a = 0; a < cities.size(); a++) {
     City myCity = cities.get(a);
-    //myCity.makeCity();  
+    //myCity.makeCity();
   }
-
   fill (255);
   //Load up all the tweets from the XML file.
   XML[] tweetList = xmlFile.getChildren("tweet");
@@ -20,6 +16,7 @@ void displayTweets() {
     for (int t=0; t<tweetList.length; t++) {
       //Store the tweets attributes
       String tweetDate = tweetList[t].getString("tweet-date");
+      //println(tweetDate);
       String tweetCity = tweetList[t].getString("city-name");
       Double tweetLat = tweetList[t].getDouble("latitude");
       Double tweetLong = tweetList[t].getDouble("longitude");
@@ -30,6 +27,18 @@ void displayTweets() {
       String tweetStrMM = tweetDate.substring(14, 16);
       int tweetHH = Integer.parseInt(tweetStrHH);
       int tweetMM = Integer.parseInt(tweetStrMM);
+
+      //println(tweetDateString);
+
+      //Comparing Tweet Lat/Long to the squares to then place them appropriatly\
+      for (int x=0; x<=width-1; x++) {
+        /*if (tweetLat>display.latS && tweetLat<display.latE) {
+          println();
+        }*/
+      }
+      
+      
+
 
       //We then need to compare them.
       //So go through each city
@@ -60,14 +69,15 @@ void displayTweets() {
               float d = (float)differenceLat;
 
               //a = a * 100;
-              b = b * 500;
-              d = d * 500;
+              b = b* longPix;
+              d = d*latPix;
+              /*
               println("Longitude difference is equal to " + Math.floor(b));
               println("Latitude difference is equal to " + Math.floor(d));
               println("The difference between latitudes is: " + differenceLat);
               println("The difference between longitudes is: " + differenceLong);
-              
-              
+              */
+
               /*
               println(" ");
                println("////// ");
@@ -84,14 +94,14 @@ void displayTweets() {
               //println("This is the latitude of Toronto Tweets " + whichCity.yPos);              
 
               myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
-              println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
+              //println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
               /*for (int x=0; x<=width-1; x++) {
-                if (120>=display.&&120<=display.xP[x][3]) {
-                  println("testing");
-                  float colour = 255;
-                  display.xP[x][6] = colour;
-                }
-              }*/
+               if (120>=display.&&120<=display.xP[x][3]) {
+               println("testing");
+               float colour = 255;
+               display.xP[x][6] = colour;
+               }
+               }*/
             }
           }
         }
