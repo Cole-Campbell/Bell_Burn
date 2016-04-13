@@ -3,7 +3,7 @@ import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
-import guru.ttslib.*;
+//import guru.ttslib.*;
 
 Twitter twitter;
 
@@ -65,7 +65,7 @@ Calendar incrementMe;
 int curHH = 0;
 int curMM = 0;
 
-TTS tts;
+//TTS tts;
 
 void setup() {
   //fullScreen();
@@ -76,7 +76,7 @@ void setup() {
   cities = new ArrayList<City>();
   display = new ArrayList <Display>();
   shootingParticles = new ArrayList<Particle>();
-  tts = new TTS();
+  //tts = new TTS();
   //Make cities and then add them to the arrayList.
   //cityName, Latitude, Longitude,      xPos,         yPos,      radius
   dublin = new City("Dublin", 53.344104, -6.2675, -6.26*longPix, 53.344104*-latPix, 1);
@@ -85,11 +85,11 @@ void setup() {
   toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
   cities.add(toronto);
 
-  //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
-  //cities.add(nyc);
+  nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
+  cities.add(nyc);
 
-  //tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
-  //cities.add(tokyo);
+  tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
+  cities.add(tokyo);
 
   //Add in the maps
   xmlFile = loadXML(xml);
@@ -132,6 +132,7 @@ void draw() {
   background(0);
   /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
+    delay(10);
     liveStream();
   }
 

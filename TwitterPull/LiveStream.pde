@@ -7,7 +7,7 @@ void liveStream() {
     
     myInterface.paint();
     
-    image(world, 0, 0);
+
     
     for (int j = 0; j < shootingParticles.size(); j++) { 
         Particle aParticle = shootingParticles.get(j);
@@ -58,9 +58,9 @@ void liveStream() {
               }
             }
             if(tweetExists == false) {
-              if(searchWord.contains("Tweetset")){            
-                tts.speak(searchWord);
-              }
+              //if(searchWord.contains("Tweetset")){            
+                //tts.speak(searchWord);
+              //}
 
               //For saving to XML
               //Load up with the data we want from the status object
@@ -88,23 +88,11 @@ void liveStream() {
                 newChild.setDouble("latitude", latitude);
               }
               
+              //Unlike in the other version, the tweets are coming straight from a city and pinging towards the top
               
-              double differenceLat = myCity.longitude - tweetLat;           
-              double differenceLong = myCity.latitude - tweetLong;
-              
-              float b = (float)differenceLong;             
-              float d = (float)differenceLat;
-              
-              b = b * 500;
-              d = d * 500;
-              println("Longitude difference is equal to " + Math.floor(b));
-              println("Latitude difference is equal to " + Math.floor(d));
-              println("The difference between latitudes is: " + differenceLat);
-              println("The difference between longitudes is: " + differenceLong);
-
               fill(255,255,255);
 
-              shootingParticles.add(new Particle(b+myCity.xPos, d+myCity.yPos));
+              shootingParticles.add(new Particle(myCity.xPos, myCity.yPos));
             }
             else{
               println("Sorry, this tweet already exists!");
@@ -113,5 +101,5 @@ void liveStream() {
         }
       }
     }
+        //image(world, 0, 0);
   }
-
