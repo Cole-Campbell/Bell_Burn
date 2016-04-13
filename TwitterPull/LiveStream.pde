@@ -46,18 +46,6 @@ void liveStream() {
 
             println(status.getCreatedAt());
             String searchWord = status.getText();
-<<<<<<< HEAD
-            /*println(searchWord);
-            int intIndex = searchWord.indexOf("Tweetset");
-            if(intIndex == - 1){
-               System.out.println("Hello not found");
-            }else{
-               System.out.println("Found Hello at index "
-               + intIndex);
-            }*/
-
-=======
->>>>>>> display
             
             //We need to load up the XML file and check if the tweets already exist
             XML[] liveList = xmlLive.getChildren("tweet");

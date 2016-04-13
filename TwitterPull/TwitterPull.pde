@@ -7,12 +7,7 @@ import guru.ttslib.*;
 
 Twitter twitter;
 
-<<<<<<< HEAD
-TTS tts;
-
-=======
 //Backgrounds for the canvas
->>>>>>> display
 PImage world;
 
 //String is not needed anymore, can leave it here for now as a note
@@ -51,7 +46,6 @@ City dublin;
 City toronto;
 City nyc;
 City tokyo;
-City clonmel;
 
 //Controls for the menu
 boolean tweetSetDemo = false;
@@ -75,31 +69,11 @@ TTS tts;
 
 void setup() {
   //fullScreen();
-<<<<<<< HEAD
-  size(1440, 770);
-=======
   size(1440, 700);
->>>>>>> display
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
-  shootingParticles = new ArrayList <Particle>();
   cities = new ArrayList<City>();
-<<<<<<< HEAD
-  
-  tts = new TTS();
-  //Make cities and then add them to the arrayList.
-                    //cityName, Latitude, Longitude,      xPos,         yPos,      radius
-  dublin = new City("Dublin", 53.344104, -6.2674937, 53.344104*longPix , -6.26*latPix, 10 );
-  cities.add(dublin);
-  
-  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 10);
-  cities.add(toronto);
-  
-  //clonmel = new City("Clonmel",52.35345, -7.68982, 200, 200, 1);
-  //cities.add(clonmel);
-  
-=======
   display = new ArrayList <Display>();
   shootingParticles = new ArrayList<Particle>();
   tts = new TTS();
@@ -111,7 +85,6 @@ void setup() {
   toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
   cities.add(toronto);
 
->>>>>>> display
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   //cities.add(nyc);
 
@@ -122,13 +95,9 @@ void setup() {
   xmlFile = loadXML(xml);
   xmlLive = loadXML(liveXml);
   world = loadImage("world.png");
-<<<<<<< HEAD
-  world.resize(width,height);
-=======
   //dublinMap = loadImage("dub.jpg");
   //torontoMap = loadImage("tor.jpg");
   world.resize(width, height);
->>>>>>> display
 
   //width,height,xPos,yPos
   myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
@@ -176,13 +145,6 @@ void draw() {
   if (tweetSetPlay == true) {
     displayTweets();
     timer();
-<<<<<<< HEAD
-    rect(720,570,10,10);
-    
-  }
-
-/*------------MAIN MENU-----------------*/
-=======
   }
 
   //Keeps check on how many particles there are, removes them when its time.
@@ -197,7 +159,6 @@ void draw() {
   }
 
   /*------------MAIN MENU-----------------*/
->>>>>>> display
   if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
     fill(255, 255, 255);
     rect(0, 0, width, 50);
@@ -222,8 +183,3 @@ void draw() {
     text("Back", width - 100, height - 40, 100, 50);
   }
 }
-<<<<<<< HEAD
-    
-
-=======
->>>>>>> display

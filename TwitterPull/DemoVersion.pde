@@ -25,14 +25,10 @@ void demoVersion() {
         //We then loop through each cities tweets.
         for (int k = 0; k < myCity.tweets.size(); k++) {
 
-<<<<<<< HEAD
-            println(status.getCreatedAt());
-=======
           Status status = myCity.tweets.get(k);
           User user = status.getUser();
 
           println(myCity.cityName + " " + myCity.tweets.size());
->>>>>>> display
 
           //Running this piece of code returns when the tweets were created. 
           String storeDate = "" + status.getCreatedAt();           
@@ -70,16 +66,8 @@ void demoVersion() {
           }
         }
       }
-<<<<<<< HEAD
-      else{
-        nextPage=false;
-      }
-   }
-}
-=======
     } else {
       nextPage=false;
     }
   }
 }
->>>>>>> display

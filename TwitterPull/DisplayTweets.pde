@@ -1,11 +1,6 @@
 void displayTweets() {
   //image(world,0,0);
-<<<<<<< HEAD
-  //world.resize(1440, 842);
-
-=======
   //world.resize(1440, 774);
->>>>>>> display
 
   //display.paint();
   for (int a = 0; a < cities.size(); a++) {
@@ -50,29 +45,6 @@ void displayTweets() {
       for (int j = 0; j < cities.size(); j++) { 
         City whichCity = cities.get(j);
         //check which city we are currently on
-<<<<<<< HEAD
-        if(tweetCity.equals(whichCity.cityName)){
-          if(tweetHH - curHH == 0){
-            if(curMM - tweetMM <= 15){
-
-              double differenceLat = whichCity.longitude - tweetLat;           
-              double differenceLong = whichCity.latitude - tweetLong;
-              
-              float b = (float)differenceLong;             
-              float d = (float)differenceLat;
-              
-              b = b * 500;
-              d = d * 500;
-              println("Longitude difference is equal to " + Math.floor(b));
-              println("Latitude difference is equal to " + Math.floor(d));
-              println("The difference between latitudes is: " + differenceLat);
-              println("The difference between longitudes is: " + differenceLong);
-
-              fill(255,255,255);
-
-              myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
-              
-=======
         if (tweetCity.equals(whichCity.cityName)) {
           if (tweetHH - curHH == 0) {
             if (curMM - tweetMM <= 15) {
@@ -97,7 +69,6 @@ void displayTweets() {
                display.xP[x][6] = colour;
                }
                }*/
->>>>>>> display
             }
           }
         }
@@ -107,25 +78,6 @@ void displayTweets() {
 }
 
 void timer() {
-<<<<<<< HEAD
-  if(frameCount % 30 == 1) {
-     //println("Counting down from ..." + timerCount);
-     timerCount--; 
-     if(timerCount == 0) {
-       incrementMe.add(Calendar.MINUTE, 15);
-       String whatTime = incrementMe.getTime() + " ";
-       println("Current time = " + whatTime);
-       String strHH = whatTime.substring(11,13);
-       String strMM = whatTime.substring(14,16);
-       
-       curHH = Integer.parseInt(strHH);
-       curMM = Integer.parseInt(strMM);
-       
-       println("Current Hour = " + curHH);
-       println("Current Min = " + curMM);
-       timerCount = 6;  }
-  }  
-=======
   if (frameCount % 30 == 1) {
     //println("Counting down from ..." + timerCount);
     timerCount--; 
@@ -144,5 +96,4 @@ void timer() {
       timerCount = 6;
     }
   }
->>>>>>> display
 }
