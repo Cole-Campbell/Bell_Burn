@@ -44,13 +44,9 @@ void liveStream() {
             String longString = "" + idLong;
 
 
-            //This piece is nearly obsolete, its for displaying a tweet on screen
-            fill(200);
-            text(status.getText(), 100, 100, 300, 200);
-            text(user.getName(), 200, 300, 300, 200);
-            text(longString, 300, 300, 300, 200);
             println(status.getCreatedAt());
             String searchWord = status.getText();
+<<<<<<< HEAD
             /*println(searchWord);
             int intIndex = searchWord.indexOf("Tweetset");
             if(intIndex == - 1){
@@ -60,6 +56,8 @@ void liveStream() {
                + intIndex);
             }*/
 
+=======
+>>>>>>> display
             
             //We need to load up the XML file and check if the tweets already exist
             XML[] liveList = xmlLive.getChildren("tweet");

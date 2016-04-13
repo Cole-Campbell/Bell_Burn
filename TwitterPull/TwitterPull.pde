@@ -7,8 +7,12 @@ import guru.ttslib.*;
 
 Twitter twitter;
 
+<<<<<<< HEAD
 TTS tts;
 
+=======
+//Backgrounds for the canvas
+>>>>>>> display
 PImage world;
 
 //String is not needed anymore, can leave it here for now as a note
@@ -18,7 +22,6 @@ String search = "";
 //For loading up and saving the XML files.
 String xml = "storeTweets.xml";
 String saveXml = "data/storeTweets.xml";
-
 
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
@@ -30,14 +33,15 @@ int pageNum = 1;
 List<City> cities;
 
 //Array List to store Particles
-ArrayList<Particle> myParticle;
+ArrayList<Particle> myParticle; 
+
+ArrayList <Display> display;
 
 //For the pause button
 int tweetsOnOffSwitch = 1;
 
 // To store the XML file location.
 XML xmlFile;
-
 
 //Create a new Interface
 Interface myInterface;
@@ -54,9 +58,9 @@ boolean tweetSetDemo = false;
 boolean tweetSetLive = false;
 boolean tweetSetPlay = false;
 
-//Every 5.55 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
-//Is this dependant on the screen size?... Just checked, yes it is.
-float latPix = 4.7;
+//Every 4.7 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
+//Dependant on the screen size
+float latPix = 4.677777778;
 float longPix = 4;
 
 //This is for the timer. Counts down from the number specified here.
@@ -67,15 +71,21 @@ Calendar incrementMe;
 int curHH = 0;
 int curMM = 0;
 
-void setup() {
+TTS tts;
 
+void setup() {
   //fullScreen();
+<<<<<<< HEAD
   size(1440, 770);
+=======
+  size(1440, 700);
+>>>>>>> display
 
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   shootingParticles = new ArrayList <Particle>();
   cities = new ArrayList<City>();
+<<<<<<< HEAD
   
   tts = new TTS();
   //Make cities and then add them to the arrayList.
@@ -89,9 +99,22 @@ void setup() {
   //clonmel = new City("Clonmel",52.35345, -7.68982, 200, 200, 1);
   //cities.add(clonmel);
   
+=======
+  display = new ArrayList <Display>();
+  shootingParticles = new ArrayList<Particle>();
+  tts = new TTS();
+  //Make cities and then add them to the arrayList.
+  //cityName, Latitude, Longitude,      xPos,         yPos,      radius
+  dublin = new City("Dublin", 53.344104, -6.2675, -6.26*longPix, 53.344104*-latPix, 1);
+  cities.add(dublin);
+
+  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
+  cities.add(toronto);
+
+>>>>>>> display
   //nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
   //cities.add(nyc);
-  
+
   //tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
   //cities.add(tokyo);
 
@@ -99,9 +122,15 @@ void setup() {
   xmlFile = loadXML(xml);
   xmlLive = loadXML(liveXml);
   world = loadImage("world.png");
+<<<<<<< HEAD
   world.resize(width,height);
+=======
+  //dublinMap = loadImage("dub.jpg");
+  //torontoMap = loadImage("tor.jpg");
+  world.resize(width, height);
+>>>>>>> display
 
-                             //width,height,xPos,yPos
+  //width,height,xPos,yPos
   myInterface = new Interface(width, 50, 0, height - 50); //Initiate the interface
 
   //This is for the twitter codes.
@@ -114,8 +143,7 @@ void setup() {
   //Initialize Twitter4J
   TwitterFactory tf = new TwitterFactory(cb.build());
   twitter = tf.getInstance();
-  
-  
+
   //Need to call this once. If not called, then the tweetList array is empty and throws an error.
   dublin.getNewTweets();
   toronto.getNewTweets();
@@ -123,7 +151,7 @@ void setup() {
   //tokyo.getNewTweets();
 
   currentTweet = 0;
-  
+
   //Set up a new date.time. Go back by X hours.
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
@@ -133,27 +161,43 @@ void setup() {
 void draw() {
   fill(255);
   background(0);
-  
-/*------------LIVE VERSION-------------*/
+  /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
     liveStream();
   }
 
-/*------------DEMO VERSION-------------*/
+  /*------------DEMO VERSION-------------*/
   //Turns on the demo version
   if (tweetSetDemo == true) {
     demoVersion();
   }
 
-/*------------DISPLAY VERSION-------------*/
+  /*------------DISPLAY VERSION-------------*/
   if (tweetSetPlay == true) {
     displayTweets();
     timer();
+<<<<<<< HEAD
     rect(720,570,10,10);
     
   }
 
 /*------------MAIN MENU-----------------*/
+=======
+  }
+
+  //Keeps check on how many particles there are, removes them when its time.
+  for (int q = 0; q<=myParticle.size()-1; q++) {    
+    //println(q);
+    Particle aParticle = myParticle.get(q);
+    aParticle.paint();
+
+    //if (aParticle.timeUp() == true) {
+      //myParticle.remove(aParticle);
+    //}
+  }
+
+  /*------------MAIN MENU-----------------*/
+>>>>>>> display
   if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
     fill(255, 255, 255);
     rect(0, 0, width, 50);
@@ -171,17 +215,15 @@ void draw() {
     text("TweetSet Play", 0, 200, 300, 200);
   }
   //If we are on not on the main menu then make this button
-  else{
-    fill(30,90,50);    
+  else {
+    fill(30, 90, 50);    
     rect(width - 100, height - 50, 100, 50);
-    fill(0,0,0);
+    fill(0, 0, 0);
     text("Back", width - 100, height - 40, 100, 50);
   }
-
-
-
-
-
 }
+<<<<<<< HEAD
     
 
+=======
+>>>>>>> display
