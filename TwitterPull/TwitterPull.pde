@@ -79,25 +79,23 @@ void setup() {
   shootingParticles = new ArrayList<Particle>();
   //tts = new TTS();
   //Make cities and then add them to the arrayList.
-  //cityName, Latitude, Longitude,      xPos,         yPos,      radius
-  dublin = new City("Dublin", 53.344104, -6.2675, -6.26*longPix, 53.344104*-latPix, 1);
+  //                cityName, Latitude, Longitude,  xPos,         yPos,      radius     r  g   b       
+  dublin = new City("Dublin", 53.344104, -6.2675, -6.26*longPix, 53.344104*-latPix, 2, 155,20,155);
   cities.add(dublin);
 
-  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
+  toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 2, 40,200,30);
   cities.add(toronto);
 
-  nyc = new City("nyc", 40.70979201243498, -73.992919921875, -73.992919921875*longPix, 40.70979201243498*-latPix, 1);
+  nyc = new City("nyc", 40.70979201243498, -73.992919921875, -73.992919921875*longPix, 40.70979201243498*-latPix, 2, 60,60,190);
   cities.add(nyc);
 
-  tokyo = new City("tokyo", 35.6833, 139.6833, 139.6833*longPix, 35.6833*-latPix, 1);
+  tokyo = new City("tokyo", 35.6833, 139.6833, 139.6833*longPix, 35.6833*-latPix, 2, 70,170,80);
   cities.add(tokyo);
 
   //Add in the maps
   xmlFile = loadXML(xml);
   xmlLive = loadXML(liveXml);
   world = loadImage("world.png");
-  //dublinMap = loadImage("dub.jpg");
-  //torontoMap = loadImage("tor.jpg");
   world.resize(width, height);
 
   //width,height,xPos,yPos
@@ -133,7 +131,7 @@ void draw() {
   background(0);
   /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
-    delay(10);
+    delay(30);
     liveStream();
     for (int q = 0; q<= shootingParticles.size()-1; q++) {    
     //println(q);
@@ -165,17 +163,6 @@ void draw() {
   if (tweetSetPlay == true) {
     displayTweets();
     timer();
-  }
-
-  //Keeps check on how many particles there are, removes them when its time.
-  for (int q = 0; q<=myParticle.size()-1; q++) {    
-    //println(q);
-    Particle aParticle = myParticle.get(q);
-    aParticle.paint();
-
-    //if (aParticle.timeUp() == true) {
-      //myParticle.remove(aParticle);
-    //}
   }
 
   /*------------MAIN MENU-----------------*/

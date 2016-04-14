@@ -92,7 +92,7 @@ void liveStream() {
               
               fill(255,255,255);
 
-              shootingParticles.add(new Particle(myCity.xPos, myCity.yPos));
+              shootingParticles.add(new Particle(myCity.xPos, myCity.yPos, myCity.r, myCity.g, myCity.b));
             }
             else{
               println("Sorry, this tweet already exists!");

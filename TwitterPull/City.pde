@@ -6,6 +6,9 @@ public class City {
   float xPos;
   float yPos;
   float radius;
+  float r;
+  float g;
+  float b;
   List<Status> tweets;
   QueryResult result;
   //Need to pass these arguments when making a city
@@ -15,7 +18,7 @@ public class City {
   //circle x
   //circle y
   //circle radius
-  public City(String w, double lo, double la, float x, float y, float radius){
+  public City(String w, double lo, double la, float x, float y, float radius, float r, float g, float b){
     
     this.cityName = w;
     this.longitude = lo;
@@ -23,6 +26,10 @@ public class City {
     this.xPos = x;
     this.yPos= y;
     this.radius = radius;
+    this.r = r;
+    this.g = g;
+    this.b = b;
+    
   }
 
   void makeCity() {   

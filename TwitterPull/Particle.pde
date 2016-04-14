@@ -4,13 +4,20 @@ public class Particle {
   float Life = 35;
   float originX = width/2;
   float originY = 0;
-  Particle(float xPos, float yPos) {
+  float r;
+  float g;
+  float b;
+  
+  Particle(float xPos, float yPos, float r, float g, float b) {
     this.yPos = yPos;
     this.xPos = xPos;
+    this.r = r;
+    this.g = g;
+    this.b = b;
   }
 
   void paint() {
-    fill(255, 255, 255);
+    fill(r, g, b);
     rect((width/2)+xPos, 568 + yPos, 5, 5);
     //rect(width/2+xPos, 570+yPos, 5, 5);
   }

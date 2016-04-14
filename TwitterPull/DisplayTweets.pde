@@ -60,7 +60,7 @@ void displayTweets() {
 
               fill(255, 255, 255);          
 
-              myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos));
+              myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos, whichCity.r,  whichCity.g,  whichCity.b ));
               //println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
               /*for (int x=0; x<=width-1; x++) {
                if (120>=display.&&120<=display.xP[x][3]) {
