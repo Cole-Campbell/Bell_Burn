@@ -7,6 +7,7 @@ import java.util.*;
 
 Twitter twitter;
 
+float originX = width/2;
 //Backgrounds for the canvas
 PImage world;
 
@@ -85,10 +86,10 @@ void setup() {
   toronto = new City("Toronto", 43.6525, -79.381667, -79.381667*longPix, 43.6525*-latPix, 1);
   cities.add(toronto);
 
-  nyc = new City("nyc", 40.70979201243498, -73.992919921875, 558, 518, 1);
+  nyc = new City("nyc", 40.70979201243498, -73.992919921875, -73.992919921875*longPix, 40.70979201243498*-latPix, 1);
   cities.add(nyc);
 
-  tokyo = new City("tokyo", 35.6833, 139.6833, 0, 0, 1);
+  tokyo = new City("tokyo", 35.6833, 139.6833, 139.6833*longPix, 35.6833*-latPix, 1);
   cities.add(tokyo);
 
   //Add in the maps
@@ -134,6 +135,19 @@ void draw() {
   if (tweetSetLive == true) {
     delay(10);
     liveStream();
+    for (int q = 0; q<= shootingParticles.size()-1; q++) {    
+    //println(q);
+    Particle aParticle = shootingParticles.get(q);
+    if(aParticle.xPos > originX){
+      aParticle.xPos -= 1.5; 
+    }
+    else{
+      aParticle.xPos += 1.5; 
+    }
+    if(aParticle.yPos < 0){
+      aParticle.yPos-=6;
+    }
+    }
   }
 
   /*------------DEMO VERSION-------------*/
