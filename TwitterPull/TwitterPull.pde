@@ -139,13 +139,18 @@ void draw() {
     //println(q);
     Particle aParticle = shootingParticles.get(q);
     if(aParticle.xPos > originX){
-      aParticle.xPos -= 1.5; 
+      float getSpeed = aParticle.xPos + originX;
+      getSpeed = getSpeed/100 + 2;
+      aParticle.xPos -= getSpeed;
     }
     else{
-      aParticle.xPos += 1.5; 
+      float getSpeed = (aParticle.xPos * -1) - (originX * -1);
+      getSpeed = getSpeed/100 + 1;
+      //getSpeed = getSpeed * -1;
+      aParticle.xPos += getSpeed;
     }
     if(aParticle.yPos < 0){
-      aParticle.yPos-=6;
+      aParticle.yPos-=7;
     }
     }
   }
