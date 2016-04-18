@@ -4,16 +4,14 @@ XML xmlLive;
 ArrayList<Particle> shootingParticles;
 
 void liveStream() {
+  
     image(world, 0, 0);
     myInterface.paint();
-    
-
-    
+        
     for (int j = 0; j < shootingParticles.size(); j++) { 
         Particle aParticle = shootingParticles.get(j);
         aParticle.paint();
     }
-    //The pause button will change tweetsOnOffSwitch to 0.
     if (tweetsOnOffSwitch == 1) {
       
       //We need to cycle through the tweets in the tweetList arrayList
@@ -27,11 +25,10 @@ void liveStream() {
           City myCity = cities.get(j);            
           myCity.makeCity();
           myCity.getNewTweets();
-          println("calling this");
-          
+
           //We then loop through each cities tweets.
           for (int k = 0; k < myCity.tweets.size(); k++) {
-            
+            //We get the tweets from each city.
             Status status = myCity.tweets.get(k);
             User user = status.getUser();
 
@@ -42,11 +39,7 @@ void liveStream() {
             //The id is in the data type LONG and needs to be converted to a string
             long idLong = status.getId();
             String longString = "" + idLong;
-
-
-            println(status.getCreatedAt());
-            String searchWord = status.getText();
-            
+            String searchWord = status.getText();        
             //We need to load up the XML file and check if the tweets already exist
             XML[] liveList = xmlLive.getChildren("tweet");
             boolean tweetExists = false;
@@ -58,9 +51,9 @@ void liveStream() {
               }
             }
             if(tweetExists == false) {
-              //if(searchWord.contains("Tweetset")){            
-                //tts.speak(searchWord);
-              //}
+              if(searchWord.contains("Tweetset")){            
+                tts.speak(searchWord);
+              }
 
               //For saving to XML
               //Load up with the data we want from the status object
@@ -68,30 +61,23 @@ void liveStream() {
               XML newChild = xmlLive.addChild("tweet");  
               newChild.setContent(status.getText());
               newChild.setString("tweet-id", longString);
-              newChild.setString("tweet-name", user.getName());
               newChild.setString("tweet-date", storeDate);
               newChild.setString("city-name", myCity.cityName);
   
-              double tweetLat = 0.0;
-              double tweetLong = 0.0;
               
               //We want to check if there is a GeoLocation attached to a tweet.
               if (status.getGeoLocation() != null) {
                 GeoLocation tweetLoc = status.getGeoLocation();
                 double longitude = tweetLoc.getLongitude();
-                tweetLong = tweetLoc.getLongitude();
                 double latitude = tweetLoc.getLatitude();
-                tweetLat = tweetLoc.getLatitude();
                 println(longitude); 
                 println(latitude);
                 newChild.setDouble("longitude", longitude);
                 newChild.setDouble("latitude", latitude);
               }
               
-              //Unlike in the other version, the tweets are coming straight from a city and pinging towards the top
-              
+              //Unlike in the other version, the tweets are coming straight from a city and pinging towards the top             
               fill(255,255,255);
-
               shootingParticles.add(new Particle(myCity.xPos, myCity.yPos, myCity.r, myCity.g, myCity.b));
             }
             else{

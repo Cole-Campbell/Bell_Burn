@@ -7,14 +7,12 @@ import guru.ttslib.*;
 
 Twitter twitter;
 
+//Point where tweets will ping towards.
 float originX = width/2;
+
 //Backgrounds for the canvas
 PImage world;
 PImage demoWorld;
-
-//String is not needed anymore, can leave it here for now as a note
-//Incase we want to put it back in, pass it through the Query object.
-String search = "";
 
 //For loading up and saving the XML files.
 String xml = "storeTweets.xml";
@@ -23,15 +21,13 @@ String saveXml = "data/storeTweets.xml";
 //This keeps track of what tweet we are on and when ready changes nextPage to true
 int currentTweet;
 boolean nextPage = false;
-//Keeps track of the page number. Should probably but in the city class.
+
+//Keeps track of the page number.
 int pageNum = 1;
 
-//Array list to store the cities.
+//Setting up ArrayLists
 List<City> cities;
-
-//Array List to store Particles
 ArrayList<Particle> myParticle; 
-
 ArrayList <Display> display;
 
 //For the pause button
@@ -61,7 +57,7 @@ Calendar incrementMe;
 int curHH = 0;
 int curMM = 0;
 
-//TTS tts;
+TTS tts;
 
 void setup() {
   //fullScreen();
@@ -69,10 +65,12 @@ void setup() {
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
-  initCities();
   display = new ArrayList <Display>();
   shootingParticles = new ArrayList<Particle>();
-  //tts = new TTS();
+  //Initialize the cities
+  initCities();
+  //Start up the Text-To-Speech
+  tts = new TTS();
 
   
 
@@ -100,9 +98,45 @@ void setup() {
   //Need to call this once. If not called, then the tweetList array is empty and throws an error.
   dublin.getNewTweets();
   toronto.getNewTweets();
-  //nyc.getNewTweets();
-  //tokyo.getNewTweets();
-
+  nyc.getNewTweets();
+  tokyo.getNewTweets();
+  saoPaulo.getNewTweets();
+  seoul.getNewTweets();
+  mexicoCity.getNewTweets();
+  mumbai.getNewTweets();
+  delhi.getNewTweets();
+  lagos.getNewTweets();
+  moscow.getNewTweets();
+  paris.getNewTweets();
+  beijing.getNewTweets();
+  chicago.getNewTweets();
+  london.getNewTweets();
+  lima.getNewTweets();
+  bangkok.getNewTweets();
+  baghdad.getNewTweets();
+  bangalore.getNewTweets();
+  philadelphia.getNewTweets();
+  miami.getNewTweets();
+  madrid.getNewTweets();
+  milan.getNewTweets();
+  dallas.getNewTweets();
+  washington.getNewTweets();
+  berlin.getNewTweets();
+  houston.getNewTweets();
+  montreal.getNewTweets();
+  phoenix.getNewTweets();
+  capetown.getNewTweets();
+  calgary.getNewTweets();
+  melbourne.getNewTweets();
+  rome.getNewTweets();
+  sandiego.getNewTweets();
+  sanfrancisco.getNewTweets();
+  glasgow.getNewTweets();
+  vancouver.getNewTweets();
+  stjohns.getNewTweets();
+  copenhagen.getNewTweets();
+  
+  
   currentTweet = 0;
 
   //Set up a new date.time. Go back by X hours.

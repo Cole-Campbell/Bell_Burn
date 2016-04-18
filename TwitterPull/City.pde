@@ -63,8 +63,12 @@ public class City {
     //Basically calling it the type of search we want
     //When we search for the tweets we pass in this query    
     Query query = new Query();
-    query.count(100); //Returns 100 searches per page (max 100)
-    
+    if(tweetSetLive == true){
+      query.count(10);
+    }
+    else{
+      query.count(100); //Returns 100 searches per page (max 100)
+    }
     //Here we define what type of search we want
     //We pass it our geoLocation, the distance, and we must set if its "km" or "mi"
     query.setGeoCode(coors, 50, Query.Unit.valueOf("mi"));

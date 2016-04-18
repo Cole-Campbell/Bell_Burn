@@ -1,5 +1,9 @@
 public class Interface {
-
+  
+  
+  /* The interface is the menu. This class just draws the buttons, 
+      in the Handler class, we have to code for each button */
+      
   int interWidth;
   int interHeight;
   int interXpos;
@@ -17,7 +21,7 @@ public class Interface {
     interXpos = x;
     interYpos = y;
   }
-  //Just making some basic shapes, may be better to do some translate here as it isnt automatically adjustable now
+  
   void paint() {
     fill(200, 200, 200);    
     rect(interXpos, interYpos, interWidth, interHeight);

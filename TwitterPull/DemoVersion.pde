@@ -20,7 +20,7 @@ void demoVersion() {
         City myCity = cities.get(j);            
         //myCity.makeCity();
         myCity.getNewTweets();
-        println("calling this");
+
 
         //We then loop through each cities tweets.
         for (int k = 0; k < myCity.tweets.size(); k++) {
@@ -36,21 +36,12 @@ void demoVersion() {
           long idLong = status.getId();
           String longString = "" + idLong;
 
-
-          //This piece is nearly obsolete, its for displaying a tweet on screen
-          fill(200);
-          text(status.getText(), 100, 100, 300, 200);
-          text(user.getName(), 200, 300, 300, 200);
-          text(longString, 300, 300, 300, 200);
-          println(status.getCreatedAt());
-
           //For saving to XML
           //Load up with the data we want from the status object
           //ID, Author, Date and the CityObjects name.
           XML newChild = xmlFile.addChild("tweet");  
           newChild.setContent(status.getText());
           newChild.setString("tweet-id", longString);
-          newChild.setString("tweet-name", user.getName());
           newChild.setString("tweet-date", storeDate);
           newChild.setString("city-name", myCity.cityName);
 
@@ -59,8 +50,6 @@ void demoVersion() {
             GeoLocation tweetLoc = status.getGeoLocation();
             double longitude = tweetLoc.getLongitude();
             double latitude = tweetLoc.getLatitude();
-            println(longitude); 
-            println(latitude);
             newChild.setDouble("longitude", longitude);
             newChild.setDouble("latitude", latitude);
           }

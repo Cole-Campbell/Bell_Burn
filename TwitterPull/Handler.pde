@@ -26,7 +26,6 @@ void pauseTweets() {
 
 void deleteTweets() {
   // DELETE FILES
-  // Could maybe change to delete last 50 etc
   // Adds all files to an XML array, loop around and delete them all.
   // Must save at the end or else the XML file wont update.
 

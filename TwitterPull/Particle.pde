@@ -15,17 +15,10 @@ public class Particle {
     this.g = g;
     this.b = b;
   }
-
   void paint() {
     fill(r, g, b);
     ellipse((width/2)+xPos, 568 + yPos, 10, 10);
-    //rect((width/2)+xPos, 568 + yPos, 5, 5);
-    //rect(width/2+xPos, 570+yPos, 5, 5);
   }
-  void moveMe(){
-
-  }
-
   boolean timeUp() {
     Life--;
     if (Life<0) {
