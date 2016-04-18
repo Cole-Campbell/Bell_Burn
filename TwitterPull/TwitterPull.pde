@@ -3,7 +3,7 @@ import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
-import guru.ttslib.*;
+//import guru.ttslib.*;
 
 Twitter twitter;
 
@@ -57,8 +57,13 @@ Calendar incrementMe;
 int curHH = 0;
 int curMM = 0;
 
-TTS tts;
+//TTS tts;
 
+String liveXml = "data/liveTweets.xml";
+XML xmlLive;
+ArrayList<Particle> shootingParticles;
+boolean startThread = false;
+LiveRun p;
 void setup() {
   //fullScreen();
   size(1440, 700);
@@ -70,10 +75,10 @@ void setup() {
   //Initialize the cities
   initCities();
   //Start up the Text-To-Speech
-  tts = new TTS();
-
+  //tts = new TTS();
+  frameRate(25);
   
-
+  p = new LiveRun();
   //Add in the maps
   xmlFile = loadXML(xml);
   xmlLive = loadXML(liveXml);
@@ -115,11 +120,11 @@ void draw() {
   background(0);
   /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
-    delay(30);
-    liveStream();
+    image(world, 0, 0);
+    myInterface.paint();
     for (int q = 0; q<= shootingParticles.size()-1; q++) {    
-      //println(q);
       Particle aParticle = shootingParticles.get(q);
+      aParticle.paint();
       if (aParticle.xPos > originX) {
         float getSpeed = aParticle.xPos + originX;
         getSpeed = getSpeed/100 + 2;
@@ -134,6 +139,10 @@ void draw() {
         aParticle.yPos-=7;
       }
     }
+    new Thread(p).start();
+
+    //thread("liveStream");
+
   }
 
   /*------------DEMO VERSION-------------*/

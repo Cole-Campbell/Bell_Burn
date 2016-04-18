@@ -53,7 +53,7 @@ void initCities(){
 
   tokyo = new City("Tokyo", 35.689487, 129.691706, 129.691706*longPix, 35.6833*-latPix, 2, 70, 170, 80);
   cities.add(tokyo);
-  
+/* 
   saoPaulo = new City("Sao Paulo", -23.550520, -46.633309, -46.633309*longPix, -23.550520*latPix, 2, 70, 170, 80);
   cities.add(saoPaulo);
   
@@ -157,14 +157,14 @@ void initCities(){
   cities.add(stjohns);
   
   copenhagen = new City("Copenhagen", 55.676097, 12.568337, 12.568337*longPix, 55.676097*-latPix, 2, 70, 170, 80);
-  cities.add(copenhagen);
+  cities.add(copenhagen);*/
 }
 void getTweets(){
-    dublin.getNewTweets();
+  dublin.getNewTweets();
   toronto.getNewTweets();
   nyc.getNewTweets();
   tokyo.getNewTweets();
-  saoPaulo.getNewTweets();
+  /*saoPaulo.getNewTweets();
   seoul.getNewTweets();
   mexicoCity.getNewTweets();
   mumbai.getNewTweets();
@@ -198,5 +198,5 @@ void getTweets(){
   glasgow.getNewTweets();
   vancouver.getNewTweets();
   stjohns.getNewTweets();
-  copenhagen.getNewTweets();
+  copenhagen.getNewTweets();*/
 }
