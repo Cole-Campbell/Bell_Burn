@@ -86,56 +86,21 @@ void setup() {
 
   //This is for the twitter codes.
   ConfigurationBuilder cb = new ConfigurationBuilder();
-  cb.setOAuthConsumerKey(con);
-  cb.setOAuthConsumerSecret(conS);
-  cb.setOAuthAccessToken(access);
-  cb.setOAuthAccessTokenSecret(accessS);
+  //cb.setOAuthConsumerKey(con);
+  //cb.setOAuthConsumerSecret(conS);
+  //cb.setOAuthAccessToken(access);
+  //cb.setOAuthAccessTokenSecret(accessS);
+  
+  cb.setOAuthConsumerKey(liveCon);
+  cb.setOAuthConsumerSecret(liveConS);
+  cb.setOAuthAccessToken(liveAccess);
+  cb.setOAuthAccessTokenSecret(liveAccessS);
 
   //Initialize Twitter4J
   TwitterFactory tf = new TwitterFactory(cb.build());
   twitter = tf.getInstance();
 
   //Need to call this once. If not called, then the tweetList array is empty and throws an error.
-  dublin.getNewTweets();
-  toronto.getNewTweets();
-  nyc.getNewTweets();
-  tokyo.getNewTweets();
-  saoPaulo.getNewTweets();
-  seoul.getNewTweets();
-  mexicoCity.getNewTweets();
-  mumbai.getNewTweets();
-  delhi.getNewTweets();
-  lagos.getNewTweets();
-  moscow.getNewTweets();
-  paris.getNewTweets();
-  beijing.getNewTweets();
-  chicago.getNewTweets();
-  london.getNewTweets();
-  lima.getNewTweets();
-  bangkok.getNewTweets();
-  baghdad.getNewTweets();
-  bangalore.getNewTweets();
-  philadelphia.getNewTweets();
-  miami.getNewTweets();
-  madrid.getNewTweets();
-  milan.getNewTweets();
-  dallas.getNewTweets();
-  washington.getNewTweets();
-  berlin.getNewTweets();
-  houston.getNewTweets();
-  montreal.getNewTweets();
-  phoenix.getNewTweets();
-  capetown.getNewTweets();
-  calgary.getNewTweets();
-  melbourne.getNewTweets();
-  rome.getNewTweets();
-  sandiego.getNewTweets();
-  sanfrancisco.getNewTweets();
-  glasgow.getNewTweets();
-  vancouver.getNewTweets();
-  stjohns.getNewTweets();
-  copenhagen.getNewTweets();
-  
   
   currentTweet = 0;
 

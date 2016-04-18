@@ -64,12 +64,14 @@ void mouseClicked() {
   if (mouseX >= 0 && mouseX <= width && mouseY >= 00 && mouseY <= 50) {
     if (tweetSetDemo == false) {
       tweetSetDemo = true;
+      getTweets();
     }
   }
   //Activate the Live version
   if (mouseX >= 0 && mouseX <= width && mouseY >= 100 && mouseY <= 150) {
     if (tweetSetLive == false) {
       tweetSetLive = true;
+      getTweets();
     }
   }
   //Activate the Play version
