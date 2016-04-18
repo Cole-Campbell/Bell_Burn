@@ -140,8 +140,9 @@ void draw() {
       }
     }
     new Thread(p).start();
-
-    //thread("liveStream");
+    if(frameCount % 25 == 1){
+       startThread = true; 
+    }
 
   }
 
