@@ -1,5 +1,8 @@
 void displayTweets() {
-  //image(world,0,0);
+  //Colour variable which will change depending on the number of tweets in an area
+  float colour = 200;
+  
+  image(demoWorld,0,0);
   //world.resize(1440, 774);
 
   //display.paint();
@@ -57,10 +60,9 @@ void displayTweets() {
 
               b = b* longPix;
               d = d*latPix;
-
-              fill(255, 255, 255);          
-
-              myParticle.add(new Particle(b+whichCity.xPos, d+whichCity.yPos, whichCity.r,  whichCity.g,  whichCity.b ));
+                        
+                                    //xPosition, yPosition, start Latitude, end latitude, start longitude, end longitude, colour                     
+              display.add(new Display(200, 200, 200, 200, 200, 200, colour));
               //println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
               /*for (int x=0; x<=width-1; x++) {
                if (120>=display.&&120<=display.xP[x][3]) {

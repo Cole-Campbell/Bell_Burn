@@ -4,7 +4,7 @@ XML xmlLive;
 ArrayList<Particle> shootingParticles;
 
 void liveStream() {
-    
+    image(world, 0, 0);
     myInterface.paint();
     
 
@@ -101,5 +101,4 @@ void liveStream() {
         }
       }
     }
-        //image(world, 0, 0);
   }
