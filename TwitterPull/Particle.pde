@@ -17,7 +17,7 @@ public class Particle {
   }
   void paint() {
     canvas.fill(r, g, b);
-    canvas.ellipse((width/2)+xPos, 568 + yPos, 10, 10);
+    canvas.ellipse((width/2)+xPos, 516 + yPos, 10, 10);
   }
   boolean timeUp() {
     Life--;

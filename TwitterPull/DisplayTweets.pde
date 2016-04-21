@@ -47,27 +47,28 @@ void displayTweets() {
       //So go through each city
       for (int j = 0; j < cities.size(); j++) { 
         City whichCity = cities.get(j);
-        //check which city we are currently on
-        if (tweetCity.equals(whichCity.cityName)) {
-          if (tweetHH - curHH == 0) {
-            if (curMM - tweetMM <= 15) {
+        
+        //Goes through all squares in the display to compare them below
+        for (int i = 0; i < display.size(); i++) {
+          Display whichSquare = display.get(i);
+          //check which city we are currently on
+          if (tweetCity.equals(whichCity.cityName)) {
+            if (tweetHH - curHH == 0) {
+              if (curMM - tweetMM <= 15) {
+                if (tweetLat>=whichSquare.startLat && tweetLat<= whichSquare.endLat) {
+                  whichSquare.colour = 255;
+                }
 
-              double differenceLat = whichCity.longitude - tweetLat;           
-              double differenceLong = whichCity.latitude - tweetLong;
 
-              float b = (float)differenceLong;
-              float d = (float)differenceLat;
-
-              b = b* longPix;
-              d = d*latPix;
-              //println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
-              /*for (int x=0; x<=width-1; x++) {
-               if (120>=display.&&120<=display.xP[x][3]) {
-               println("testing");
-               float colour = 255;
-               display.xP[x][6] = colour;
-               }
-               }*/
+                /*double differenceLat = whichCity.longitude - tweetLat;           
+                 double differenceLong = whichCity.latitude - tweetLong;
+                 
+                 float b = (float)differenceLong;
+                 float d = (float)differenceLat;
+                 
+                 b = b* longPix;
+                 d = d*latPix;*/
+              }
             }
           }
         }
