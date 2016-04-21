@@ -16,8 +16,8 @@ public class Particle {
     this.b = b;
   }
   void paint() {
-    fill(r, g, b);
-    ellipse((width/2)+xPos, 568 + yPos, 10, 10);
+    canvas.fill(r, g, b);
+    canvas.ellipse((width/2)+xPos, 568 + yPos, 10, 10);
   }
   boolean timeUp() {
     Life--;

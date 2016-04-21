@@ -1,14 +1,17 @@
 void displayTweets() {
   //Colour variable which will change depending on the number of tweets in an area
   float colour = 200;
-  
-  image(demoWorld,0,0);
-  //world.resize(1440, 774);
-
   //display.paint();
   for (int a = 0; a < cities.size(); a++) {
     City myCity = cities.get(a);
     //myCity.makeCity();
+  }
+
+  for (int y = 0; y<=height/10; y++) {
+    for (int x = 0; x<=width; x++) {
+      //xPosition, yPosition, start Latitude, end latitude, start longitude, end longitude, colour
+      display.add(new Display(10*x, 10*y, 200, 200, 200, 200, colour));
+    }
   }
   fill (255);
   //Load up all the tweets from the XML file.
@@ -36,12 +39,9 @@ void displayTweets() {
       //Comparing Tweet Lat/Long to the squares to then place them appropriatly\
       for (int x=0; x<=width-1; x++) {
         /*if (tweetLat>display.latS && tweetLat<display.latE) {
-          println();
-        }*/
+         println();
+         }*/
       }
-      
-      
-
 
       //We then need to compare them.
       //So go through each city
@@ -60,9 +60,6 @@ void displayTweets() {
 
               b = b* longPix;
               d = d*latPix;
-                        
-                                    //xPosition, yPosition, start Latitude, end latitude, start longitude, end longitude, colour                     
-              display.add(new Display(200, 200, 200, 200, 200, 200, colour));
               //println("Added a new particle at X: " + (b+whichCity.xPos) + " Y: " + (d+whichCity.yPos) );
               /*for (int x=0; x<=width-1; x++) {
                if (120>=display.&&120<=display.xP[x][3]) {

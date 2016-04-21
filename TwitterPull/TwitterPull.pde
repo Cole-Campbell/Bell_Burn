@@ -3,6 +3,7 @@ import twitter4j.*;
 import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
+import codeanticode.syphon.*;
 //import guru.ttslib.*;
 
 Twitter twitter;
@@ -13,6 +14,10 @@ float originX = width/2;
 //Backgrounds for the canvas
 PImage world;
 PImage demoWorld;
+
+//Canvas tag which later gets exported out to the Syphon server for use in MadMapper/VPT.
+PGraphics canvas;
+SyphonServer server;
 
 //For loading up and saving the XML files.
 String xml = "storeTweets.xml";
@@ -66,7 +71,9 @@ boolean startThread = false;
 LiveRun p;
 void setup() {
   //fullScreen();
-  size(1440, 700);
+  //size(1440, 700);
+  size(1440,785, P3D);
+  canvas = createGraphics(1440,785,P3D);
   //Initialize the arraylists.
   myParticle = new ArrayList <Particle>();
   cities = new ArrayList<City>();
@@ -113,14 +120,18 @@ void setup() {
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
   incrementMe.add(Calendar.HOUR, -4);
+  
+  //Creates the syphon server in which we later broadcast the Canvas to the Syphon Client for MadMapper
+  server = new SyphonServer(this, "Processing Syphon");
 }
 
 void draw() {
-  fill(255);
-  background(0);
+  canvas.beginDraw();
+  canvas.fill(255);
+  canvas.background(0);
   /*------------LIVE VERSION-------------*/
   if (tweetSetLive == true) {
-    image(world, 0, 0);
+    canvas.image(world, 0, 0);
     myInterface.paint();
     for (int q = 0; q<= shootingParticles.size()-1; q++) {    
       Particle aParticle = shootingParticles.get(q);
@@ -159,31 +170,36 @@ void draw() {
     for (int d = 0; d<= display.size()-1; d++) {    
       //println(q);
       Display squareDisplay = display.get(d);
+      squareDisplay.paint();
     }
+    canvas.image(demoWorld,0,0);
   }
 
   /*------------MAIN MENU-----------------*/
   if (tweetSetDemo == false && tweetSetLive == false && tweetSetPlay == false) {    
-    fill(255, 255, 255);
-    rect(0, 0, width, 50);
-    fill(0, 0, 0);
-    text("TweetSet Demo", 0, 0, 300, 200);
+    canvas.fill(255, 255, 255);
+    canvas.rect(0, 0, width, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text("TweetSet Demo", 0, 0, 300, 200);
 
-    fill(255, 255, 255);
-    rect(0, 100, width, 50);
-    fill(0, 0, 0);
-    text("TweetSet Live", 0, 100, 300, 200);
+    canvas.fill(255, 255, 255);
+    canvas.rect(0, 100, width, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text("TweetSet Live", 0, 100, 300, 200);
 
-    fill(255, 255, 255);
-    rect(0, 200, width, 50);
-    fill(0, 0, 0);
-    text("TweetSet Play", 0, 200, 300, 200);
+    canvas.fill(255, 255, 255);
+    canvas.rect(0, 200, width, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text("TweetSet Play", 0, 200, 300, 200);
   }
   //If we are on not on the main menu then make this button
   else {
-    fill(30, 90, 50);    
-    rect(width - 100, height - 50, 100, 50);
-    fill(0, 0, 0);
-    text("Back", width - 100, height - 40, 100, 50);
+    canvas.fill(30, 90, 50);    
+    canvas.rect(width - 100, height - 50, 100, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text("Back", width - 100, height - 40, 100, 50);
   }
+  canvas.endDraw();
+  image(canvas,0,0);
+  server.sendImage(canvas);
 }
