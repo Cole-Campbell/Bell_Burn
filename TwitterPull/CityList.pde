@@ -51,7 +51,7 @@ void initCities(){
   nyc = new City("nyc", 40.712784, -74.005941, -74.005941*longPix, 40.712784*-latPix, 2, 60, 60, 190);
   cities.add(nyc);
 
-  tokyo = new City("Tokyo", 35.689487, 129.691706, 129.691706*longPix, 35.6833*-latPix, 2, 70, 170, 80);
+  tokyo = new City("Tokyo", 35.570214, 139.6403485, 139.6403485*longPix, 35.570214*-latPix, 2, 70, 170, 80);
   cities.add(tokyo);
 /* 
   saoPaulo = new City("Sao Paulo", -23.550520, -46.633309, -46.633309*longPix, -23.550520*latPix, 2, 70, 170, 80);

@@ -51,7 +51,7 @@ boolean tweetSetPlay = false;
 
 //Every 4.7 pixels is equal to one degree latitude and ever 4 pixels is equal to one degree longitude
 //Dependant on the screen size
-float latPix = 4.677777778;
+float latPix = 4.6777;
 float longPix = 4;
 
 //This is for the timer. Counts down from the number specified here.
