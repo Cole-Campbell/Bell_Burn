@@ -2,7 +2,7 @@ void displayTweets() {
   //Colour variable which will change depending on the number of tweets in an area
   float colour = 200;
   //display.paint();
-  for (int a = 0; a < cities.size(); a++) {
+  for (int a = 0; a < cities.size (); a++) {
     City myCity = cities.get(a);
     //myCity.makeCity();
   }
@@ -10,9 +10,10 @@ void displayTweets() {
   for (int y = 0; y<=height/10; y++) {
     for (int x = 0; x<=width; x++) {
       //xPosition, yPosition, start Latitude, end latitude, start longitude, end longitude, colour
-      display.add(new Display(10*x, 10*y, 200, 200, 200, 200, colour));
+      display.add(new Display(10*x, 10*y, -180+(latPix*x), -180+(latPix*(x+1)), 76.8-(longPix*y), 76.8-(longPix*(y+1), colour));
     }
   }
+
   fill (255);
   //Load up all the tweets from the XML file.
   XML[] tweetList = xmlFile.getChildren("tweet");
@@ -45,20 +46,24 @@ void displayTweets() {
 
       //We then need to compare them.
       //So go through each city
-      for (int j = 0; j < cities.size(); j++) { 
+      for (int j = 0; j < cities.size (); j++) { 
         City whichCity = cities.get(j);
-        
+
         //Goes through all squares in the display to compare them below
-        for (int i = 0; i < display.size(); i++) {
+        for (int i = 0; i < display.size (); i++) {
           Display whichSquare = display.get(i);
           //check which city we are currently on
           if (tweetCity.equals(whichCity.cityName)) {
             if (tweetHH - curHH == 0) {
               if (curMM - tweetMM <= 15) {
-                if (tweetLat>=whichSquare.startLat && tweetLat<= whichSquare.endLat) {
-                  whichSquare.colour = 255;
-                }
 
+                
+                  if (mouseX <=100) {
+                    whichSquare.colour = 0;
+                  } else {
+                    whichSquare.colour = 50;
+                  }
+                
 
                 /*double differenceLat = whichCity.longitude - tweetLat;           
                  double differenceLong = whichCity.latitude - tweetLong;
@@ -97,3 +102,4 @@ void timer() {
     }
   }
 }
+
