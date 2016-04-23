@@ -15,7 +15,7 @@ void demoVersion() {
       currentTweet=0;
 
       //Loop through the cities array and get each city
-      for (int j = 0; j < cities.size(); j++) { 
+      for (int j = 0; j < cities.size (); j++) { 
 
         City myCity = cities.get(j);            
         //myCity.makeCity();
@@ -23,12 +23,12 @@ void demoVersion() {
 
 
         //We then loop through each cities tweets.
-        for (int k = 0; k < myCity.tweets.size(); k++) {
+        for (int k = 0; k < myCity.tweets.size (); k++) {
 
           Status status = myCity.tweets.get(k);
           User user = status.getUser();
 
-          println(myCity.cityName + " " + myCity.tweets.size());
+          //println(myCity.cityName + " " + myCity.tweets.size());
 
           //Running this piece of code returns when the tweets were created. 
           String storeDate = "" + status.getCreatedAt();           
@@ -44,6 +44,7 @@ void demoVersion() {
           newChild.setString("tweet-id", longString);
           newChild.setString("tweet-date", storeDate);
           newChild.setString("city-name", myCity.cityName);
+          println(storeDate);
 
           //We want to check if there is a GeoLocation attached to a tweet.
           if (status.getGeoLocation() != null) {
@@ -60,3 +61,4 @@ void demoVersion() {
     }
   }
 }
+

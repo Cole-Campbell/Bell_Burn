@@ -33,8 +33,9 @@ public class City {
   }
 
   void makeCity() {   
-      fill(255,255,255);
-      ellipse(xPos,yPos,radius,radius);         
+      canvas.fill(r,g,b);
+      //canvas.ellipse(xPos,500,200,200);    
+      canvas.ellipse((width/2)+xPos, 516 + yPos, radius, radius);   
   }
   
   //http://stackoverflow.com/questions/16730364/add-arraylist-to-another-arraylist-in-java
@@ -71,7 +72,7 @@ public class City {
     }
     //Here we define what type of search we want
     //We pass it our geoLocation, the distance, and we must set if its "km" or "mi"
-    query.setGeoCode(coors, 50, Query.Unit.valueOf("mi"));
+    query.setGeoCode(coors, 2, Query.Unit.valueOf("mi"));
     
     //This will only run once at the start of the program
     //We get the first set of results from our query

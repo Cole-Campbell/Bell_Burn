@@ -4,7 +4,7 @@ import twitter4j.auth.*;
 import twitter4j.api.*;
 import java.util.*;
 import codeanticode.syphon.*;
-//import guru.ttslib.*;
+import guru.ttslib.*;
 
 Twitter twitter;
 
@@ -57,12 +57,13 @@ float longPix = 4;
 //This is for the timer. Counts down from the number specified here.
 int timerCount = 6;
 Calendar incrementMe;
-
+boolean timeIncreased = false;
 //For comparing the incremented time to the tweetTime
 int curHH = 0;
 int curMM = 0;
 
-//TTS tts;
+TTS tts;
+int colour = 255;
 
 String liveXml = "data/liveTweets.xml";
 XML xmlLive;
@@ -82,7 +83,7 @@ void setup() {
   //Initialize the cities
   initCities();
   //Start up the Text-To-Speech
-  //tts = new TTS();
+  tts = new TTS();
   frameRate(25);
   
   p = new LiveRun();
@@ -119,10 +120,17 @@ void setup() {
   //Set up a new date.time. Go back by X hours.
   incrementMe = Calendar.getInstance();
   println(incrementMe.getTime());
-  incrementMe.add(Calendar.HOUR, -4);
-  
+  incrementMe.add(Calendar.MINUTE, -59);
+  println(incrementMe.getTime());
   //Creates the syphon server in which we later broadcast the Canvas to the Syphon Client for MadMapper
   server = new SyphonServer(this, "Processing Syphon");
+  
+  //for (int y = 0; y<=height/10; y++) {
+    //  for (int x = 0; x<=width; x++) {
+        //xPosition, yPosition, start Latitude, end latitude, start longitude, end longitude, colour
+      //  display.add(new Display(10*x, 10*y, -180+(longPix*x), -180+(longPix*(x+1)), 76.8-(latPix*y), 76.8-(latPix*(y+1)), colour));
+     // }
+    //}
 }
 
 void draw() {
@@ -152,7 +160,7 @@ void draw() {
     }
     new Thread(p).start();
     if(frameCount % 25 == 1){
-       startThread = true; 
+       startThread = true;;
     }
 
   }
@@ -160,19 +168,25 @@ void draw() {
   /*------------DEMO VERSION-------------*/
   //Turns on the demo version
   if (tweetSetDemo == true) {
+    myInterface.paint();
     demoVersion();
   }
 
   /*------------DISPLAY VERSION-------------*/
+  timer();
   if (tweetSetPlay == true) {
+    canvas.image(world,0,0);
+    for (int w = 0; w < cities.size (); w++) {
+      City myLittleCity = cities.get(w);
+      myLittleCity.makeCity();
+    }
     displayTweets();
-    timer();
-    for (int d = 0; d<= display.size()-1; d++) {    
+    /*for (int d = 0; d<= display.size()-1; d++) {    
       //println(q);
       Display squareDisplay = display.get(d);
       squareDisplay.paint();
-    }
-    canvas.image(demoWorld,0,0);
+    }*/
+    
   }
 
   /*------------MAIN MENU-----------------*/

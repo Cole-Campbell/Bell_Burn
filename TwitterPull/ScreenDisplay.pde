@@ -21,7 +21,7 @@ public class Display {
   }
 
   void paint(){
-    fill(colour);
-   rect(xPos, yPos, 10,10);
+    canvas.fill(colour);
+    canvas.rect(xPos, yPos, 10,10);
   }
 }

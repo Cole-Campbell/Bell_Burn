@@ -23,22 +23,22 @@ public class Interface {
   }
   
   void paint() {
-    fill(200, 200, 200);    
-    rect(interXpos, interYpos, interWidth, interHeight);
+    canvas.fill(200, 200, 200);    
+    canvas.rect(interXpos, interYpos, interWidth, interHeight);
 
-    fill(150, 50, 50);
-    rect(0, height - 50, 100, 50);
-    fill(0, 0, 0);
-    text(delString, 20, height - 40, 100, 50);
+    canvas.fill(150, 50, 50);
+    canvas.rect(0, height - 50, 100, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text(delString, 20, height - 40, 100, 50);
 
-    fill(50, 50, 90);
-    rect(150, height - 50, 100, 50);
-    fill(0, 0, 0);
-    text(clickString, 170, height - 40, 100, 50);
+    canvas.fill(50, 50, 90);
+    canvas.rect(150, height - 50, 100, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text(clickString, 170, height - 40, 100, 50);
 
-    fill(50, 70, 50);    
-    rect(300, height - 50, 100, 50);
-    fill(0, 0, 0);
-    text(pauseString, 320, height - 40, 100, 50);
+    canvas.fill(50, 70, 50);    
+    canvas.rect(300, height - 50, 100, 50);
+    canvas.fill(0, 0, 0);
+    canvas.text(pauseString, 320, height - 40, 100, 50);
   }
 }

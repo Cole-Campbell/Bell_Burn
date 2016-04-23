@@ -87,3 +87,26 @@ void mouseClicked() {
     tweetSetLive = false;
   }
 }
+
+void timer() {
+  if (frameCount % 25 == 1) {
+    //println("Counting down from ..." + timerCount);
+    timerCount--; 
+    if (timerCount == 0) {
+      timeIncreased = true;
+      incrementMe.add(Calendar.MINUTE, -30);
+      String whatTime = incrementMe.getTime() + " ";
+      //println("Current time = " + whatTime);
+      String strHH = whatTime.substring(11, 13);
+      String strMM = whatTime.substring(14, 16);
+
+      curHH = Integer.parseInt(strHH);
+      curMM = Integer.parseInt(strMM);
+
+      //println("Current Hour = " + curHH);
+      //println("Current Min = " + curMM);
+      timerCount = 6;
+    }
+  }
+}
+
