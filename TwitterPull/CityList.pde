@@ -132,23 +132,23 @@ void initCities(){
 //  capetown = new City("Cape Town", -33.924869, 18.424055, 18.424055*longPix, -33.924869*latPix, 2, 70, 170, 80);
 //  cities.add(capetown);
   
-//  calgary = new City("Calgary", 51.048615, -114.070846, -114.070846*longPix, 51.048615*-latPix, 2, 70, 170, 80);
-//  cities.add(calgary);
+  calgary = new City("Calgary", 51.048615, -114.070846, -114.070846*longPix, 51.048615*-latPix, 2, 70, 170, 80);
+  cities.add(calgary);
   
-//  melbourne = new City("Melbourne", -37.814107, 144.963280, 144.963280*longPix, -37.814107*latPix, 2, 70, 170, 80);
-//  cities.add(melbourne);
+  //melbourne = new City("Melbourne", -37.814107, 144.963280, 144.963280*longPix, -37.814107*latPix, 2, 70, 170, 80);
+  //cities.add(melbourne);
   
-//  rome = new City("Rome", 41.902783, 12.496366, 12.496366*longPix, 41.902783*-latPix, 2, 70, 170, 80);
-//  cities.add(rome);
+  //rome = new City("Rome", 41.902783, 12.496366, 12.496366*longPix, 41.902783*-latPix, 2, 70, 170, 80);
+  //cities.add(rome);
   
- // sandiego = new City("San Diego", 32.715738, -117.161084, -117.161084*longPix, 32.715738*-latPix, 2, 70, 170, 80);
-//  cities.add(sandiego);
+  //sandiego = new City("San Diego", 32.715738, -117.161084, -117.161084*longPix, 32.715738*-latPix, 2, 70, 170, 80);
+  //cities.add(sandiego);
   
   //sanfrancisco = new City("San Francisdo", 37.774929, -122.419416, -122.419416*longPix, 37.774929*-latPix, 2, 70, 170, 80);
- // cities.add(sanfrancisco);
+  //cities.add(sanfrancisco);
   
-  glasgow = new City("Glasgow", 55.864237, -4.251806, -4.251806*longPix, 55.864237*-latPix, 2, 70, 170, 80);
-  cities.add(glasgow);
+  //glasgow = new City("Glasgow", 55.864237, -4.251806, -4.251806*longPix, 55.864237*-latPix, 2, 70, 170, 80);
+  //cities.add(glasgow);
   
   //vancouver = new City("Vancouver", 45.638728, -122.661486, -122.661486*longPix, 45.638728*-latPix, 2, 70, 170, 80);
   //cities.add(vancouver);
@@ -190,13 +190,13 @@ void getTweets(){
   //montreal.getNewTweets();
   //phoenix.getNewTweets();
   //capetown.getNewTweets();
-  //calgary.getNewTweets();
-  //melbourne.getNewTweets();
-  //rome.getNewTweets();
-  //sandiego.getNewTweets();
-  //sanfrancisco.getNewTweets();
-  glasgow.getNewTweets();
-  //vancouver.getNewTweets(); //24 hours got
-  //stjohns.getNewTweets(); //24 hours got
-  //copenhagen.getNewTweets();
+  calgary.getNewTweets();
+  //melbourne.getNewTweets();   //13:46 -> 13:02
+  //rome.getNewTweets();        //13:45 -> 13:09
+  //sandiego.getNewTweets();    //24 hours got
+  //sanfrancisco.getNewTweets();//13:45 -> 11:54
+  //glasgow.getNewTweets();
+  //vancouver.getNewTweets();   //24 hours got
+  //stjohns.getNewTweets();     //24 hours got
+  //copenhagen.getNewTweets();  //18:43 -> 15:41
 }

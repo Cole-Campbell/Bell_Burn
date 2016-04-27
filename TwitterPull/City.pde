@@ -72,7 +72,7 @@ public class City {
     }
     //Here we define what type of search we want
     //We pass it our geoLocation, the distance, and we must set if its "km" or "mi"
-    query.setGeoCode(coors, 5, Query.Unit.valueOf("km"));
+    query.setGeoCode(coors, 3, Query.Unit.valueOf("km"));
     
     //This will only run once at the start of the program
     //We get the first set of results from our query
