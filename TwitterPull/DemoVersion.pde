@@ -28,8 +28,6 @@ void demoVersion() {
           Status status = myCity.tweets.get(k);
           User user = status.getUser();
 
-          println(myCity.cityName + " " + myCity.tweets.size());
-
           //Running this piece of code returns when the tweets were created. 
           String storeDate = "" + status.getCreatedAt();           
           //The id is in the data type LONG and needs to be converted to a string
@@ -44,7 +42,7 @@ void demoVersion() {
           newChild.setString("tweet-id", longString);
           newChild.setString("tweet-date", storeDate);
           newChild.setString("city-name", myCity.cityName);
-
+          println(storeDate);
           //We want to check if there is a GeoLocation attached to a tweet.
           if (status.getGeoLocation() != null) {
             GeoLocation tweetLoc = status.getGeoLocation();

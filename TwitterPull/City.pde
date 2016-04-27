@@ -1,5 +1,6 @@
 public class City {
-   
+  //Keeps track of the page number.
+  int pageNum = 1;
   String cityName;
   double longitude;
   double latitude;
@@ -71,7 +72,7 @@ public class City {
     }
     //Here we define what type of search we want
     //We pass it our geoLocation, the distance, and we must set if its "km" or "mi"
-    query.setGeoCode(coors, 50, Query.Unit.valueOf("mi"));
+    query.setGeoCode(coors, 5, Query.Unit.valueOf("km"));
     
     //This will only run once at the start of the program
     //We get the first set of results from our query
@@ -92,7 +93,7 @@ public class City {
           query = result.nextQuery();
           result = twitter.search(query);
           tweets = result.getTweets();
-          println(cityName + "Page " + pageNum);
+          println(cityName + "Page " + pageNum + "... Tweets available " + tweets.size() );
           //nextPage = false;
         }
         else{
